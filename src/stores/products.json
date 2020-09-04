@@ -1,0 +1,984 @@
+{
+  "products": [
+    {
+      "id": 5515377049765,
+      "title": "100% Grass-Fed Organic Ground Beef",
+      "handle": "100-grass-fed-organic-ground-beef",
+      "body_html": "\u003cspan\u003eThe original. The bacon that blazed its path across the pork landscape and made Pederson’s a household name. This is bacon without sugar. Simple enough, right? Turns out making bacon without artificial nitrates or nitrites is tough. Take sugar out of the equation, and, for many, well you have a down-right conundrum. Then the cowboys and cowgirls at Pederson’s Natural Farms went and did it. The rest is history. If you want to get in on that, here’s your chance. This bacon will change the way you look at bacon, and you’ll want more of it.\u003c/span\u003e\u003cbr\u003e\u003cbr\u003e\u003cspan\u003eThis is Whole30 Approved. It’s AIP diet friendly. It fits right into Paleo and Keto lifestyles. The process of getting this bacon from pasture to plate is whittled down to the essentials. Minimal processing. The seasonings get soaked in over time, not injected all at once. Slabs of pork smoked by all natural hickory chips and perfectly sliced. Humanely raised, these animals get the life they deserve with no growth stimulants or antibiotics. You won’t find any MSG, gluten, or lactose here. No preservatives, no artificial ingredients. All natural uncured bacon. If there’s a better way to make bacon, we haven’t found it yet.\u003c/span\u003e\n\u003cp\u003e \u003c/p\u003e",
+      "published_at": "2020-08-10T12:06:42-05:00",
+      "created_at": "2020-08-10T12:06:41-05:00",
+      "updated_at": "2020-09-01T00:42:05-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available", "in store only"],
+      "variants": [
+        {
+          "id": 35942808518821,
+          "title": "30",
+          "option1": "30",
+          "option2": null,
+          "option3": null,
+          "sku": "7930",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "29.99",
+          "grams": 454,
+          "compare_at_price": "1.99",
+          "position": 1,
+          "product_id": 5515377049765,
+          "created_at": "2020-08-30T21:51:14-05:00",
+          "updated_at": "2020-08-30T21:51:14-05:00"
+        },
+        {
+          "id": 35960977719461,
+          "title": "50",
+          "option1": "50",
+          "option2": null,
+          "option3": null,
+          "sku": "",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 454,
+          "compare_at_price": null,
+          "position": 2,
+          "product_id": 5515377049765,
+          "created_at": "2020-09-01T00:37:27-05:00",
+          "updated_at": "2020-09-01T00:42:05-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371747381413,
+          "created_at": "2020-08-10T12:06:43-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:06:43-05:00",
+          "product_id": 5515377049765,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Organic-Ground-Beef.jpg?v=1597079203",
+          "width": 1200,
+          "height": 800
+        },
+        {
+          "id": 18714744389797,
+          "created_at": "2020-08-29T14:06:58-05:00",
+          "position": 2,
+          "updated_at": "2020-08-29T14:06:58-05:00",
+          "product_id": 5515377049765,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/4dea11bce94de360478621e9383db141.png?v=1598728018",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "options": [{ "name": "Price", "position": 1, "values": ["30", "50"] }]
+    },
+    {
+      "id": 5515189682341,
+      "title": "Fully Cooked No Sugar Added Mild Breakfast Sausage Links",
+      "handle": "fully-cooked-no-sugar-added-mild-breakfast-sausage-links",
+      "body_html": "\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eFour (4) 9 oz. packages.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eOur NEW Fully Cooked Breakfast Links and Patties are made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. These Mild Breakfast Sausage Links are minimally processed with no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, and no MSG! Whole30 Approved.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/Mild-Breakfast-Sausage-Links-NFP.jpg?v=1597076330\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, LESS THAN 2% OF: VINEGAR, SALT, SPICES (GINGER, NUTMEG, SAGE, BLACK PEPPER, RED PEPPER).",
+      "published_at": "2020-08-10T11:20:15-05:00",
+      "created_at": "2020-08-10T11:20:13-05:00",
+      "updated_at": "2020-09-01T00:42:35-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35960942690469,
+          "title": "30",
+          "option1": "30",
+          "option2": null,
+          "option3": null,
+          "sku": "70009",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "29.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515189682341,
+          "created_at": "2020-09-01T00:33:32-05:00",
+          "updated_at": "2020-09-01T00:33:32-05:00"
+        },
+        {
+          "id": 35960987058341,
+          "title": "50",
+          "option1": "50",
+          "option2": null,
+          "option3": null,
+          "sku": "",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 2,
+          "product_id": 5515189682341,
+          "created_at": "2020-09-01T00:38:43-05:00",
+          "updated_at": "2020-09-01T00:42:35-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18370937028773,
+          "created_at": "2020-08-10T11:20:15-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:20:15-05:00",
+          "product_id": 5515189682341,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Fully-Cooked-Mild-Breakfast-Sausage-Links.jpg?v=1597076415",
+          "width": 890,
+          "height": 1200
+        }
+      ],
+      "options": [{ "name": "Price", "position": 1, "values": ["30", "50"] }]
+    },
+    {
+      "id": 5515224350885,
+      "title": "Fully Cooked No Sugar Added Spicy Breakfast Sausage Links",
+      "handle": "fully-cooked-no-sugar-added-spicy-breakfast-sausage-links",
+      "body_html": "\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eFour (4) 9 oz. packages.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eThis fully cooked and perfectly seasoned sausage is for cowboys and cowgirls that prefer a bit of heat with their breakfast (or lunch, dinner, second supper, midnight snack etc). The point is, this stuff is spicy and ready to eat. It's simple and it's good. \u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eThese simple links are a simple combination of seasonings and meat, all natural and nothing artificial. Minimal processing. No preservatives, no added nitrates or nitrites. You won't find any gluten, lactose or MSG here. There's no sugar either, you can go ahead and add it to your Whole30 meal plan. We'll just tell you it's hard to pass these links up when they're sitting on the counter, so stock up.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/Spicy-Breakfast-Sausage-Links-NFP.jpg?v=1597076931\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, LESS THAN 2% OF: VINEGAR, SALT, SPICES (RED \u0026amp; BLACK PEPPERS, SAGE, GINGER, NUTMEG, SPICE EXTRACTIVE [CAPSICUM]).",
+      "published_at": "2020-08-10T11:29:51-05:00",
+      "created_at": "2020-08-10T11:29:49-05:00",
+      "updated_at": "2020-09-01T00:42:31-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35960949276837,
+          "title": "30",
+          "option1": "30",
+          "option2": null,
+          "option3": null,
+          "sku": "70069",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "29.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515224350885,
+          "created_at": "2020-09-01T00:34:30-05:00",
+          "updated_at": "2020-09-01T00:34:30-05:00"
+        },
+        {
+          "id": 35960985321637,
+          "title": "50",
+          "option1": "50",
+          "option2": null,
+          "option3": null,
+          "sku": "",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 2,
+          "product_id": 5515224350885,
+          "created_at": "2020-09-01T00:38:23-05:00",
+          "updated_at": "2020-09-01T00:42:31-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371117777061,
+          "created_at": "2020-08-10T11:29:51-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:29:51-05:00",
+          "product_id": 5515224350885,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Regular-Fully-Cooked-Spicy-Breakfast-Sauasge-Links-scaled.jpg?v=1597076991",
+          "width": 1554,
+          "height": 2048
+        }
+      ],
+      "options": [{ "name": "Price", "position": 1, "values": ["30", "50"] }]
+    },
+    {
+      "id": 5515406278821,
+      "title": "No Sugar Added Chorizo",
+      "handle": "no-sugar-added-chorizo",
+      "body_html": "\u003cp\u003eFive (5) 16 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eNeed a little spice in your life? Our Whole30 Approved No Sugar Chorizo Sausage is like a fiesta in your mouth! Bold, flavorful, and packing a punch, our Chorizo Sausage is versatile enough to get you through breakfast, brunch, lunch, snacks, and supper. Stuff a pepper, top a pizza, or scramble it with eggs. Our No Sugar Chorizo is made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, no MSG, and no added sweeteners!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/09.14.16-NS-Chorizo-NFP.jpg?v=1597079705\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, SPICES (BLACK PEPPER, CHILI PEPPER, OREGANO, RED PEPPER), SALT, TAPIOCA STARCH, PAPRIKA, DEHYDRATED GARLIC, WATER, LESS THAN 2% OF: VINEGAR, CELERY POWDER.",
+      "published_at": "2020-08-10T12:16:15-05:00",
+      "created_at": "2020-08-10T12:16:14-05:00",
+      "updated_at": "2020-09-01T00:42:10-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35960952848549,
+          "title": "30",
+          "option1": "30",
+          "option2": null,
+          "option3": null,
+          "sku": "75011",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "29.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515406278821,
+          "created_at": "2020-09-01T00:34:58-05:00",
+          "updated_at": "2020-09-01T00:35:11-05:00"
+        },
+        {
+          "id": 35960981225637,
+          "title": "50",
+          "option1": "50",
+          "option2": null,
+          "option3": null,
+          "sku": "",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 2,
+          "product_id": 5515406278821,
+          "created_at": "2020-09-01T00:37:57-05:00",
+          "updated_at": "2020-09-01T00:42:10-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371908993189,
+          "created_at": "2020-08-10T12:16:15-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:16:15-05:00",
+          "product_id": 5515406278821,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/75011-No-Sugar-Chorizo-web-1.png?v=1597079775",
+          "width": 962,
+          "height": 1000
+        }
+      ],
+      "options": [{ "name": "Price", "position": 1, "values": ["30", "50"] }]
+    },
+    {
+      "id": 5515266621605,
+      "title": "No Sugar Added Double Smoked Bratwurst",
+      "handle": "no-sugar-added-double-smoked-bratwurst",
+      "body_html": "\u003cp\u003eFive (5) 12 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eOur all natural, fully cooked sausage link line offers a taste for every palate! Convenient with uncompromised quality and flavor, we know you’ll love it! Our No Sugar Added Double Smoked Bratwurst is made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, no MSG, and no sweeteners!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/Brat-NFP.jpg?v=1597077645\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, VINEGAR, LESS THAN 2% OF: MACE, WHITE PEPPER, NUTMEG, CULTURED CELERY POWDER AND SEA SALT, GINGER.",
+      "published_at": "2020-08-10T11:42:00-05:00",
+      "created_at": "2020-08-10T11:41:58-05:00",
+      "updated_at": "2020-08-29T15:25:01-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35597638271141,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "71049",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515266621605,
+          "created_at": "2020-08-10T11:41:58-05:00",
+          "updated_at": "2020-08-29T15:25:01-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371330277541,
+          "created_at": "2020-08-10T11:42:00-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:42:00-05:00",
+          "product_id": 5515266621605,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Bratwurst.jpg?v=1597077720",
+          "width": 1200,
+          "height": 805
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515256168613,
+      "title": "No Sugar Added Green Chili \u0026 Cheese Sausage",
+      "handle": "no-sugar-added-green-chili-cheese-sausage",
+      "body_html": "\u003cp\u003eFive (5) 12 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eOur all natural, fully cooked sausage link line offers a taste for every palate! Convenient with uncompromised quality and flavor, we know you’ll love it! Our No Sugar Added Green Chili \u0026amp; Cheese Sausage is made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no MSG, and no sweeteners!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/Green-Chili-Cheese-NFP.jpg?v=1597077400\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, PANELA CHEESE (PASTEURIZED MILK, CHEESE CULTURES, SALT, ENZYMES), WATER, VINEGAR, LESS THAN 2% OF: SALT, GREEN CHILI PEPPER, PAPRIKA, BLACK PEPPER, CHILI PEPPERS, CULTURED CELERY POWDER AND SEA SALT, CILANTRO.",
+      "published_at": "2020-08-10T11:38:38-05:00",
+      "created_at": "2020-08-10T11:38:36-05:00",
+      "updated_at": "2020-08-29T15:25:21-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35597540032677,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "71039",
+          "requires_shipping": true,
+          "taxable": true,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515256168613,
+          "created_at": "2020-08-10T11:38:36-05:00",
+          "updated_at": "2020-08-29T15:25:20-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371279945893,
+          "created_at": "2020-08-10T11:38:38-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:38:38-05:00",
+          "product_id": 5515256168613,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Green-Chili-Cheese.jpg?v=1597077518",
+          "width": 1200,
+          "height": 846
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515397595301,
+      "title": "No Sugar Added Ground Italian Sausage",
+      "handle": "no-sugar-added-ground-italian-sausage",
+      "body_html": "\u003cp\u003eFive (5) 16 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eFeatures:\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e* Whole30 Approved, No Sugar added ground Italian sausage\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e* Vegetarian fed, raised humanely without antibiotics.\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e* Gluten, Lactose, and MSG free.\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e* Ships Frozen.\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eLike the rest of their product line, Pederson’s Natural Farms Italian ground sausage checks every box when it comes to health-conscious and humane protein production. This Italian ground sausage fits the bill, whether you’re putting it on pizza, in a pasta, or spicing up a perfectly balanced omelet. Pederson’s Italian ground sausage is minimally processed and infused with just the right amount of seasoning, without adding any sugar or artificial ingredients. It’ll cook up with a distinctive and characteristic Italian taste, yet that flavor profile strikes a balance with enough nuance to not overpower the rest of your dish. You’ll know it once you try it. If you’ve had PNF products in the past, you know they each set themselves apart from the competition in their own way. They make the best, better.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/09.14.16-NS-Italian-Ground-NFP.jpg?v=1597079531\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, SEASONING (SEA SALT, SPICES [ANISE, FENNEL, BLACK PEPPER, DEHYDRATED PARSLEY], GARLIC POWDER), LESS THAN 2% OF: VINEGAR, CELERY POWDER.",
+      "published_at": "2020-08-10T12:13:21-05:00",
+      "created_at": "2020-08-10T12:13:19-05:00",
+      "updated_at": "2020-08-29T15:20:26-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35598604304549,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "75032",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515397595301,
+          "created_at": "2020-08-10T12:13:19-05:00",
+          "updated_at": "2020-08-29T15:20:25-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371862823077,
+          "created_at": "2020-08-10T12:13:21-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:13:21-05:00",
+          "product_id": 5515397595301,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/75032-No-Sugar-Italian-Ground-Sausage-Web.png?v=1597079601",
+          "width": 1000,
+          "height": 923
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515238080677,
+      "title": "No Sugar Added Old World Uncured Kielbasa",
+      "handle": "no-sugar-added-old-world-uncured-kielbasa",
+      "body_html": "\u003cp\u003eFour (4) 14 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eYou asked for it, so you shall receive! Introducing our newest addition to our sausage family. Our Uncured No Sugar Added Old World Kielbasa is mild, kid tasted, and kid approved! With a more traditional kielbasa flavor profile, this product is sure to be a crowd pleaser. Our Uncured No Sugar Added Old World Kielbasa is made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, no MSG, and no added sweeteners!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/Old-World-Kielbasa-NFP.jpg?v=1597077125\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, VINEGAR, SALT, LESS THAN 2% OF: WHITE PEPPER, CORIANDER, NUTMEG, GARLIC, CELERY POWDER.",
+      "published_at": "2020-08-10T11:33:32-05:00",
+      "created_at": "2020-08-10T11:33:31-05:00",
+      "updated_at": "2020-08-29T15:22:43-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35597398671525,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "73007",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515238080677,
+          "created_at": "2020-08-10T11:33:31-05:00",
+          "updated_at": "2020-08-29T15:22:43-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371191603365,
+          "created_at": "2020-08-10T11:33:33-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:33:33-05:00",
+          "product_id": 5515238080677,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/No-Sugar-Added-Old-World-Uncured-Kielbasa.jpg?v=1597077213",
+          "width": 1200,
+          "height": 544
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515415617701,
+      "title": "No Sugar Added Spicy Breakfast Sausage",
+      "handle": "no-sugar-added-spicy-breakfast-sausage",
+      "body_html": "\u003cp\u003eFive (5) 16 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eWe might be biased, but we think our No Sugar Spicy Breakfast Sausage is the best on the market! We’d even go so far as to say that this breakfast sausage makes Monday mornings bearable. Okay, okay… that and coffee. Seasoned to perfection, it’s definitely the best part of waking up. Paleo friendly and Whole30 Approved. Our No Sugar Added Spicy Breakfast Sausage is made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, no MSG, and no added sweeteners!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/09.14.16-NS-Spicy-Breakfast-Sausage-NFP.jpg?v=1597079890\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, SALT, SPICES (RED \u0026amp; BLACK PEPPERS, SAGE, GINGER, NUTMEG, SPICE EXTRACTIVE [CAPSICUM]), VINEGAR.",
+      "published_at": "2020-08-10T12:19:18-05:00",
+      "created_at": "2020-08-10T12:19:17-05:00",
+      "updated_at": "2020-08-29T16:15:41-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35598763557029,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "75002",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515415617701,
+          "created_at": "2020-08-10T12:19:17-05:00",
+          "updated_at": "2020-08-29T15:22:05-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371950215333,
+          "created_at": "2020-08-10T12:19:19-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:19:19-05:00",
+          "product_id": 5515415617701,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/75002-No-Sugar-Spicy-Breakfast-Sausage-copy-web.png?v=1597079959",
+          "width": 1000,
+          "height": 941
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515355881637,
+      "title": "No Sugar Added Uncured Beef Hot Dogs",
+      "handle": "no-sugar-added-uncured-beef-hot-dogs",
+      "body_html": "\u003cp\u003eFive (5) 12 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eLet’s be frank, hot dogs are the perfect meal for everyone. Kids love them, dads love to grill them, and, now, moms love the fact that they can feel good about feeding their families our all natural, 100% beef hot dogs because they contain NO ADDED SUGAR! These Whole 30 Compliant No Sugar Hot Dogs are quick and easy to prepare and give you the perfect emergency protein boost you’re looking for! Paleo friendly and Whole30 Approved. Our Uncured No Sugar Beef Hot Dogs are made from beef that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, no MSG, and no added sweeteners!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/07.20.16-Uncured-No-Sugar-Added-Beef-Hot-Dogs-NFP.jpg?v=1597078848\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: BEEF, WATER, LESS THAN 2% OF: SALT, VINEGAR, CELERY POWDER, TAPIOCA STARCH, POTATO STARCH, NATURAL SPICES (INCLUDING PAPRIKA), NATURAL FLAVORS.",
+      "published_at": "2020-08-10T12:02:21-05:00",
+      "created_at": "2020-08-10T12:02:20-05:00",
+      "updated_at": "2020-08-29T15:23:10-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35598261059749,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "99005",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515355881637,
+          "created_at": "2020-08-10T12:02:20-05:00",
+          "updated_at": "2020-08-29T15:23:09-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371674538149,
+          "created_at": "2020-08-10T12:02:22-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:02:22-05:00",
+          "product_id": 5515355881637,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Grass-Fed-Beef-Hot-Dogs.jpg?v=1597078942",
+          "width": 800,
+          "height": 660
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515134828709,
+      "title": "No Sugar Added Uncured Dry Rub Bacon",
+      "handle": "no-sugar-added-uncured-dry-rub-bacon",
+      "body_html": "\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eFour (4) 10oz. packages.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eLet me tell you, this bacon took some time to perfect. Long hours, weekends, batch after batch. May have been some beer involved. Bottom line, seasonings are a serious topic at Pederson's, and this bacon speaks to that fact. We rub this uncured bacon in a top secret recipe. The one thing we can tell you is that there's no sugar in it. That's all we're gonna give away. Well, that and the juniper berries. We love those juniper berries.\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eSo, it's rubbed with and rolled in the secret spices. It's smoked the old fashioned way, with chipped wood over fire. Our Vice President Neil Dudley hums 'Amarillo By Morning' while it's sliced. This bacon goes through minimal processing, but 'Amarillo By Morning' always gets hummed. \u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eWe're talking about a bacon that's Whole30 approved, friendly to the AIP diet, and Keto and Paleo ready. There's no MSG here, no gluten, no lactose - and we do it without adding nitrates or nitrites. We may like to spin a yarn here and there, but this bacon is about as good as it gets. Pederson's Natural Farms makes the best, better.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/Dry-Rub-NFP.jpg?v=1597075392\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, VINEGAR, SEASONING (SPICES, SEA SALT, DEHYDRATED GARLIC, JUNIPER BERRIES, EXTRA VIRGIN OLIVE OIL), SALT, CELERY POWDER.",
+      "published_at": "2020-08-10T11:00:57-05:00",
+      "created_at": "2020-08-10T11:00:56-05:00",
+      "updated_at": "2020-08-29T15:19:58-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35596429099173,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "3017",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515134828709,
+          "created_at": "2020-08-10T11:00:56-05:00",
+          "updated_at": "2020-08-29T15:19:58-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18370686517413,
+          "created_at": "2020-08-10T11:00:58-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:00:58-05:00",
+          "product_id": 5515134828709,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/No-Sugar-Added-Dry-Rub-Bacon.jpg?v=1597075258",
+          "width": 1200,
+          "height": 681
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515387437221,
+      "title": "No Sugar Added Uncured Kielbasa",
+      "handle": "no-sugar-added-uncured-kielbasa",
+      "body_html": "\u003cp\u003eFour (4) 14 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eSome days just call for a simple, quick, and delicious meal. Our Whole30 Approved Uncured No Sugar Smoked Kielbasa has got your back! Fully cooked and packed with flavor, just heat it, eat it, and wait for your tastebuds to thank you. Our Uncured No Sugar Added Smoked Kielbasa is made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, no MSG, and no added sweeteners!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/08.17.16-NS-Uncured-Smoked-Kielbasa-NFP.jpg?v=1597079331\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, SEASONING (SPICES [RED \u0026amp; BLACK PEPPER, GINGER, CORIANDER, NUTMEG], GARLIC), LESS THAN 2% OF: VINEGAR, CELERY POWDER.",
+      "published_at": "2020-08-10T12:10:07-05:00",
+      "created_at": "2020-08-10T12:10:05-05:00",
+      "updated_at": "2020-08-29T16:17:14-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35598505345189,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "70147",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515387437221,
+          "created_at": "2020-08-10T12:10:05-05:00",
+          "updated_at": "2020-08-29T15:23:26-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371799122085,
+          "created_at": "2020-08-10T12:10:07-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:10:07-05:00",
+          "product_id": 5515387437221,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/No-Sugar-Added-Uncured-Kielbasa.jpg?v=1597079407",
+          "width": 1200,
+          "height": 550
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515169792165,
+      "title": "Organic No Sugar Added Uncured Smoked Bacon",
+      "handle": "organic-no-sugar-added-uncured-smoked-bacon",
+      "body_html": "\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eFour (4) 8 oz. packages.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eFood starts with farmers. Old fashioned food starts with old fashioned approaches. We are no strangers to technology, but we are strangers to cutting corners. We're strangers to putting profit over product. These organic products are about attaining the highest of quality for everyone involved. We work with self-sustaining family farms, good stewards of land and animals alike. We have and feel an ethical obligation to provide our animals with a comfortable life. Not only do our farmers raise their pigs right, but they also grow much of the grain used to feed those pigs. This makes for a higher quality feed that's always free of animal by-products. These animals live in open pens, they get to see the sky. They have open air. They romp, frolic, and engage in natural behavior. Our pigs grow slower than those at industrial “farms,” and we don't mind. It's more natural because we raise pigs without growth hormones or antibiotics. It’s a better life for the pigs and produces the best pork we’ve ever eaten.\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eWe’ve partnered with these farmers because they share our values. Our goal is to produce the best bacon in the best ways. Our pork bellies are never injected with anything at any point in the process. No liquid smoke… ever. We use straight from the kitchen real, natural seasonings. No preservatives, no artificial ingredients. Next, we smoke the bellies using real wood chips. A smoky flavor should come from actually smoking the meat instead of faking it with liquid smoke. Our final step is to slice the chilled bellies into strips of bacon and put it in a package. Easy enough, right? Seasoned. Smoked. Sliced. It’s a natural process with no complicated steps… kind of like our uncured bacon… no nonsense, just natural.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/6014-Organic-No-Sugar-Added-Uncured-Smoked-Bacon-NFP.jpg?v=1597075930\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003eINGREDIENTS: ORGANIC PORK, WATER, VINEGAR (MADE WITH ORGANIC INGREDIENTS), SALT, CELERY POWDER.",
+      "published_at": "2020-08-10T11:14:03-05:00",
+      "created_at": "2020-08-10T11:14:01-05:00",
+      "updated_at": "2020-08-29T15:23:43-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35596753830053,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "6014",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515169792165,
+          "created_at": "2020-08-10T11:14:01-05:00",
+          "updated_at": "2020-08-29T15:23:43-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18370847670437,
+          "created_at": "2020-08-10T11:14:03-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:14:03-05:00",
+          "product_id": 5515169792165,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Organic-No-Sugar-Added-Uncured-Smoked-Bacon.jpg?v=1597076043",
+          "width": 1200,
+          "height": 672
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515281793189,
+      "title": "Spiral Sliced No Sugar Added Boneless Smoked Uncured Ham",
+      "handle": "spiral-sliced-no-sugar-added-boneless-smoked-uncured-ham",
+      "body_html": "\u003cp\u003eOne (1) 6-8 lb. ham.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eSing it with me, now, “I like pig butts, and I cannot lie!” Okay, okay… we’ll stop hamming around! Our Uncured No Sugar Boneless Half Ham is about to revolutionize your holidays. It’s the same superior taste and quality that you’ve come to expect from Pederson’s Natural Farms and their No Sugar Line. Spiral Sliced. Boneless. Average weight is 4-6 lbs. Fully cooked. Our hams are made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, no MSG, and no added sweeteners! Paleo friendly and Whole30 Approved.\u003c/span\u003e\u003cbr\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/09.14.16_NS_Petite_Ham_NFP_large_7d4a4051-4975-401a-a7ab-29482a538fd0.jpg?v=1597077902\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, VINEGAR, LESS THAN 2% OF: SEASONING (NATURAL SPICE EXTRACTIVES [INCLUDING CHILI PEPPERS, NATURAL FLAVORS]), CELERY POWDER, SALT INCLUDING SEA SALT.",
+      "published_at": "2020-08-10T11:46:30-05:00",
+      "created_at": "2020-08-10T11:46:29-05:00",
+      "updated_at": "2020-08-29T15:19:19-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35597755121829,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "5014",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "79.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515281793189,
+          "created_at": "2020-08-10T11:46:29-05:00",
+          "updated_at": "2020-08-29T15:19:18-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18371402924197,
+          "created_at": "2020-08-10T11:46:30-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T11:46:30-05:00",
+          "product_id": 5515281793189,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/5014-No-Sugar-Uncured-Smoked-Boneless-Ham-Half-Web.jpg?v=1597077990",
+          "width": 1200,
+          "height": 931
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515462148261,
+      "title": "Sweet German Brand Smoked Uncured Sausage",
+      "handle": "sweet-german-brand-smoked-uncured-sausage",
+      "body_html": "\u003cp\u003eFour (4) 14 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eOur all natural, fully cooked rope sausage line offers a taste for every palate! Convenient with uncompromised quality and flavor, it’s no wonder they’re some of our best selling products! Our Sweet German Brand Smoked Sausage is made from pork that is humanely raised without the use of antibiotics or growth stimulants and fed no animal by-products. Minimally processed, no preservatives, no artificial ingredients, no added nitrates or nitrites, no gluten, no lactose, and no MSG!\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/08.17.16-Sweet-German-Sausage-NFP.jpg?v=1597080783\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, SEASONING (SALT, SPICES [PEPPERS, CHILI PEPPERS], SUGAR, GARLIC), LESS THAN 2% OF: VINEGAR, CELERY POWDER.",
+      "published_at": "2020-08-10T12:34:23-05:00",
+      "created_at": "2020-08-10T12:34:22-05:00",
+      "updated_at": "2020-08-29T15:22:23-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35599230075045,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "75097",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515462148261,
+          "created_at": "2020-08-10T12:34:22-05:00",
+          "updated_at": "2020-08-29T15:22:23-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18372161798309,
+          "created_at": "2020-08-10T12:34:23-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:34:23-05:00",
+          "product_id": 5515462148261,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/German-Sausage.jpg?v=1597080863",
+          "width": 1200,
+          "height": 540
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515119722661,
+      "title": "The Original No Sugar Added Hickory Smoked Uncured Bacon",
+      "handle": "the-original-no-sugar-added-hickory-smoked-uncured-bacon",
+      "body_html": "\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eFour (4) 10oz. packages.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eThe original. The bacon that blazed its path across the pork landscape and made Pederson's a household name. This is bacon without sugar. Simple enough, right? Turns out making bacon without artificial nitrates or nitrites is tough. Take sugar out of the equation and, for many, well you have a down-right conundrum. Then the cowboys and cowgirls at Pederson's Natural Farms went and did it. The rest is history. If you want to get in on that, here's your chance. This bacon will change the way you look at bacon, and you'll want more of it. This is Whole30 Approved. It's AIP diet friendly. It fits right into Paleo and Keto lifestyles.\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eThe process of getting this bacon from pasture to plate is whittled down to the essentials. Minimal processing. The seasonings get soaked in over time, not injected all at once. Slabs of pork smoked by all natural hickory chips and perfectly sliced. Humanely raised, these animals get the life they deserve, with no growth stimulants or antibiotics. You won't find any MSG, gluten, or lactose here. No preservatives, no artificial ingredients. All natural uncured bacon. If there's a better way to make bacon, we haven't found it yet.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/No-Sugar-NFP.jpg?v=1597074922\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, LESS THAN 2% OF: SALT, VINEGAR, CITRUS EXTRACTS, POMEGRANATE EXTRACT, ROSEMARY EXTRACT.",
+      "published_at": "2020-08-10T10:54:35-05:00",
+      "created_at": "2020-08-10T10:54:34-05:00",
+      "updated_at": "2020-08-27T18:03:22-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "Bacon",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35596226265253,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "30149",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515119722661,
+          "created_at": "2020-08-10T10:54:34-05:00",
+          "updated_at": "2020-08-19T13:00:32-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18370591883429,
+          "created_at": "2020-08-10T10:54:36-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T10:54:36-05:00",
+          "product_id": 5515119722661,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/The-Original-No-Sugar-Added-Hickory-Smoked-Bacon.jpg?v=1597074876",
+          "width": 1200,
+          "height": 671
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515475779749,
+      "title": "Uncured Beef Bacon",
+      "handle": "uncured-beef-bacon",
+      "body_html": "\u003cp\u003eFour (4) 10 oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eDo you love beef? Do you love bacon? Well, do we have something for you. You read the headline right, this is beef bacon. It's lean, even leaner than our turkey bacon. It's packed with protein. It cooks up something beautiful, and its uses are endless. This meat is versatile. Want to use it where you'd usually use bacon? Go for it. Want to use it where you'd usually use beef? That's gonna turn out well. Ever had a beef BLT? A beef wrapped jalapeno popper? How about a beef bacon wrapped filet mignon? You can do that now. Put this on a plate, and conversation will commence.   \u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eLike the rest of Pederson's line, this is about quality food. Food we make for our own families. There's nothing artificial in this beef. No antibiotics, ever. No growth stimulants, ever. This is fresh and preservative free meat from farmers that take pride in their products. This is from Pederson's - where we make the best better.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/06.30.16-Uncured-Beef-Bacon-NFP.jpg?v=1597081114\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: BEEF, WATER, BROWN SUGAR, LESS THAN 2% OF: SALT, VINEGAR, CELERY POWDER.",
+      "published_at": "2020-08-10T12:39:41-05:00",
+      "created_at": "2020-08-10T12:39:39-05:00",
+      "updated_at": "2020-08-29T15:21:24-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35599348859045,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "3710",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515475779749,
+          "created_at": "2020-08-10T12:39:39-05:00",
+          "updated_at": "2020-08-29T15:21:23-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18372230054053,
+          "created_at": "2020-08-10T12:39:41-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:39:41-05:00",
+          "product_id": 5515475779749,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Uncured-Beef-Bacon.jpg?v=1597081181",
+          "width": 1200,
+          "height": 671
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515442323621,
+      "title": "Uncured No Sugar Added Hickory Smoked Turkey Bacon",
+      "handle": "uncured-no-sugar-added-hickory-smoked-turkey-bacon",
+      "body_html": "\u003cp\u003eFour (4) 10oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eTurkey and bacon. To be honest, without the word ‘and’ in that sentence, it's kind of an odd statement. Isn't bacon made from the belly of a pig? Well, yes. Thing is, even we'll admit that sometimes pork doesn't have to be on the menu. So we did our best to come up with something we'd be proud to eat when we weren't looking to eat pork. The results, well, you'll have to taste them for yourself (we're pretty proud). \u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eWhen these turkeys hatch, we make sure someone is there to oink at them. Once they're old enough to fend for themselves, they're raised next to our pigs and grow up side by side. We're pretty sure these turkeys think they're pigs.\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eThat might not all be true, but it's fun to imagine. What is true is that we slice this turkey like bacon. We season this turkey like bacon, and we smoke it with natural hickory chips. Just like our bacon. It's uncured, and there's no sugar added. No artificial ingredients and no preservatives. This turkey isn't raised in cages, and it gets a chance to grow with no antibiotics or growth stimulants - ever. This MSG and gluten free bird bacon is perfect for the Paleo or Keto lifestyle, and we invite you to try it today.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/06.27.17-No-Sugar-Uncured-Hickory-Smoked-Turkey-Bacon-NFP.jpg?v=1597080446\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: TURKEY, WATER, LESS THAN 2% OF: SALT, VINEGAR, CELERY POWDER.",
+      "published_at": "2020-08-10T12:28:28-05:00",
+      "created_at": "2020-08-10T12:28:26-05:00",
+      "updated_at": "2020-08-29T15:24:02-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35599042838693,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "36109",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515442323621,
+          "created_at": "2020-08-10T12:28:27-05:00",
+          "updated_at": "2020-08-29T15:24:01-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18372071325861,
+          "created_at": "2020-08-10T12:28:29-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:28:29-05:00",
+          "product_id": 5515442323621,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/Turkey-Bacon.png?v=1597080509",
+          "width": 1388,
+          "height": 793
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    },
+    {
+      "id": 5515428692133,
+      "title": "Uncured No Sugar Buckin' Bacon",
+      "handle": "uncured-no-sugar-buckin-bacon",
+      "body_html": "\u003cp\u003eFour (4) 10oz. packages.\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003eThis bacon bucks trends, then starts them. Pederson's Buckin' Bacon comes from the center of the pork shoulder instead of the belly. This makes for bacon that's much more lean, which makes for a product that's higher in protein and lower in fat. It's a beautiful cut and has earned its place in our product line. This is a good place to start for a low fat high protein alternative to traditional bacon. It's an artisanal style with a practical purpose and a taste all its own. There's no sugar added, so it's Whole30 approved. It's also safe to eat for those of us adhering to the AIP diet or living a Keto or Paleo lifestyle. \u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cbr\u003e\u003c/span\u003e\u003cspan style=\"font-weight: 400;\"\u003eLike the rest of Pederson's Natural Farms products, this meat is raised humanely. There's no antibiotics or growth stimulants here. No preservatives, no artificial ingredients, no added nitrates or nitrites. All natural seasoning and as little processing as possible to get it on your plate. You can taste the difference. We hang our hat on the quality of our products.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-weight: 400;\"\u003e\u003cimg src=\"https://cdn.shopify.com/s/files/1/0435/7819/6133/files/04.06.17-Uncured-No-Sugar-Buckin-Bacon-NFP.jpg?v=1597080134\" alt=\"\"\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cmeta charset=\"utf-8\"\u003e\nINGREDIENTS: PORK, WATER, LESS THAN 2% OF: SALT, VINEGAR, CELERY POWDER.",
+      "published_at": "2020-08-10T12:23:28-05:00",
+      "created_at": "2020-08-10T12:23:26-05:00",
+      "updated_at": "2020-08-29T15:21:43-05:00",
+      "vendor": "Pederson's Natural Farms",
+      "product_type": "",
+      "tags": ["available"],
+      "variants": [
+        {
+          "id": 35598895415461,
+          "title": "Default Title",
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "sku": "80149",
+          "requires_shipping": true,
+          "taxable": false,
+          "featured_image": null,
+          "available": true,
+          "price": "49.99",
+          "grams": 0,
+          "compare_at_price": null,
+          "position": 1,
+          "product_id": 5515428692133,
+          "created_at": "2020-08-10T12:23:27-05:00",
+          "updated_at": "2020-08-29T15:21:42-05:00"
+        }
+      ],
+      "images": [
+        {
+          "id": 18372013686949,
+          "created_at": "2020-08-10T12:23:28-05:00",
+          "position": 1,
+          "updated_at": "2020-08-10T12:23:28-05:00",
+          "product_id": 5515428692133,
+          "variant_ids": [],
+          "src": "https://cdn.shopify.com/s/files/1/0435/7819/6133/products/BuckinWeb.png?v=1597080208",
+          "width": 1000,
+          "height": 578
+        }
+      ],
+      "options": [{ "name": "Title", "position": 1, "values": ["Default Title"] }]
+    }
+  ]
+}
