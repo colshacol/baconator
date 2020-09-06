@@ -19,7 +19,7 @@ const App = () => {
   useStoreInitializers()
 
   return (
-    <div className='App fade-in'>
+    <div className='App'>
       <Route path='/box-product-selection' component={Cart} />
       <Route path='/box-product-selection' component={BoxProductOptionQuickView} />
       <GlobalStyles />

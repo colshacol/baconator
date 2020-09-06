@@ -2,6 +2,7 @@ import React from "react"
 import { Link, Route, navigate } from "wouter"
 import styled from "styled-components"
 import { useLocation } from "wouter"
+
 export const NavBar = (props) => {
   const [location, setLocation] = useLocation()
 
@@ -27,6 +28,9 @@ export const NavBar = (props) => {
           </Link>
         </div>
       </div>
+      <div className='menuButtonContainer'>
+        <img src={window.pedersonsData.assets.menuIconUrl} alt='menu' />
+      </div>
     </StyledWrapper>
   )
 }
@@ -37,7 +41,7 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 120px;
+  height: 100px;
   padding: 8px 48px 16px 48px;
   position: relative;
 
@@ -86,45 +90,69 @@ const StyledWrapper = styled.div`
     margin-left: 248x;
   }
 
-  .logoWrapper {
+  .topBar,
+  .bottomLinks {
+    display: none;
+  }
 
+  .logoWrapper {
+    z-index: 50;
     width: 100%;
-    height: 120px;
+    height: 100px;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 16px;
     padding-bottom: 16px;
+    display: flex;
+    justify-content: center;
 
     img {
-      width: clamp(150px, 50%, 70%);
+      width: 140px;
+      height: 70px;
+    }
+  }
+
+  .menuButtonContainer {
+    z-index: 100;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 24px;
     }
   }
 
   @media (min-width: 530px) {
+    height: 120px;
+
+    .topBar,
+    .bottomLinks {
+      display: flex;
+    }
+
+    .menuButtonContainer {
+      display: none;
+    }
 
     .logoWrapper {
-    width: 180px;
-    min-width: 180px;
-    position: relative;
-    bottom: 40px;
+      width: 180px;
+      min-width: 180px;
+      position: relative;
+      top: -32px;
 
-    img {
-      width: 100%;
-      max-width: 100%;
+      img {
+        width: 180px;
+        height: 90px;
+      }
     }
   }
 
   @media (min-width: 768px) {
-
-    .logoWrapper {
-    width: 200px;
-    min-width: 200px;
-    position: relative;
-    bottom: 40px;
-
-    img {
-      width: 100%;
-      max-width: 100%;
-    }
   }
 `

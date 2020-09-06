@@ -15,7 +15,7 @@ export const BoxProductSelection = (props) => {
   const cartStore = useCartStore()
 
   if (productsStore.isFetchingProducts) {
-    return <Ellipsis color='#ffdf00' size={40} />
+    return <h1>HOWDY</h1>
   }
 
   return (
