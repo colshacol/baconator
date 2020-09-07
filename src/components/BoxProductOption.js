@@ -9,7 +9,7 @@ export const BoxProductOption = (props) => {
 
   return (
     <BoxProductOptionContainer>
-      <BoxProductOptionTop imageSrc={props.images[0].src}></BoxProductOptionTop>
+      <BoxProductOptionTop imageSrc={props.media[0].src}></BoxProductOptionTop>
       <BoxProductOptionBottom>
         <BoxProductOptionTitle>{props.title}</BoxProductOptionTitle>
         <p
@@ -52,8 +52,7 @@ export const BoxProductOption = (props) => {
           </div>
         ) : boxStore.isBoxFull() ? (
           <Button
-            which='primary'
-            disabled
+            isDisabled
             className='BoxProductOptionButton'
             onClick={(event) => {
               event.preventDefault()
@@ -64,7 +63,7 @@ export const BoxProductOption = (props) => {
           </Button>
         ) : (
           <Button
-            which='primary'
+            isPrimary
             className='BoxProductOptionButton'
             onClick={(event) => {
               event.preventDefault()
@@ -82,7 +81,6 @@ export const BoxProductOption = (props) => {
 const BoxProductOptionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #446264;
   align-items: flex-start;
   background: var(--white);
 
@@ -108,7 +106,7 @@ const BoxProductOptionContainer = styled.div`
       font-size: 18px;
       text-align: center;
       width: 100%;
-      background: var(--offWhite);
+      background: var(--brandOffWhite100);
       height: 40px;
       display: flex;
       justify-content: center;
@@ -166,18 +164,18 @@ const BoxProductOptionBottom = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-  padding: 16px;
+  justify-content: space-between;
+  padding: 16px 0px 0px;
   width: 100%;
 
   .quickViewLink {
     cursor: pointer;
     font-size: 16px;
-    margin-top: auto;
-    color: var(--brandGreen);
+    color: var(--brandGreen100);
     font-style: italic;
 
     :hover {
-      color: var(--darkGreen);
+      color: var(--brandDarkGreen100);
     }
   }
 
@@ -188,24 +186,10 @@ const BoxProductOptionBottom = styled.div`
   }
 `
 
-const BoxProductOptionTopBackground = styled.div`
-  display: none;
-  position: absolute;
-  padding: 16px;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  /* background: rgba(0, 0, 0, 0.5); */
-  background: var(--darkGreen75); ;
-`
-
 const BoxProductOptionTitle = styled.h3`
   font-weight: 700;
   font-size: 18px;
-  color: var(--darkGreen);
+  color: var(--brandDarkGreen100);
   margin-bottom: 16px;
   /* text-shadow: 0px 2px #000; */
 `

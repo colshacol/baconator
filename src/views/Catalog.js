@@ -11,14 +11,17 @@ export const Catalog = (props) => {
   const productsStore = useProductsStore()
 
   return (
-    <View
-      title='Product Catalog'
-      description='Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? '
-    >
-      <>
-        <ViewOptions>
-          <BoxProductTypeFilters />
-        </ViewOptions>
+    <View>
+      <View.Header>
+        <View.Title>Product Catalog</View.Title>
+        <View.Description>
+          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
+          laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        </View.Description>
+        <BoxProductTypeFilters />
+      </View.Header>
+      <View.Content>
+        <ViewOptions></ViewOptions>
         <BoxOptions>
           {productsStore.products.map((product) =>
             product.title.includes(productsStore.filter) ? (
@@ -26,7 +29,7 @@ export const Catalog = (props) => {
             ) : null
           )}
         </BoxOptions>
-      </>
+      </View.Content>
     </View>
   )
 }
@@ -36,6 +39,7 @@ const BoxOptions = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 24px 24px;
+  grid-gap: 24px 24px;
 
   @media (min-width: 530px) {
     grid-template-columns: repeat(2, 1fr);

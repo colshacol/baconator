@@ -1,7 +1,7 @@
 import wretch from "wretch"
 
 export const getVariantId = (productId, index) => {
-  const match = window.pedersonsData.products.find((product) => {
+  const match = window.pedersonsData.allProducts.find((product) => {
     return product.id == productId
   })
 

@@ -15,38 +15,40 @@ export const BoxProductSelection = (props) => {
   const cartStore = useCartStore()
 
   if (productsStore.isFetchingProducts) {
-    return <h1>HOWDY</h1>
+    return <Ellipsis size={240} color='var(--brandGreen50)' />
   }
 
   return (
-    <View
-      title='Select Your Products'
-      description='Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.'
-    >
-      <>
-        <ViewOptions>
-          <Button className='ViewOptionsButton' onClick={cartStore.toggleIsCartOpen}>
-            Show My Box ({boxStore.getProductCount()})
-          </Button>
-          <BoxProductTypeFilters />
-        </ViewOptions>
+    <View>
+      <View.Header data-testid='View.Header'>
+        <View.Title>Select Your Products</View.Title>
+        <View.Description>
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
+          quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+        </View.Description>
+        <Button className='ViewOptionsButton' onClick={cartStore.toggleIsCartOpen}>
+          Show My Box ({boxStore.getProductCount()})
+        </Button>
+        <BoxProductTypeFilters />
+      </View.Header>
+      <View.Content>
         <BoxOptions>
-          {productsStore.products.map((product) =>
+          {productsStore.subscribableProducts.map((product) =>
             product.title.includes(productsStore.filter) ? (
               <BoxProductOption key={product.id} {...product} />
             ) : null
           )}
         </BoxOptions>
-      </>
+      </View.Content>
     </View>
   )
 }
 
 const BoxOptions = styled.div`
-  margin-top: 48px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 24px 24px;
+  gap: 32px 32px;
+  grid-gap: 32px 32px;
 
   @media (min-width: 530px) {
     grid-template-columns: repeat(2, 1fr);

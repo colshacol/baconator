@@ -5,12 +5,10 @@ import { useBoxStore, useSharedStore } from "../stores"
 import { Link } from "wouter"
 
 export const ProductListProduct = (props) => {
-  console.log({ props })
-
   return (
     <ProductListProductContainer>
       <Link href={`/product/${props.id}`}>
-        <ProductListProductTop imageSrc={props.images[0].src}></ProductListProductTop>
+        <ProductListProductTop imageSrc={props.media[0].src}></ProductListProductTop>
       </Link>
       <ProductListProductBottom>
         <Link href={`/product/${props.id}`}>
@@ -24,7 +22,6 @@ export const ProductListProduct = (props) => {
 const ProductListProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #446264;
   align-items: flex-start;
   background: var(--white);
 `
@@ -47,14 +44,13 @@ const ProductListProductBottom = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-  padding: 16px;
+  padding: 16px 0px;
   width: 100%;
 `
 
 const ProductListProductTitle = styled.h3`
   font-weight: 700;
   font-size: 18px;
-  color: var(--darkGreen);
-  margin-bottom: 16px;
+  color: var(--brandDarkGreen100);
   /* text-shadow: 0px 2px #000; */
 `

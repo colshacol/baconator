@@ -3,19 +3,25 @@ import { Link, Route } from "wouter"
 import styled from "styled-components"
 
 import { Button } from "../components/Button"
-import { ViewHeader } from "../components/ViewHeader"
-import { ViewDescription } from "../components/ViewDescription"
 import { View } from "../components/View"
 
 export const Home = (props) => {
   return (
-    <View
-      title='How It Works'
-      description='Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?'
-    >
-      <Link href='/box-selection'>
-        <Button onClick={console.log}>Get Started</Button>
-      </Link>
+    <View>
+      <View.Header data-testid='View.Header'>
+        <View.Title>How It Works</View.Title>
+        <View.Description>
+          Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
+          molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+          pariatur?
+        </View.Description>
+        <Link href='/box-selection'>
+          <Button isPrimary onClick={console.log}>
+            Get Started
+          </Button>
+        </Link>
+      </View.Header>
+      <View.Content>{"..."}</View.Content>
     </View>
   )
 }

@@ -2,7 +2,9 @@ import * as React from "react"
 import styled from "styled-components"
 import getValue from "get-value"
 import { slide as Menu } from "react-burger-menu"
-import { useBoxStore, useCartStore } from "../stores"
+import { useBoxStore, useCartStore, useProductsStore } from "../stores"
+import { Button } from "./Button"
+import { useScript } from "../utilities/useScript"
 
 const prices = {
   0: "$0.00",
@@ -17,10 +19,20 @@ const prices = {
 export const Cart = (props) => {
   const cartStore = useCartStore()
   const boxStore = useBoxStore()
+  const productsStore = useProductsStore()
 
-  React.useEffect(() => console.log("MOUNTING CART", { cartStore }), [])
+  const status = useScript(
+    window.pedersonsData.assets.rechargeScriptUrl + `&t=${Date.now()}`
+  )
 
-  const items = cartStore.cart.items || []
+  React.useEffect(() => {
+    status === "ready" && window.reChargeCartJS()
+  }, [status === "ready"])
+
+  console.log({ boxStore })
+  // const items = cartStore.cart.items || []
+  const items = boxStore.products.map((id) => productsStore.getProductById(id))
+  console.log({ items })
 
   return (
     <StyledMenu
@@ -32,16 +44,37 @@ export const Cart = (props) => {
       onClose={() => cartStore.toggleIsCartOpen(false)}
     >
       <div className='innerContainer'>
-        <h2 className='boxTitle'>Box of {boxStore.products.length}</h2>
-        {items.map((item) => (
-          <div className='cartItem'>
-            <p>
-              {item.title.substring(0, item.title.indexOf(" - "))} (x{item.quantity})
-            </p>
+        <div className='top'>
+          <h2 className='boxTitle'>Your Box ({boxStore.products.length})</h2>
+          {items.map((item, index) => (
+            <div className='cartItem' key={item.title + index}>
+              <p>
+                {item.title.substring(0, item.title.indexOf(" - ")) || item.title}
+                {/*(x{item.quantity})*/}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className='priceContainer'>
+          <div className='shippingRow'>
+            <p>Shipping:</p>
+            <h4 className='shippingPrice'>FREE</h4>
           </div>
-        ))}
+          <div className='priceRow'>
+            <h2>Total:</h2>
+            <h2 className='price'>${cartStore.cart.total_price / 100}</h2>
+          </div>
+          <Button isPrimary name='checkout' className='checkout_button'>
+            Checkout
+          </Button>
+        </div>
       </div>
-      <h2 className='price'>{prices[boxStore.products.length]}</h2>
+      {/* {useScript && (
+        <script
+          src={window.pedersonsData.assets.rechargeScriptUrl}
+          type='text/javascript'
+        />
+      )} */}
     </StyledMenu>
   )
 }
@@ -50,9 +83,16 @@ const StyledMenu = styled(Menu)`
   background: #fff;
 
   .innerContainer {
-    display: flex;
+    height: 100%;
+    display: flex !important;
     flex-direction: column;
-    gap: 16px;
+    justify-content: space-between;
+    padding-bottom: 16px;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .cartItem {
@@ -65,11 +105,40 @@ const StyledMenu = styled(Menu)`
 
   .boxTitle {
     margin-bottom: 24px;
-    color: #02383a;
+    color: var(--brandBlack100);
   }
 
-  .price {
-    margin-bottom: 48px;
-    color: #02383a;
+  .shippingRow {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--brandBlack50);
+    padding-bottom: 8px;
+
+    p {
+      color: var(--brandBlack100);
+    }
+
+    h4 {
+      color: var(--brandGreen100);
+    }
+  }
+
+  .priceRow {
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      color: var(--brandBlack100);
+    }
+
+    h2.price {
+      color: var(--brandGreen100);
+    }
+  }
+
+  .checkout_button {
+    margin-top: 24px;
+    width: 100%;
   }
 `

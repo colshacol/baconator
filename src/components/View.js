@@ -2,60 +2,57 @@ import * as React from "react"
 import styled from "styled-components"
 
 export const View = (props) => {
-  return (
-    <ViewContainer>
-      <ViewContainerInner>
-        <ViewIntro>
-          <ViewTitle>{props.title}</ViewTitle>
-          <ViewDescription>{props.description}</ViewDescription>
-        </ViewIntro>
-        <ViewContent>{props.children}</ViewContent>
-      </ViewContainerInner>
-    </ViewContainer>
-  )
+  return <ViewContainer>{props.children}</ViewContainer>
 }
 
-export const ViewContainer = styled.div`
+const ViewContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 64px 24px 24px;
   width: 100%;
-  background: var(--offWhite);
-
-  @media screen and (min-width: 450px) {
-    padding: 80px 48px 48px;
-  }
+  background: var(--brandOffWhite100);
 `
 
-export const ViewContainerInner = styled.div`
+const ViewContainerInner = styled.div`
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
 `
 
-export const ViewIntro = styled.div`
+View.Header = styled.div`
+  --xPadding: 24px;
+  --sidePadding: max(calc(((100vw - 1100px) / 2) + 24px), 24px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  padding: 64px var(--sidePadding) 24px;
+  background: var(--brandDarkGreen100);
 `
 
-export const ViewTitle = styled.h1`
-  color: var(--colorBlack);
+View.Title = styled.h1`
+  color: var(--brandWhite100);
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 16px;
 `
 
-export const ViewDescription = styled.h1`
-  color: var(--colorBlack);
+View.Description = styled.h1`
+  color: var(--brandWhite100);
   font-size: 18px;
   font-weight: 500;
-  margin-bottom: 0px;
+  margin-bottom: 24px;
   line-height: 160%;
 `
 
-export const ViewContent = styled.div`
-  margin-top: 48px;
+View.Content = styled.div`
+  padding: 48px 24px 24px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media screen and (min-width: 450px) {
+    padding: 48px 48px 48px;
+  }
 `

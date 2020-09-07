@@ -5,14 +5,21 @@ import { useProductsStore } from "../stores"
 
 const filters = [
   "Bacon",
-  "Beef",
-  "Turkey",
-  "Ham",
   "Sausage",
-  "Chorizo",
-  "Bratwurst",
-  "Kielbasa",
   "Hot Dogs",
+  "Ham",
+  "Beef & Bison",
+  "Fresh Pork",
+  "Bundles",
+  // "Bacon",
+  // "Beef",
+  // "Turkey",
+  // "Ham",
+  // "Sausage",
+  // "Chorizo",
+  // "Bratwurst",
+  // "Kielbasa",
+  // "Hot Dogs",
 ]
 
 export const BoxProductTypeFilters = (props) => {
@@ -20,10 +27,7 @@ export const BoxProductTypeFilters = (props) => {
 
   return (
     <BoxProductTypeFiltersContainer>
-      <div className='labelContainer'>
-        <p className='filtersLabel'>Filter by type:</p>
-      </div>
-      <div className='filterOptions'>
+      <div className='filterOptions useHighVoltage'>
         {filters.map((filter) => (
           <p
             key={filter}
@@ -43,34 +47,28 @@ export const BoxProductTypeFilters = (props) => {
 const BoxProductTypeFiltersContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 24px 16px 12px;
-
-  .labelContainer {
-    width: 100%;
-    font-size: 14px;
-    color: var(--grayGreen);
-    margin-bottom: 24px;
-  }
+  padding: 24px 0px 0px;
 
   .filterOptions {
     width: 100%;
     flex-wrap: wrap;
     display: flex;
-    gap: 48px;
+    line-height: 280%;
   }
 
   .filterOption {
     cursor: pointer;
     font-weight: 700;
-    color: var(--brandGreen);
+    color: var(--brandGreen100);
+    margin-right: 48px;
 
     :hover {
-      color: var(--lightBrandGreen);
+      color: var(--brandLightGreen100);
     }
   }
 
   .filterOption.activeFilter {
     text-decoration: underline;
-    color: var(--darkGreen);
+    color: var(--brandYellow100);
   }
 `

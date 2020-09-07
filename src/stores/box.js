@@ -3,8 +3,6 @@ import create from "zustand"
 import isEmpty from "is-empty"
 import removeOne from "remove-one"
 import count from "@extra-array/count"
-import { useProductsStore } from "./products"
-import { devtools } from "zustand/middleware"
 
 export const useBoxStore = create((set, get) => {
   const addProduct = (id) => {
@@ -45,11 +43,18 @@ export const useBoxStore = create((set, get) => {
     return get().products.length === 6
   }
 
+  const getProductById = (id) => {
+    return get().products.find((product) => {
+      return product.id === Number(id)
+    })
+  }
+
   return {
     products: [],
     addProduct,
     removeProduct,
     getProductCount,
+    getProductById,
     hasProduct,
     isBoxEmpty,
     isBoxFull,

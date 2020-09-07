@@ -11,6 +11,7 @@ export const useProductsStore = create((set, get) => {
   }
 
   const getProductById = (id) => {
+    console.log("getProductById")
     return get().products.find((product) => {
       return product.id === Number(id)
     })
@@ -23,8 +24,15 @@ export const useProductsStore = create((set, get) => {
     })
   }
 
+  const getSubscribableProducts = () => {
+    return window.pedersonsData.allProducts.filter((product) => {
+      return !product.tags.includes("in store only")
+    })
+  }
+
   return {
-    products: [],
+    products: window.pedersonsData.allProducts,
+    subscribableProducts: window.pedersonsData.subscribableProducts,
     isFetchingProducts: false,
     fetchProducts,
     getProductById,

@@ -2,8 +2,10 @@ import React from "react"
 import { Link, Route, navigate } from "wouter"
 import styled from "styled-components"
 import { useLocation } from "wouter"
+import { useSharedStore } from "../stores"
 
 export const NavBar = (props) => {
+  const sharedStore = useSharedStore()
   const [location, setLocation] = useLocation()
 
   return (
@@ -29,15 +31,18 @@ export const NavBar = (props) => {
         </div>
       </div>
       <div className='menuButtonContainer'>
-        <img src={window.pedersonsData.assets.menuIconUrl} alt='menu' />
+        <img
+          src={window.pedersonsData.assets.menuIconUrl}
+          alt='menu'
+          onClick={sharedStore.toggleIsSideNavOpen}
+        />
       </div>
     </StyledWrapper>
   )
 }
 
 const StyledWrapper = styled.div`
-  background: #02383a;
-  /* howdy */
+  background: var(--brandDarkGreen100);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -87,7 +92,7 @@ const StyledWrapper = styled.div`
     color: #fff;
     text-decoration: none;
     font-size: 16px;
-    margin-left: 248x;
+    margin-left: 48px;
   }
 
   .topBar,
@@ -96,6 +101,7 @@ const StyledWrapper = styled.div`
   }
 
   .logoWrapper {
+    user-select: none;
     z-index: 50;
     width: 100%;
     height: 100px;
@@ -107,12 +113,13 @@ const StyledWrapper = styled.div`
     justify-content: center;
 
     img {
-      width: 140px;
-      height: 70px;
+      width: 160px;
+      height: 80px;
     }
   }
 
   .menuButtonContainer {
+    user-select: none;
     z-index: 100;
     position: absolute;
     right: 0;

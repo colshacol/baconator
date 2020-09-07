@@ -25,6 +25,13 @@ export const useSharedStore = create((set, get) => {
     })
   }
 
+  const toggleIsSideNavOpen = (bool) => {
+    set((state) => {
+      const value = typeof bool === "boolean" ? bool : !state.isSideNavOpen
+      return { isSideNavOpen: value }
+    })
+  }
+
   const openProductQuickView = (product) => {
     set({ isQuickViewOpen: true, quickViewProduct: product })
   }
@@ -32,8 +39,10 @@ export const useSharedStore = create((set, get) => {
   return {
     isCartOpen: false,
     isQuickViewOpen: false,
+    isSideNavOpen: false,
     quickViewProduct: undefined,
     toggleIsCartOpen,
+    toggleIsSideNavOpen,
     toggleIsQuickViewOpen,
     openProductQuickView,
   }

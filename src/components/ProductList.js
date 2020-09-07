@@ -29,7 +29,7 @@ export const ProductList = (props) => {
           <BoxProductTypeFilters />
         </ViewOptions>
         <BoxOptions>
-          {productsStore.products.map((product) =>
+          {productsStore.subscribableProducts.map((product) =>
             product.title.includes(boxStore.filter) ? (
               <BoxProductOption key={product.id} {...product} />
             ) : null
@@ -45,6 +45,7 @@ const BoxOptions = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 24px 24px;
+  grid-gap: 24px 24px;
 
   @media (min-width: 530px) {
     grid-template-columns: repeat(2, 1fr);

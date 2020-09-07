@@ -9,7 +9,7 @@ export const BoxOption = (props) => {
       <BoxOptionTitle>{props.title}</BoxOptionTitle>
       <BoxOptionDescription>{props.description}</BoxOptionDescription>
       <Link className='BoxOptionButton' href='/box-product-selection'>
-        <Button className='optionButton' onClick={props.onSelect}>
+        <Button isPrimary className='optionButton' onClick={props.onSelect}>
           Select This Box
         </Button>
       </Link>
@@ -20,7 +20,6 @@ export const BoxOption = (props) => {
 const BoxOptionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #446264;
   background: var(--white);
   padding: 24px;
   align-items: flex-start;

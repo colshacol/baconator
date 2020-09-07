@@ -40,24 +40,31 @@ const boxOptions = [
 
 export const BoxSelection = (props) => {
   return (
-    <View
-      title='Select Your Box'
-      description='Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.'
-    >
-      <BoxOptions>
-        {boxOptions.map((option) => (
-          <BoxOption key={option.id} {...option} />
-        ))}
-      </BoxOptions>
+    <View>
+      <View.Header data-testid='View.Header'>
+        <View.Title>Select Your Box</View.Title>
+        <View.Description>
+          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+          adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
+          dolore magnam aliquam quaerat voluptatem.
+        </View.Description>
+      </View.Header>
+      <View.Content>
+        <BoxOptions>
+          {boxOptions.map((option) => (
+            <BoxOption key={option.id} {...option} />
+          ))}
+        </BoxOptions>
+      </View.Content>
     </View>
   )
 }
 
 const BoxOptions = styled.div`
-  margin-top: 48px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 24px 24px;
+  grid-gap: 24px 24px;
 
   @media (min-width: 530px) {
     grid-template-columns: repeat(2, 1fr);

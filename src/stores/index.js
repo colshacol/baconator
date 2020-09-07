@@ -13,10 +13,10 @@ export const useStoreInitializers = () => {
     cartStore.fetchCart()
   }, [])
 
-  React.useEffect(() => {
-    console.log("INIT PRODUCTS STORE")
-    productsStore.fetchProducts()
-  }, [])
+  // React.useEffect(() => {
+  //   console.log("INIT PRODUCTS STORE")
+  //   productsStore.fetchProducts()
+  // }, [])
 }
 
 export { useBoxStore }

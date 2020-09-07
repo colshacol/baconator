@@ -1,31 +1,57 @@
 import * as React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import getValue from "get-value"
 
-const getBackground = (props) => {
-  const isPrimary = props.which === "primary"
-  const isPrimaryDisabled = isPrimary && props.disabled
+const disabledStyles = css`
+  background: ${(props) => props.theme.disabledButtonBackgroundColor};
+  color: ${(props) => props.theme.disabledButtonTextColor};
+  border: ${(props) => props.theme.disabledButtonBorder};
+  cursor: not-allowed;
 
-  return (
-    (isPrimaryDisabled && "var(--darkGreen75)") ||
-    (isPrimary && "var(--brandGreen)") ||
-    "var(--white)"
-  )
-}
+  &:hover {
+    background: ${(props) => props.theme.disabledButtonBackgroundColor};
+    color: ${(props) => props.theme.disabledButtonTextColor};
+    border: ${(props) => props.theme.disabledButtonBorder};
+  }
+`
 
-export const Button = styled.button`
-  color: ${(props) =>
-    props.which === "primary" ? "var(--offWhite)" : "var(--deepGreen)"};
-  background: ${getBackground};
+const primaryStyles = css`
+  background: ${(props) => props.theme.primaryButtonBackgroundColor};
+  color: ${(props) => props.theme.primaryButtonTextColor};
+  border: ${(props) => props.theme.primaryButtonBorder};
+  font-weight: ${(props) => props.theme.primaryButtonFontWeight};
 
-  border: 1px solid
-    ${(props) => (props.which === "primary" ? "var(--darkBrandGreen)" : "#446264")};
-  padding: 8px 16px 10px;
+  &:hover {
+    background: ${(props) => props.theme.primaryButtonHoveredBackgroundColor};
+    color: ${(props) => props.theme.primaryButtonHoveredTextColor};
+    border: ${(props) => props.theme.primaryButtonHoveredBorder};
+    font-weight: ${(props) => props.theme.primaryButtonHoveredFontWeight};
+  }
+`
+
+const secondaryStyles = css`
+  background: ${(props) => props.theme.secondaryButtonBackgroundColor};
+  color: ${(props) => props.theme.secondaryButtonTextColor};
+  border: ${(props) => props.theme.secondaryButtonBorder};
+
+  &:hover {
+    background: ${(props) => props.theme.secondaryButtonBackgroundColor};
+    color: ${(props) => props.theme.secondaryButtonTextColor};
+    border: ${(props) => props.theme.secondaryButtonBorder};
+  }
+`
+
+export const Button = styled.button.attrs((props) => ({}))`
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 16px 10px;
   font-size: 16px;
   font-weight: 700;
   display: inline-flex;
   justify-content: center;
-  cursor: pointer;
+  text-transform: uppercase;
 
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  ${(props) => props.isSecondary && secondaryStyles};
+  ${(props) => props.isPrimary && primaryStyles};
+  ${(props) => props.isDisabled && disabledStyles};
 `

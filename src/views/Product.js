@@ -5,32 +5,42 @@ import { useProductsStore } from "../stores"
 import isEmpty from "is-empty"
 import { Ellipsis } from "react-css-spinners"
 
-export const Product = (props) => {
+const useProduct = (id) => {
   const productsStore = useProductsStore()
   const [product, setProduct] = React.useState({})
 
   React.useEffect(() => {
-    const product = productsStore.getProductById(props.params.productId)
-    setProduct(product)
+    setProduct(productsStore.getProductById(id))
   }, [productsStore.products.length])
+
+  return product
+}
+
+export const Product = (props) => {
+  const product = useProduct(props.params.productId)
 
   if (isEmpty(product)) {
     return <Ellipsis color='#ffdf00' size={40} />
   }
 
   console.log({ product })
+  const image = product.media[1] ? product.media[1].src : product.images[0]
 
   return (
     <StyledWrapper>
-      <ProductHeader>
+      <ProductHeader
+        backgroundColor={product.metaFields.packaging_color || "var(--brandDarkGreen100)"}
+      >
         <div className='absoluteContainer'>
           <div className='innerContainer'>
             <ProductTitle>{product.title}</ProductTitle>
-            <ProductImage src={product.images[1].src} alt={product.title} />
+            <ProductImage src={image} alt={product.title} />
             <ProductDetails>
               <div
                 className='productDescription'
-                dangerouslySetInnerHTML={{ __html: `<div>${product.body_html}</div>` }}
+                dangerouslySetInnerHTML={{
+                  __html: `<div>${product.body_html || product.description}</div>`,
+                }}
               />
             </ProductDetails>
           </div>
@@ -53,7 +63,7 @@ const StyledWrapper = styled.div`
 const ProductHeader = styled.div`
   display: flex;
   justify-content: space-around;
-  background: #02383a;
+  background: ${(props) => props.backgroundColor};
   position: relative;
   height: 320px;
 
