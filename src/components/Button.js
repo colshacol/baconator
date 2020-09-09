@@ -6,6 +6,7 @@ const disabledStyles = css`
   background: ${(props) => props.theme.disabledButtonBackgroundColor};
   color: ${(props) => props.theme.disabledButtonTextColor};
   border: ${(props) => props.theme.disabledButtonBorder};
+  font-weight: ${(props) => props.theme.disabledButtonFontWeight};
   cursor: not-allowed;
 
   &:hover {
@@ -25,7 +26,6 @@ const primaryStyles = css`
     background: ${(props) => props.theme.primaryButtonHoveredBackgroundColor};
     color: ${(props) => props.theme.primaryButtonHoveredTextColor};
     border: ${(props) => props.theme.primaryButtonHoveredBorder};
-    font-weight: ${(props) => props.theme.primaryButtonHoveredFontWeight};
   }
 `
 
@@ -41,12 +41,13 @@ const secondaryStyles = css`
   }
 `
 
-export const Button = styled.button.attrs((props) => ({}))`
+export const Button = styled.button`
   cursor: pointer;
   user-select: none;
   padding: 10px 16px 10px;
   font-size: 16px;
   font-weight: 700;
+  letter-spacing: 2px;
   display: inline-flex;
   justify-content: center;
   text-transform: uppercase;

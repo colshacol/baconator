@@ -18,9 +18,15 @@ export const useBoxStore = create((set, get) => {
   const removeProduct = (id) => {
     set((state) => {
       return {
-        products: state.isBoxEmpty()
-          ? state.products
-          : removeOne(state.products, (x) => x === id),
+        products: state.isBoxEmpty() ? state.products : removeOne(state.products, (x) => x === id),
+      }
+    })
+  }
+
+  const removeProductById = (id) => {
+    set((state) => {
+      return {
+        products: state.isBoxEmpty() ? state.products : state.products.filter((x) => x !== id),
       }
     })
   }
@@ -53,6 +59,7 @@ export const useBoxStore = create((set, get) => {
     products: [],
     addProduct,
     removeProduct,
+    removeProductById,
     getProductCount,
     getProductById,
     hasProduct,

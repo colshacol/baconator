@@ -51,6 +51,7 @@ View.Content = styled.div`
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+  display: flex;
 
   @media screen and (min-width: 450px) {
     padding: 48px 48px 48px;

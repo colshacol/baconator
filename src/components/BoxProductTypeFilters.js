@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "styled-components"
-import { Button } from "./Button"
-import { useProductsStore } from "../stores"
+import { Store } from "../../store"
 
 const filters = [
   "Bacon",
@@ -23,7 +22,13 @@ const filters = [
 ]
 
 export const BoxProductTypeFilters = (props) => {
-  const productsStore = useProductsStore()
+  const state = Store.useStoreState((state) => ({
+    productListFilter: state.productListFilter,
+  }))
+
+  const actions = Store.useStoreActions((actions) => ({
+    setProductListFilter: actions.setProductListFilter,
+  }))
 
   return (
     <BoxProductTypeFiltersContainer>
@@ -31,10 +36,8 @@ export const BoxProductTypeFilters = (props) => {
         {filters.map((filter) => (
           <p
             key={filter}
-            className={`filterOption ${
-              productsStore.filter === filter ? "activeFilter" : ""
-            }`}
-            onClick={() => productsStore.toggleFilter(filter)}
+            className={`filterOption ${state.productListFilter === filter ? "activeFilter" : ""}`}
+            onClick={() => actions.setProductListFilter(filter)}
           >
             {filter}
           </p>

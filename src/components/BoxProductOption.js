@@ -2,29 +2,24 @@ import * as React from "react"
 import styled from "styled-components"
 import { Button } from "./Button"
 import { useBoxStore, useSharedStore } from "../stores"
+import { Store } from "../../store"
 
 export const BoxProductOption = (props) => {
-  const boxStore = useBoxStore()
-  const sharedStore = useSharedStore()
-
   return (
     <BoxProductOptionContainer>
-      <BoxProductOptionTop imageSrc={props.media[0].src}></BoxProductOptionTop>
+      <BoxProductOptionTop imageSrc={props.product.media[0].src}></BoxProductOptionTop>
       <BoxProductOptionBottom>
-        <BoxProductOptionTitle>{props.title}</BoxProductOptionTitle>
-        <p
-          className='quickViewLink'
-          onClick={() => sharedStore.openProductQuickView(props)}
-        >
+        <BoxProductOptionTitle>{props.product.title}</BoxProductOptionTitle>
+        <p className='quickViewLink' onClick={() => props.toggleIsQuickViewOpen(true)}>
           Quick View
         </p>
-        {boxStore.hasProduct(props.id) ? (
+        {props.hasProduct ? (
           <div className='quantityChanger'>
             <Button
               className='decrementButton'
               onClick={(event) => {
                 event.preventDefault()
-                boxStore.removeProduct(props.id)
+                props.removeProductFromBox()
               }}
               children={
                 <img
@@ -34,12 +29,12 @@ export const BoxProductOption = (props) => {
                 />
               }
             ></Button>
-            <p className='quantityText'>{boxStore.getProductCount(props.id)}</p>
+            <p className='quantityText'>{props.quantity}</p>
             <Button
-              className={`incrementButton ${boxStore.isBoxFull() ? "nope" : ""}`}
+              className={`incrementButton ${props.isBoxFull ? "nope" : ""}`}
               onClick={(event) => {
                 event.preventDefault()
-                boxStore.addProduct(props.id)
+                props.addProductToBox()
               }}
               children={
                 <img
@@ -50,15 +45,8 @@ export const BoxProductOption = (props) => {
               }
             ></Button>
           </div>
-        ) : boxStore.isBoxFull() ? (
-          <Button
-            isDisabled
-            className='BoxProductOptionButton'
-            onClick={(event) => {
-              event.preventDefault()
-              // boxStore.addProduct(props.id)
-            }}
-          >
+        ) : props.isBoxFull ? (
+          <Button isDisabled className='BoxProductOptionButton'>
             Box Is Full
           </Button>
         ) : (
@@ -67,7 +55,7 @@ export const BoxProductOption = (props) => {
             className='BoxProductOptionButton'
             onClick={(event) => {
               event.preventDefault()
-              boxStore.addProduct(props.id)
+              props.addProductToBox()
             }}
           >
             Add To Box

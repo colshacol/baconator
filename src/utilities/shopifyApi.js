@@ -32,9 +32,14 @@ export const addToCart = async (items) => {
   })
 }
 
-export const updateCart = async () => {
+export const updateCart = async (items) => {
   // 35942808518821
-  const response = await wretch("/cart.js").get()
+  const updates = items.reduce((final, item) => {
+    final[item.id] = item.quantity
+    return final
+  }, {})
+
+  const response = await wretch("/cart/update.js").post({ updates })
 
   return response.json((data) => {
     console.log("shopifyApi.updateCart", data)

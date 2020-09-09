@@ -2,9 +2,9 @@ import * as React from "react"
 import styled from "styled-components"
 import getValue from "get-value"
 import { slide as Menu } from "react-burger-menu"
-import { useBoxStore, useCartStore, useProductsStore } from "../stores"
 import { Button } from "./Button"
 import { useScript } from "../utilities/useScript"
+import { Store } from "../../store"
 
 const prices = {
   0: "$0.00",
@@ -16,94 +16,192 @@ const prices = {
   6: "$199.99",
 }
 
-export const Cart = (props) => {
-  const cartStore = useCartStore()
-  const boxStore = useBoxStore()
-  const productsStore = useProductsStore()
+export const CartMenu = (props) => {
+  const state = Store.useStoreState((state) => ({
+    isSideCartOpen: state.isSideCartOpen,
+  }))
 
-  const status = useScript(
-    window.pedersonsData.assets.rechargeScriptUrl + `&t=${Date.now()}`
-  )
-
-  React.useEffect(() => {
-    status === "ready" && window.reChargeCartJS()
-  }, [status === "ready"])
-
-  console.log({ boxStore })
-  // const items = cartStore.cart.items || []
-  const items = boxStore.products.map((id) => productsStore.getProductById(id))
-  console.log({ items })
+  const actions = Store.useStoreActions((actions) => ({
+    toggleIsSideCartOpen: actions.toggleIsSideCartOpen,
+  }))
 
   return (
     <StyledMenu
       right
       width='360px'
       className='CartView'
-      isOpen={cartStore.isCartOpen}
-      onOpen={() => cartStore.toggleIsCartOpen()}
-      onClose={() => cartStore.toggleIsCartOpen(false)}
+      isOpen={state.isSideCartOpen}
+      onOpen={() => actions.toggleIsSideCartOpen()}
+      onClose={() => actions.toggleIsSideCartOpen(false)}
     >
-      <div className='innerContainer'>
-        <div className='top'>
-          <h2 className='boxTitle'>Your Box ({boxStore.products.length})</h2>
-          {items.map((item, index) => (
-            <div className='cartItem' key={item.title + index}>
-              <p>
-                {item.title.substring(0, item.title.indexOf(" - ")) || item.title}
-                {/*(x{item.quantity})*/}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className='priceContainer'>
-          <div className='shippingRow'>
-            <p>Shipping:</p>
-            <h4 className='shippingPrice'>FREE</h4>
-          </div>
-          <div className='priceRow'>
-            <h2>Total:</h2>
-            <h2 className='price'>${cartStore.cart.total_price / 100}</h2>
-          </div>
-          <Button isPrimary name='checkout' className='checkout_button'>
-            Checkout
-          </Button>
-        </div>
-      </div>
-      {/* {useScript && (
-        <script
-          src={window.pedersonsData.assets.rechargeScriptUrl}
-          type='text/javascript'
-        />
-      )} */}
+      <Cart style={{ paddingLeft: 16 }} />
     </StyledMenu>
+  )
+}
+
+export const Cart = (props) => {
+  const state = Store.useStoreState((state) => ({
+    isSideCartOpen: state.isSideCartOpen,
+    cartListItems: state.cartListItems,
+    selectedProductCount: state.selectedProductCount,
+    selectedProductVariantIds: state.selectedProductVariantIds,
+    isBoxEmpty: state.isBoxEmpty,
+    cartItems: state.cartItems,
+  }))
+
+  const actions = Store.useStoreActions((actions) => ({
+    toggleIsSideCartOpen: actions.toggleIsSideCartOpen,
+    removeProductFromBox: actions.removeProductFromBox,
+    removeProductsFromBox: actions.removeProductsFromBox,
+    updateCart: actions.updateCart,
+    emptyCart: actions.emptyCart,
+  }))
+
+  React.useEffect(() => {
+    actions.emptyCart()
+  }, [])
+
+  React.useEffect(() => {
+    if (state.cartItems) {
+      console.log("Cart - updating cart.")
+      actions.updateCart()
+    }
+  }, [state.cartItems])
+
+  const status = useScript(window.pedersonsData.assets.rechargeScriptUrl + `&t=${Date.now()}`)
+
+  React.useEffect(() => {
+    status === "ready" && window.reChargeCartJS()
+  }, [status === "ready"])
+
+  return (
+    <StyledCart className={props.className} style={props.style}>
+      <div className='top'>
+        <h3 className='boxTitle'>Your Box ({state.selectedProductCount})</h3>
+        {state.isBoxEmpty && (
+          <div
+            style={{
+              width: "100%",
+              height: "100px",
+              fontStyle: "italic",
+              display: "flex",
+              alignItems: "center",
+              color: "var(--brandBlack50)",
+            }}
+          >
+            No products to show. :(
+          </div>
+        )}
+        {state.cartListItems.map(({ title, quantity, id }) => (
+          <CartItem
+            title={title}
+            quantity={quantity}
+            key={title}
+            id={id}
+            removeProductFromBox={actions.removeProductFromBox}
+            removeProductsFromBox={actions.removeProductsFromBox}
+          />
+        ))}
+      </div>
+      <div className='priceContainer'>
+        <ShippingPrice />
+        <CartPrice />
+        <CheckoutButton />
+      </div>
+    </StyledCart>
+  )
+}
+
+const CartItem = (props) => {
+  const title = props.title.substring(0, props.title.indexOf(" - ")) || props.title
+
+  return (
+    <div className='cartItem' key={title}>
+      <p>
+        {title} (x{props.quantity})
+      </p>
+      <span style={{ display: "flex", justifyContent: "space-between" }}>
+        {props.quantity > 1 ? (
+          <>
+            <small onClick={() => props.removeProductFromBox(props.id)}>remove one</small>
+            <small onClick={() => props.removeProductsFromBox(props.id)}>remove all</small>
+          </>
+        ) : (
+          <small onClick={() => props.removeProductsFromBox(props.id)}>remove</small>
+        )}
+      </span>
+    </div>
+  )
+}
+
+const ShippingPrice = (props) => {
+  return (
+    <div className='shippingRow'>
+      <p>Shipping:</p>
+      <h4 className='shippingPrice'>FREE</h4>
+    </div>
+  )
+}
+
+const CartPrice = (props) => {
+  const state = Store.useStoreState((state) => ({
+    cartPrice: state.cartPrice,
+  }))
+
+  return (
+    <div className='priceRow'>
+      <h2>Total:</h2>
+      <h2 className='price'>${state.cartPrice}</h2>
+    </div>
+  )
+}
+
+const CheckoutButton = (props) => {
+  const state = Store.useStoreState((state) => ({
+    isBoxEmpty: state.isBoxEmpty,
+  }))
+
+  return (
+    <Button isPrimary name='checkout' isDisabled={state.isBoxEmpty} className='checkout_button'>
+      Checkout
+    </Button>
   )
 }
 
 const StyledMenu = styled(Menu)`
   background: #fff;
+`
 
-  .innerContainer {
-    height: 100%;
-    display: flex !important;
+const StyledCart = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 16px;
+
+  .top {
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 16px;
-
-    .top {
-      display: flex;
-      flex-direction: column;
-    }
   }
 
   .cartItem {
     margin-bottom: 24px;
 
     p {
-      color: #446263;
+      color: var(--brandBlack100);
+      line-height: 150%;
+    }
+
+    small {
+      color: var(--brandGreen100);
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 
   .boxTitle {
+    text-align: right;
     margin-bottom: 24px;
     color: var(--brandBlack100);
   }

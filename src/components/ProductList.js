@@ -8,8 +8,23 @@ import { Button } from "../components/Button"
 import { BoxProductOption } from "../components/BoxProductOption"
 import { useProductsStore, useCartStore, useBoxStore } from "../stores"
 import { BoxProductTypeFilters } from "../components/BoxProductTypeFilters"
+import { Store } from "../../store"
 
 export const ProductList = (props) => {
+  const state = Store.useStoreState((state) => ({
+    selectedProductIds: state.selectedProductIds,
+    subscribableProducts: state.subscribableProducts,
+    selectedProductCount: state.selectedProductCount,
+    isBoxFull: state.isBoxFull,
+    isBoxEmpty: state.isBoxEmpty,
+  }))
+
+  const actions = Store.useStoreActions((actions) => ({
+    toggleIsSideCartOpen: actions.toggleIsSideCartOpen,
+    addProductToBox: actions.addProductToBox,
+    removeProductFromBox: actions.removeProductFromBox,
+  }))
+
   const productsStore = useProductsStore()
 
   if (productsStore.isFetchingProducts) {
@@ -23,15 +38,22 @@ export const ProductList = (props) => {
     >
       <>
         <ViewOptions>
-          <Button className='ViewOptionsButton' onClick={cartStore.toggleIsCartOpen}>
-            Show My Box ({boxStore.getProductCount()})
+          <Button className='ViewOptionsButton' onClick={actions.toggleIsSideCartOpen}>
+            Show My Box ({state.selectedProductCount})
           </Button>
           <BoxProductTypeFilters />
         </ViewOptions>
         <BoxOptions>
-          {productsStore.subscribableProducts.map((product) =>
+          {state.subscribableProducts.map((product) =>
             product.title.includes(boxStore.filter) ? (
-              <BoxProductOption key={product.id} {...product} />
+              <BoxProductOption
+                key={product.id}
+                hasProduct={state.selectedProductIds.includes(product.id)}
+                isBoxFull={state.isBoxFull}
+                quantity={state.selectedProductIds.filter((id) => id === product.id)}
+                product={product}
+                toggleIsQuickViewOpen={actions.toggleIsQuickViewOpen}
+              />
             ) : null
           )}
         </BoxOptions>

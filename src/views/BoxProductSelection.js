@@ -6,43 +6,95 @@ import styled from "styled-components"
 import { View } from "../components/View"
 import { Button } from "../components/Button"
 import { BoxProductOption } from "../components/BoxProductOption"
-import { useProductsStore, useCartStore, useBoxStore } from "../stores"
 import { BoxProductTypeFilters } from "../components/BoxProductTypeFilters"
+import { Cart } from "../components/Cart"
+import { Store } from "../../store"
 
 export const BoxProductSelection = (props) => {
-  const boxStore = useBoxStore()
-  const productsStore = useProductsStore()
-  const cartStore = useCartStore()
+  const state = Store.useStoreState((state) => ({
+    selectedProductCount: state.selectedProductCount,
+    isFetchingProducts: state.isFetchingProducts,
+    subscribableProducts: state.subscribableProducts,
+    productListFilter: state.productListFilter,
+    selectedProductIds: state.selectedProductIds,
+    isBoxFull: state.isBoxFull,
+    isBoxEmpty: state.isBoxEmpty,
+  }))
 
-  if (productsStore.isFetchingProducts) {
-    return <Ellipsis size={240} color='var(--brandGreen50)' />
+  const actions = Store.useStoreActions((actions) => ({
+    toggleIsSideCartOpen: actions.toggleIsSideCartOpen,
+    setProductListFilter: state.setProductListFilter,
+    addProductToBox: actions.addProductToBox,
+    removeProductFromBox: actions.removeProductFromBox,
+  }))
+
+  if (state.isFetchingProducts) {
+    return null
   }
 
   return (
     <View>
-      <View.Header data-testid='View.Header'>
+      <StyledViewHeader data-testid='StyledViewHeader'>
         <View.Title>Select Your Products</View.Title>
         <View.Description>
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
-          quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+          consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
         </View.Description>
-        <Button className='ViewOptionsButton' onClick={cartStore.toggleIsCartOpen}>
-          Show My Box ({boxStore.getProductCount()})
+        <Button className='ShowBoxButton' onClick={actions.toggleIsSideCartOpen}>
+          Show My Box ({state.selectedProductCount})
         </Button>
         <BoxProductTypeFilters />
-      </View.Header>
-      <View.Content>
+      </StyledViewHeader>
+      <StyledViewContent>
+        <StyledCart className='carty' />
         <BoxOptions>
-          {productsStore.subscribableProducts.map((product) =>
-            product.title.includes(productsStore.filter) ? (
-              <BoxProductOption key={product.id} {...product} />
+          {state.subscribableProducts.map((product) =>
+            product.title.includes(state.productListFilter) ? (
+              <BoxProductOption
+                key={product.id}
+                hasProduct={state.selectedProductIds.includes(product.id)}
+                isBoxFull={state.isBoxFull}
+                quantity={state.selectedProductIds.filter((id) => id === product.id).length}
+                product={product}
+                toggleIsQuickViewOpen={actions.toggleIsQuickViewOpen}
+                removeProductFromBox={() => actions.removeProductFromBox(product.id)}
+                addProductToBox={() => actions.addProductToBox(product.id)}
+              />
             ) : null
           )}
         </BoxOptions>
-      </View.Content>
+      </StyledViewContent>
     </View>
   )
 }
+
+const StyledViewContent = styled(View.Content)`
+  @media (max-width: 760px) {
+    .carty.carty {
+      display: none !important;
+    }
+  }
+`
+
+const StyledCart = styled(Cart)`
+  display: none;
+  max-width: 200px !important;
+  margin-right: 48px;
+  position: sticky;
+  top: 24px;
+
+  @media (min-width: 760px) {
+    display: flex !important;
+  }
+`
+
+const StyledViewHeader = styled(View.Header)`
+  @media (min-width: 760px) {
+    ${Button} {
+      display: none !important;
+    }
+  }
+`
 
 const BoxOptions = styled.div`
   display: grid;
@@ -54,31 +106,7 @@ const BoxOptions = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 980px) {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`
-
-const ViewOptions = styled.div`
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-
-  .ViewOptionsButton {
-    width: 100%;
-  }
-
-  @media screen and (min-width: 530px) {
-    .ViewOptionsButton {
-      width: fit-content;
-    }
   }
 `
