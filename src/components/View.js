@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 
 export const View = (props) => {
-  return <ViewContainer>{props.children}</ViewContainer>
+  return <ViewContainer {...props} />
 }
 
 const ViewContainer = styled.div`
@@ -23,6 +23,7 @@ View.Header = styled.div`
   --xPadding: 24px;
   --sidePadding: max(calc(((100vw - 1100px) / 2) + 24px), 24px);
   width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -38,7 +39,7 @@ View.Title = styled.h1`
   margin-bottom: 16px;
 `
 
-View.Description = styled.h1`
+View.Description = styled.p`
   color: var(--brandWhite100);
   font-size: 18px;
   font-weight: 500;
@@ -54,6 +55,45 @@ View.Content = styled.div`
   display: flex;
 
   @media screen and (min-width: 450px) {
-    padding: 48px 48px 48px;
+    /* padding: 48px 48px 48px; */
+  }
+`
+
+View.TempTop = (props) => {
+  return (
+    <TempTopContainer>
+      <div className='viewHeaderInnerContainer'>
+        <h1 className='viewTitle'>{props.title}</h1>
+        <p className='viewDescription'>{props.description}</p>
+      </div>
+    </TempTopContainer>
+  )
+}
+
+const TempTopContainer = styled.div`
+  padding: 48px 24px;
+  width: 100%;
+  height: fit-content;
+  background-color: var(--brandDarkGreen100);
+
+  .viewHeaderInnerContainer {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: 48 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .viewDescription {
+    margin-top: 24px;
+  }
+
+  .viewTitle,
+  .viewDescription {
+    color: #fff;
+  }
+
+  @media (min-width: 760px) {
+    padding: 96px 24px 48px;
   }
 `

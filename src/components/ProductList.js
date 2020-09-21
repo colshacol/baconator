@@ -52,7 +52,10 @@ export const ProductList = (props) => {
                 isBoxFull={state.isBoxFull}
                 quantity={state.selectedProductIds.filter((id) => id === product.id)}
                 product={product}
-                toggleIsQuickViewOpen={actions.toggleIsQuickViewOpen}
+                toggleIsQuickViewOpen={() => {
+                  actions.toggleIsQuickViewOpen(true)
+                  actions.setQuickViewProduct()
+                }}
               />
             ) : null
           )}

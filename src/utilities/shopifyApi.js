@@ -1,4 +1,5 @@
 import wretch from "wretch"
+import { VARIANT_TITLE_30, VARIANT_TITLE_50 } from "../consts"
 
 export const getVariantId = (productId, index) => {
   const match = window.pedersonsData.allProducts.find((product) => {
@@ -6,7 +7,7 @@ export const getVariantId = (productId, index) => {
   })
 
   const variantMatch = match.variants.find((variant) => {
-    const titleMatch = index === 0 ? "50" : "30"
+    const titleMatch = index === 0 ? VARIANT_TITLE_50 : VARIANT_TITLE_30
     return variant.title === titleMatch
   })
 
@@ -18,8 +19,28 @@ export const getProducts = async () => {
   const response = await wretch(endpoint).get()
 
   return response.json(({ products }) => {
-    console.log("shopifyApi.getProducts", products)
+    // console.log("shopifyApi.getProducts", products)
     return products
+  })
+}
+
+export const getCollectionProducts = async (collectionHandle) => {
+  const endpoint = `/collections/${collectionHandle}/products.json`
+  const response = await wretch(endpoint).get()
+
+  return response.json(({ products }) => {
+    // console.log("shopifyApi.getCollectionProducts", collectionHandle, products)
+    return products
+  })
+}
+
+export const getCollections = async () => {
+  const endpoint = "/collections.json"
+  const response = await wretch(endpoint).get()
+
+  return response.json(({ collections }) => {
+    // console.log("shopifyApi.getCollections", collections)
+    return collections
   })
 }
 
@@ -27,7 +48,7 @@ export const addToCart = async (items) => {
   const response = await wretch("/cart/add.js").post({ items })
 
   return response.json((data) => {
-    console.log("shopifyApi.addToCart", data)
+    // console.log("shopifyApi.addToCart", data)
     return data
   })
 }
@@ -42,7 +63,7 @@ export const updateCart = async (items) => {
   const response = await wretch("/cart/update.js").post({ updates })
 
   return response.json((data) => {
-    console.log("shopifyApi.updateCart", data)
+    // console.log("shopifyApi.updateCart", data)
     return data
   })
 }
@@ -51,7 +72,7 @@ export const emptyCart = async () => {
   const response = await wretch("/cart/clear.js").post()
 
   return response.json((data) => {
-    console.log("shopifyApi.emptyCart", data)
+    // console.log("shopifyApi.emptyCart", data)
     return data
   })
 }
@@ -60,7 +81,7 @@ export const getCart = async () => {
   const response = await wretch("/cart.js").get()
 
   return response.json((data) => {
-    console.log("shopifyApi.getCart", data)
+    // console.log("shopifyApi.getCart", data)
     return data
   })
 }

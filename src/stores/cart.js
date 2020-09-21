@@ -5,6 +5,7 @@ import { useBoxStore } from "./box"
 import removeOne from "remove-one"
 import { useProductsStore } from "./products"
 import count from "@extra-array/count"
+import { VARIANT_TITLE_30, VARIANT_TITLE_50 } from "./../consts"
 
 const findProductWithId = (allProducts, productId) => {
   return allProducts.find((product) => {
@@ -12,14 +13,14 @@ const findProductWithId = (allProducts, productId) => {
   })
 }
 
-const findProuctVariantId = (product, isFirstProduct) => {
-  console.log("findProuctVariantId", { product, isFirstProduct })
+const findProductVariantId = (product, isFirstProduct) => {
+  console.log("findProductVariantId", { product, isFirstProduct })
   for (const variant of product.variants) {
-    if (isFirstProduct && variant.title === "50") {
+    if (isFirstProduct && variant.title === VARIANT_TITLE_50) {
       return variant.id
     }
 
-    if (!isFirstProduct && variant.title === "30") {
+    if (!isFirstProduct && variant.title === VARIANT_TITLE_30) {
       return variant.id
     }
   }
@@ -33,7 +34,7 @@ export const useCartStore = create((set, get) => {
     for (const [index, boxProductId] of boxProducts.entries()) {
       const isFirstProduct = index === 0
       const product = findProductWithId(allProducts, boxProductId)
-      const variantId = findProuctVariantId(product, isFirstProduct)
+      const variantId = findProductVariantId(product, isFirstProduct)
       cartItems.push({ id: variantId, quantity: 1 })
     }
 

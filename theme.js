@@ -8,17 +8,17 @@ export const theme = {
   primaryButtonHoveredTextColor: "var(--brandWhite100)",
   primaryButtonHoveredBorder: "none",
 
-  secondaryButtonBackgroundColor: "var(--brandBlack10)",
+  secondaryButtonBackgroundColor: "#dbe1e1",
   secondaryButtonTextColor: "var(--brandBlack100)",
   secondaryButtonFontWeight: "500",
   secondaryButtonBorder: "none",
 
-  secondaryButtonHoveredBackgroundColor: "var(--brandBlack10)",
+  secondaryButtonHoveredBackgroundColor: "#dbe1e1",
   secondaryButtonHoveredTextColor: "var(--brandBlack100)",
   secondaryButtonHoveredBorder: "none",
 
-  disabledButtonBackgroundColor: "var(--brandGray20)",
-  disabledButtonTextColor: "var(--brandBlack50)",
+  disabledButtonBackgroundColor: "#dbe1e1",
+  disabledButtonTextColor: "var(--brandBlack80)",
   disabledButtonFontWeight: "500",
   disabledButtonBorder: "none",
 

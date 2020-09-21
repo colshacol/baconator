@@ -4,36 +4,169 @@ import styled from "styled-components"
 import { useProductsStore } from "../stores"
 import isEmpty from "is-empty"
 import { Ellipsis } from "react-css-spinners"
+import { Store } from "../../store"
+import ImageGallery from "react-image-gallery"
+import "react-responsive-carousel/lib/styles/carousel.min.css" // requires a loader
+import { Carousel } from "react-responsive-carousel"
+import Gallery from "react-photo-gallery"
+import { useCart, products } from "../state"
+import { Button } from "../components/Button"
+
+const Galleryx = (props) => {
+  return (
+    <Carousel>
+      {props.images.map((image) => (
+        <div key={image.thumbnail}>
+          <img src={image.thumbnail} alt='preview image' />
+          <p className='legend'></p>
+        </div>
+      ))}
+    </Carousel>
+  )
+}
+// const images = [
+//   {
+//     original: "https://picsum.photos/id/1018/1000/600/",
+//     thumbnail: "https://picsum.photos/id/1018/250/150/",
+//   },
+//   {
+//     original: "https://picsum.photos/id/1015/1000/600/",
+//     thumbnail: "https://picsum.photos/id/1015/250/150/",
+//   },
+//   {
+//     original: "https://picsum.photos/id/1019/1000/600/",
+//     thumbnail: "https://picsum.photos/id/1019/250/150/",
+//   },
+// ]
 
 const useProduct = (id) => {
-  const productsStore = useProductsStore()
-  const [product, setProduct] = React.useState({})
+  const state = Store.useStoreState((state) => ({
+    allProducts: state.allProducts,
+  }))
 
-  React.useEffect(() => {
-    setProduct(productsStore.getProductById(id))
-  }, [productsStore.products.length])
+  const product = state.allProducts.find((product) => {
+    return product.id === Number(id)
+  })
 
   return product
 }
 
+const useImages = (product) => {
+  return product.media.slice(2, 5).reduce((final, media) => {
+    final.push({
+      thumbnail: media.preview_image.src,
+      original: media.src,
+      src: media.src,
+      width: 1,
+      height: 1,
+    })
+
+    return final
+  }, [])
+}
+
 export const Product = (props) => {
-  const product = useProduct(props.params.productId)
+  const cart = useCart()
+  const product = products.getById(props.params.productId)
+  const images = useImages(product)
+  console.log({ images }, product.media)
 
   if (isEmpty(product)) {
     return <Ellipsis color='#ffdf00' size={40} />
   }
 
-  console.log({ product })
   const image = product.media[1] ? product.media[1].src : product.images[0]
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className='ProductWrapper'>
       <ProductHeader
+        className='ProductHeader'
+        style={{
+          backgroundColor: product.metaFields.packaging_color || "var(--brandDarkGreen100)",
+        }}
         backgroundColor={product.metaFields.packaging_color || "var(--brandDarkGreen100)"}
       >
         <div className='absoluteContainer'>
           <div className='innerContainer'>
-            <ProductTitle>{product.title}</ProductTitle>
+            <ProductTitle className='ProductTitle'>
+              {product.title}{" "}
+              <span
+                className='productQuantityWeight'
+                dangerouslySetInnerHTML={{
+                  __html: product.metaFields.quantity_weight_and_pricing || "<span></span>",
+                }}
+              ></span>
+              {!!product.metaFields.in_stores_only && (
+                <Button
+                  isPrimary
+                  className='BoxProductOptionButton'
+                  onClick={(event) => {
+                    event.preventDefault()
+                    window.location.replace("https://pedersonsfarms.com/where-to-buy/")
+                    // cart.actions.addProductToCart(product)
+                  }}
+                >
+                  Find a Retailer
+                </Button>
+              )}
+              {!product.metaFields.in_stores_only && (
+                <>
+                  {product.isOutOfStock && (
+                    <Button isDisabled className='BoxProductOptionButton'>
+                      Out of Stock
+                    </Button>
+                  )}
+                  {product.isOutOfStock ? null : cart.actions.doesCartHaveProductId(product.id) ? (
+                    <div className='quantityChanger'>
+                      <Button
+                        className='decrementButton'
+                        onClick={(event) => {
+                          event.preventDefault()
+                          cart.actions.decrementCartProductQuantity(product)
+                          // props.removeProductFromBox()
+                        }}
+                        children={
+                          <img
+                            className='quantityIcon'
+                            src={window.pedersonsData.assets.minusIconUrl}
+                            alt='decrement'
+                          />
+                        }
+                      ></Button>
+                      <p className='quantityText'>
+                        {cart.actions.getCartProductQuantity(product.id)}
+                      </p>
+                      <Button
+                        className={`incrementButton`}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          cart.actions.incrementCartProductQuantity(product)
+                          // props.addProductToBox()
+                        }}
+                        children={
+                          <img
+                            className='quantityIcon'
+                            src={window.pedersonsData.assets.plusIconUrl}
+                            alt='increment'
+                          />
+                        }
+                      ></Button>
+                    </div>
+                  ) : (
+                    <Button
+                      isPrimary
+                      className='BoxProductOptionButton'
+                      onClick={(event) => {
+                        event.preventDefault()
+                        cart.actions.addProductToCart(product)
+                      }}
+                    >
+                      Add To Box
+                    </Button>
+                  )}
+                </>
+              )}
+            </ProductTitle>
             <ProductImage src={image} alt={product.title} />
             <ProductDetails>
               <div
@@ -42,6 +175,13 @@ export const Product = (props) => {
                   __html: `<div>${product.body_html || product.description}</div>`,
                 }}
               />
+              <p
+                className='ingredientsList'
+                dangerouslySetInnerHTML={{
+                  __html: `Ingredients: ${product.metaFields.ingredients}` || "<span></span>",
+                }}
+              />
+              {images.length && <Gallery photos={images} direction={"column"} />}
             </ProductDetails>
           </div>
         </div>
@@ -58,6 +198,64 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+
+  .ingredientsList {
+    margin: 16px 0;
+  }
+
+  .quantityChanger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+
+    .quantityIcon {
+      filter: invert();
+      max-width: 20px;
+    }
+
+    .decrementButton {
+      border: none;
+      height: 40px;
+      width: 40px;
+      padding-top: 9px;
+      background: var(--brandGreen100);
+    }
+
+    .quantityText {
+      font-size: 18px;
+      text-align: center;
+      width: 100%;
+      background: var(--brandOffWhite100);
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .incrementButton {
+      border: none;
+      height: 40px;
+      width: 40px;
+      padding-top: 9px;
+      background: var(--brandGreen100);
+    }
+
+    .incrementButton.nope {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .BoxProductOptionButton {
+    width: 100%;
+    max-width: 240px;
+    margin-top: 16px;
+  }
+
+  .BoxProductOptionButton[disabled] {
+    cursor: not-allowed;
+  }
 `
 
 const ProductHeader = styled.div`
@@ -122,11 +320,37 @@ const ProductTitle = styled.h1`
   padding: 0;
   margin-bottom: 24px;
 
+  .productQuantityWeight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .productQuantityWeight p {
+    color: #fff;
+    font-size: 16px;
+    line-height: 150%;
+    margin-right: 16px;
+  }
+
+  .productQuantityWeight p:first-of-type {
+    /* margin-top: 16px; */
+  }
+
   @media screen and (min-width: 930px) {
     width: 30%;
     margin-right: 24px;
     padding-top: 48px;
     text-align: left;
+
+    .productQuantityWeight {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-top: 16px;
+    }
   }
 `
 
@@ -143,7 +367,23 @@ const ProductDetails = styled.div`
 
   .productDescription {
     margin-top: 48px;
-    margin-bottom: 48px;
-    line-height: 140%;
+    line-height: 160% !important;
+
+    p,
+    span,
+    div {
+      line-height: 160% !important;
+    }import { useCart } from './../state';
+
+
+    img {
+      max-width: 100%;
+      margin: 32px 0;
+
+      @media (min-width: 760px) {
+        max-width: 100%;
+        padding: 0 10%;
+      }
+    }
   }
 `

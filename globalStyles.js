@@ -2,15 +2,6 @@ import { ThemeProvider, createGlobalStyle } from "styled-components"
 import * as brand from "./brandStyles"
 
 export const GlobalStyles = createGlobalStyle`
-/* @import url('https://cdn.shopify.com/s/files/1/0435/7819/6133/files/HighVoltage.woff?v=1599435170'); */
-
-/* @font-face { */
-  /* font-family: 'High Voltage'; */
-  /* font-style: normal; */
-  /* font-weight: normal; */
-  /* src: local("High Voltage"), url(${window.pedersonsData.assets.highVoltageFontUrl}) format('woff'); */
-/* } */
-
 .useHighVoltage {
   font-family: 'High Voltage', 'HighVoltage' !important;
 }
@@ -157,14 +148,34 @@ html {
   overflow-y: unset;
   flex-direction: column;
   align-items: flex-start;
+
+  &::-webkit-scrollbar {
+      height: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--brandBlack10);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--brandDarkGreen50);
+    }
 }
 
 body, .App {
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   touch-action: pan-y;
+}
+
+pre code {
+  padding: 16px 0px;
+  white-space: pre-wrap;
+  display: flex;
+  font-family: monospace;
+  color: var(--brandBlack70);
+  font-weight: 500;
 }
 
 #mountPoint {
@@ -195,5 +206,13 @@ a, :any-link {
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
+}
+
+.shopify-challenge__container {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 `

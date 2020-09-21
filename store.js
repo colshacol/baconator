@@ -1,8 +1,19 @@
-import { createContextStore, action, thunk, computed, debug } from "easy-peasy"
+import {
+  persist,
+  createContextStore,
+  actionOn,
+  action,
+  thunk,
+  computed,
+  debug,
+  thunkOn,
+} from "easy-peasy"
 import removeOne from "remove-one"
 import kindOf from "kind-of"
 import * as shopifyApi from "./src/utilities/shopifyApi"
 import count from "@extra-array/count"
+import { u } from "./src/utilities/u"
+import { VARIANT_TITLE_30 } from "./src/consts"
 
 const filterBy = (key) => (list) => (value) => {
   return list.filter((item) => item[key] === value)
@@ -13,14 +24,38 @@ const findBy = (key) => (list) => (value) => {
 }
 
 const findById = findBy("id")
-const filterById = filterBy("id")
-const filterByTitle = filterBy("title")
 
 const fetchProducts = thunk(async (actions, payload) => {
   actions.toggleIsFetchingProducts(true)
   const products = await shopifyApi.getProducts()
   actions.setAllProducts(products)
   actions.toggleIsFetchingProducts(false)
+})
+
+const fetchCollectionProducts = thunk(async (actions, collectionHandle, { getState }) => {
+  const products = await shopifyApi.getCollectionProducts(collectionHandle)
+  const { allProducts } = getState()
+
+  const final = products.map((product) => {
+    return allProducts.find((item) => {
+      return item.id === product.id
+    })
+  })
+
+  actions.setFilteredProducts(final.filter(Boolean))
+})
+
+const setFilteredProducts = action((state, filteredProducts) => {
+  state.filteredProducts = filteredProducts
+})
+
+const fetchCollections = thunk(async (actions, payload) => {
+  const collections = await shopifyApi.getCollections()
+  actions.setCollections(collections)
+})
+
+const setCollections = action((state, collections) => {
+  state.collections = collections
 })
 
 const fetchCart = thunk(async (actions, payload) => {
@@ -32,15 +67,7 @@ const fetchCart = thunk(async (actions, payload) => {
 
 const emptyCart = thunk(async (actions, payload) => {
   const cart = await shopifyApi.emptyCart()
-  actions.setCart(cart)
-})
-
-const updateCart = thunk(async (actions, payload, { getState }) => {
-  await actions.emptyCart()
-  const { cartItems } = getState()
-  console.log({ cartItems })
-  const cart = await shopifyApi.updateCart(cartItems)
-  actions.setCart(cart)
+  // actions.setCart(cart)
 })
 
 const setAllProducts = action((state, products) => {
@@ -51,16 +78,18 @@ const setCart = action((state, cart) => {
   state.cart = cart
 })
 
+const selectedProductIdsSelector = (state) => state.selectedProductIds
+
 const isBoxFull = computed(
-  [(state) => state.selectedProductIds],
+  [selectedProductIdsSelector],
 
   (selectedProductIds) => {
-    return selectedProductIds.length === 6
+    return selectedProductIds.length === 9999
   }
 )
 
 const isBoxEmpty = computed(
-  [(state) => state.selectedProductIds],
+  [selectedProductIdsSelector],
 
   (selectedProductIds) => {
     return selectedProductIds.length === 0
@@ -68,7 +97,7 @@ const isBoxEmpty = computed(
 )
 
 const selectedProductCount = computed(
-  [(state) => state.selectedProductIds],
+  [selectedProductIdsSelector],
 
   (selectedProductIds) => {
     return selectedProductIds.length
@@ -89,8 +118,7 @@ const selectedProductVariantIds = computed(
 
   (selectedProducts) => {
     return selectedProducts.map((product, index) => {
-      const variantTitle = index > 0 ? "30" : "50"
-      console.log(product)
+      const variantTitle = index > 0 ? VARIANT_TITLE_30 : VARIANT_TITLE_50
 
       return product.variants.reduce((final, variant) => {
         return variant.title === variantTitle ? variant.id : final
@@ -99,6 +127,40 @@ const selectedProductVariantIds = computed(
   }
 )
 
+const cartPrice = computed([(state) => state.cart], (cart) => {
+  const price = cart.total_price / 100
+  return price || 0
+})
+
+// When selectedProductVariantIds changes,
+// derive a new list of items to update cart.
+const cartItems = computed(
+  [(state) => state.selectedProductVariantIds],
+
+  (selectedProductVariantIds) => {
+    return selectedProductVariantIds.reduce((final, id) => {
+      const existing = final.find((item) => item.id === id)
+
+      if (existing) {
+        existing.quantity++
+        return final
+      }
+
+      final.push({
+        id,
+        quantity: 1,
+        properties: {
+          shipping_interval_frequency: "1",
+          shipping_interval_unit_type: "Month",
+        },
+      })
+
+      return final
+    }, [])
+  }
+)
+
+//
 const cartListItems = computed(
   [(state) => state.selectedProducts],
 
@@ -126,34 +188,6 @@ const cartListItems = computed(
   }
 )
 
-const cartPrice = computed([(state) => state.cart], (cart) => {
-  const price = cart.total_price / 100
-  console.log("CART PRICE", cart, price)
-  return price || 0
-})
-
-const cartItems = computed(
-  [(state) => state.selectedProductVariantIds],
-
-  (selectedProductVariantIds) => {
-    return selectedProductVariantIds.reduce((final, id) => {
-      const existing = final.find((item) => item.id === id)
-
-      if (existing) {
-        existing.quantity++
-        return final
-      }
-
-      final.push({
-        id,
-        quantity: 1,
-      })
-
-      return final
-    }, [])
-  }
-)
-
 const toggleAction = (stateKey) => {
   return action((state, arg) => {
     const oldValue = state[stateKey]
@@ -162,64 +196,134 @@ const toggleAction = (stateKey) => {
   })
 }
 
-const toggleIsFetchingProducts = toggleAction("isFetchingProducts")
-const toggleIsFetchingCart = toggleAction("isFetchingCart")
-const toggleIsSideCartOpen = toggleAction("isSideCartOpen")
-const toggleIsSideNavOpen = toggleAction("isSideNavOpen")
-const toggleIsQuickViewOpen = toggleAction("isQuickViewOpen")
-
-const addProductToBox = action((state, id) => {
-  state.selectedProductIds.push(id)
-})
-
-const removeProductFromBox = action((state, id) => {
-  state.selectedProductIds = removeOne(state.selectedProductIds, (pid) => pid === id)
-})
-
-const removeProductsFromBox = action((state, id) => {
-  state.selectedProductIds = state.selectedProductIds.filter((pid) => {
-    return pid !== id
-  })
-})
-
-const setProductListFilter = action((state, filter) => {
-  const current = state.productListFilter
-  state.productListFilter = current === filter ? "" : filter
-})
-
 export const Store = createContextStore({
-  cart: {},
-  allProducts: window.pedersonsData.allProducts,
+  auditLogs: [],
+  allProducts: window.pnf.allProducts,
   subscribableProducts: window.pedersonsData.subscribableProducts,
-  productListFilter: "",
+  cart: {},
+  collections: window.pnf.allCollections,
+  filteredProducts: window.pedersonsData.subscribableProducts,
+  filterSearchValue: "",
+  productListFilter: "subscribable-products",
+  quickViewProductId: "",
   selectedProductIds: [],
-  isFetchingProducts: false,
   isFetchingCart: false,
+  isFetchingProducts: false,
+  isQuickViewOpen: false,
   isSideCartOpen: false,
   isSideNavOpen: false,
-  isQuickViewOpen: false,
 
-  setProductListFilter,
-  toggleIsFetchingProducts,
-  toggleIsFetchingCart,
-  toggleIsSideCartOpen,
-  toggleIsSideNavOpen,
-  toggleIsQuickViewOpen,
-  addProductToBox,
-  removeProductFromBox,
-  removeProductsFromBox,
   cartItems,
-  cartPrice,
-  selectedProducts,
-  selectedProductCount,
-  selectedProductVariantIds,
-  isBoxFull,
-  isBoxEmpty,
   cartListItems,
-  fetchProducts,
+  cartPrice,
+  emptyCart,
   fetchCart,
+  fetchCollectionProducts,
+  fetchCollections,
+  fetchProducts,
+  isBoxEmpty,
+  isBoxFull,
+  selectedProductCount,
+  selectedProducts,
+  selectedProductVariantIds,
   setAllProducts,
   setCart,
-  emptyCart,
-  updateCart,
+  setCollections,
+  setFilteredProducts,
+
+  toggleIsFetchingProducts: toggleAction("isFetchingProducts"),
+  toggleIsFetchingCart: toggleAction("isFetchingCart"),
+  toggleIsSideCartOpen: toggleAction("isSideCartOpen"),
+  toggleIsSideNavOpen: toggleAction("isSideNavOpen"),
+  toggleIsQuickViewOpen: toggleAction("isQuickViewOpen"),
+
+  // initialize: thunk(async (actions, payload, { getState }) => {
+  //   const cart = window.pnf.cart
+  //   const productIds = u.array.reduceToValues(cart.items, "id")
+  //   actions.hydrateSelectedProductIds(productIds)
+  //   actions.setCart(cart)
+  // }),
+
+  // hydrateSelectedProductIds: action((state, ids) => {
+  //   state.selectedProductIds = ids
+  // }),
+
+  quickViewProduct: computed(
+    [(state) => state.quickViewProductId, (state) => state.allProducts],
+    (id, allProducts) => {
+      return allProducts.find((item) => item.id === id)
+    }
+  ),
+
+  addProductToBox: action((state, id) => {
+    state.selectedProductIds.push(id)
+  }),
+
+  removeProductFromBox: action((state, id) => {
+    state.selectedProductIds = removeOne(state.selectedProductIds, (pid) => pid === id)
+  }),
+
+  removeProductsFromBox: action((state, id) => {
+    state.selectedProductIds = state.selectedProductIds.filter((pid) => {
+      return pid !== id
+    })
+  }),
+
+  setFilterSearchValue: action((state, data) => {
+    const _value = data.target ? data.target.value : data
+    state.filterSearchValue = _value
+  }),
+
+  setProductListFilter: action((state, filter) => {
+    state.productListFilter = filter
+  }),
+
+  setQuickViewProductId: action((state, productId) => {
+    state.quickViewProductId = productId
+  }),
+
+  updateCart: thunk(async (actions, payload, { getState }) => {
+    actions.toggleIsFetchingCart(true)
+    await actions.emptyCart()
+    const { cartItems } = getState()
+    await shopifyApi.addToCart(cartItems)
+    const cart = await shopifyApi.getCart()
+    actions.setCart(cart)
+    actions.toggleIsFetchingCart(false)
+  }),
+
+  // When a product is added to the box,
+  // add a log to be displayed in <AuditLogs />.
+  addProductToBoxLogger: actionOn(
+    (actions) => actions.addProductToBox,
+    (state, target) => {
+      const product = u.array.findByKeyValue(state.allProducts, "id", target.payload, {})
+      state.auditLogs.push(`Added a product: ${product.title}`)
+    }
+  ),
+
+  cartLogger: actionOn(
+    (actions) => actions.setCart,
+    (state, target) => {
+      state.auditLogs.push(`Set new cart value.`)
+    }
+  ),
+
+  // When the product list filter changes, fetch the
+  // corresponding collection.
+  onSetProductListFilter: thunkOn(
+    (actions) => actions.setProductListFilter,
+    (actions, target) => {
+      actions.fetchCollectionProducts(target.payload)
+    }
+  ),
+
+  // When a product is added to the box,
+  // update the cart.
+  onAddProductToBox: thunkOn(
+    (actions) => actions.addProductToBox,
+    async (actions, target) => {
+      // actions.updateCart()
+    }
+  ),
 })

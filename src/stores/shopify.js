@@ -17,7 +17,6 @@ export const useShopifyStore = create((set, get) => {
 
   const fetchProducts = async () => {
     setIsFetchingProducts(true)
-    // const response = await shopifyApi.getProducts()
     const response = products
     setProducts(response.products)
     setIsFetchingProducts(false)
@@ -25,7 +24,6 @@ export const useShopifyStore = create((set, get) => {
 
   const fetchCart = async () => {
     setIsFetchingCart(true)
-    // const response = await shopifyApi.getProducts()
     const response = {}
     setCart(response)
     setIsFetchingCart(false)
@@ -33,7 +31,6 @@ export const useShopifyStore = create((set, get) => {
 
   const updateCart = async (details) => {
     setIsUpdatingCart(true)
-    // const response = await shopifyApi.emptyCart()
     setIsUpdatingCart(false)
   }
 

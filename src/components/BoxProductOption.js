@@ -1,25 +1,99 @@
+import { motion } from "framer-motion"
 import * as React from "react"
 import styled from "styled-components"
 import { Button } from "./Button"
 import { useBoxStore, useSharedStore } from "../stores"
 import { Store } from "../../store"
+import { useCart } from "./../state"
+
+const QuickViewLink = () => {
+  return (
+    <div className='quickViewLink'>
+      <img src={window.pedersonsData.assets.searchIconWhiteUrl} alt='search icon' />
+    </div>
+  )
+}
+
+const QuantityWeightAndPricing = (props) => {
+  return (
+    <div className='productInfo'>
+      <div
+        className='productQuantityWeight'
+        dangerouslySetInnerHTML={{
+          __html: props.innerHtml || "<span></span>",
+        }}
+      ></div>
+    </div>
+  )
+}
+
+const variants = {
+  hidden: { opacity: 0 },
+  visible: (custom) => {
+    const final = { opacity: 1, transition: { duration: 1, delay: 0.3 * custom } }
+    return final
+  },
+}
+
+const getProuctStuff = (props) => {
+  if (props.product.variants.length < 2) {
+    return {
+      variant30: null,
+      variant50: null,
+      variant: null,
+      inventory: 99,
+    }
+  }
+
+  const variant30 = props.product.variant30
+  const variant50 = props.product.variant50
+  const variant = props.isBoxEmpty ? variant50 : variant30
+  const inventory = props.isBoxEmpty ? variant50.inventory_quantity : variant30.inventory_quantity
+
+  return {
+    variant30,
+    variant50,
+    variant,
+    inventory,
+  }
+}
 
 export const BoxProductOption = (props) => {
+  const cart = useCart()
+
   return (
-    <BoxProductOptionContainer>
-      <BoxProductOptionTop imageSrc={props.product.media[0].src}></BoxProductOptionTop>
+    <BoxProductOptionContainer
+      variants={variants}
+      custom={props.index}
+      initial='hidden'
+      animate='visible'
+    >
+      <BoxProductOptionTop
+        imageSrc={props.product.media[0].src}
+        onClick={props.toggleIsQuickViewOpen}
+      >
+        <QuickViewLink />
+      </BoxProductOptionTop>
       <BoxProductOptionBottom>
         <BoxProductOptionTitle>{props.product.title}</BoxProductOptionTitle>
-        <p className='quickViewLink' onClick={() => props.toggleIsQuickViewOpen(true)}>
-          Quick View
-        </p>
-        {props.hasProduct ? (
+        <QuantityWeightAndPricing
+          innerHtml={props.product.metaFields.quantity_weight_and_pricing}
+        />
+
+        {props.product.isOutOfStock && (
+          <Button isDisabled className='BoxProductOptionButton'>
+            Out of Stock
+          </Button>
+        )}
+
+        {props.product.isOutOfStock ? null : props.hasProduct ? (
           <div className='quantityChanger'>
             <Button
               className='decrementButton'
               onClick={(event) => {
                 event.preventDefault()
-                props.removeProductFromBox()
+                cart.actions.decrementCartProductQuantity(props.product)
+                // props.removeProductFromBox()
               }}
               children={
                 <img
@@ -31,10 +105,11 @@ export const BoxProductOption = (props) => {
             ></Button>
             <p className='quantityText'>{props.quantity}</p>
             <Button
-              className={`incrementButton ${props.isBoxFull ? "nope" : ""}`}
+              className={`incrementButton`}
               onClick={(event) => {
                 event.preventDefault()
-                props.addProductToBox()
+                cart.actions.incrementCartProductQuantity(props.product)
+                // props.addProductToBox()
               }}
               children={
                 <img
@@ -45,17 +120,13 @@ export const BoxProductOption = (props) => {
               }
             ></Button>
           </div>
-        ) : props.isBoxFull ? (
-          <Button isDisabled className='BoxProductOptionButton'>
-            Box Is Full
-          </Button>
         ) : (
           <Button
             isPrimary
             className='BoxProductOptionButton'
             onClick={(event) => {
               event.preventDefault()
-              props.addProductToBox()
+              cart.actions.addProductToCart(props.product)
             }}
           >
             Add To Box
@@ -66,11 +137,38 @@ export const BoxProductOption = (props) => {
   )
 }
 
-const BoxProductOptionContainer = styled.div`
+const BoxProductOptionContainer = styled(motion.div)`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background: var(--white);
+
+  .productInfo {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    color: var(--brandBlack50);
+    /* align-items: center; */
+  }
+
+  .productQuantityWeight {
+    font-size: 14px;
+  }
+
+  .fromPrice {
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  :hover {
+    .quickViewLink {
+      transform: scale(1.2);
+      background: var(--brandGreen80);
+      box-shadow: 0px 2px 16px var(--brandBlack50);
+    }
+  }
 
   .quantityChanger {
     display: flex;
@@ -122,16 +220,6 @@ const BoxProductOptionContainer = styled.div`
   .BoxProductOptionButton[disabled] {
     cursor: not-allowed;
   }
-
-  .BoxProductOptionButton:first-of-type {
-    margin-top: 16px;
-  }
-
-  /* @media screen and (max-width: 530px) {
-    .BoxProductOptionButton {
-      width: 100%;
-    }
-  } */
 `
 
 const BoxProductOptionTop = styled.div`
@@ -141,10 +229,31 @@ const BoxProductOptionTop = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
-  padding-top: 50%;
+  padding-top: 100%;
 
   @media (min-width: 530px) {
-    padding-top: 60%;
+    padding-top: 100%;
+  }
+
+  .quickViewLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    background: var(--brandBlack30);
+    transition: all 0.2s;
+    width: 40px;
+    height: 40px;
+    transform: scale(1);
+
+    img {
+      margin: 0 1px 0px 0px;
+      max-width: 32px;
+    }
   }
 `
 
@@ -155,30 +264,14 @@ const BoxProductOptionBottom = styled.div`
   justify-content: space-between;
   padding: 16px 0px 0px;
   width: 100%;
-
-  .quickViewLink {
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--brandGreen100);
-    font-style: italic;
-
-    :hover {
-      color: var(--brandDarkGreen100);
-    }
-  }
-
-  @media screen and (min-width: 530px) {
-    .quickViewLink {
-      font-size: 14px;
-    }
-  }
+  position: relative;
 `
 
 const BoxProductOptionTitle = styled.h3`
   font-weight: 700;
   font-size: 18px;
   color: var(--brandDarkGreen100);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   /* text-shadow: 0px 2px #000; */
 `
 

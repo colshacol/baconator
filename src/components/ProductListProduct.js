@@ -24,6 +24,7 @@ const ProductListProductContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   background: var(--white);
+  cursor: pointer;
 `
 
 const ProductListProductTop = styled.div`
@@ -33,10 +34,10 @@ const ProductListProductTop = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
-  padding-top: 50%;
+  padding-top: 100%;
 
   @media (min-width: 530px) {
-    padding-top: 60%;
+    padding-top: 100%;
   }
 `
 

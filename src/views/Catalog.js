@@ -6,33 +6,74 @@ import { ProductListProduct } from "../components/ProductListProduct"
 import { View } from "../components/View"
 import { Button } from "../components/Button"
 import { BoxProductTypeFilters } from "../components/BoxProductTypeFilters"
+import { Store } from "../../store"
+import { useCart, products } from "../state"
+
+const filters = {
+  All: "available-products",
+  Bacon: "bacon",
+  Sausage: "sausage",
+  "Hot Dogs": "hot-dogs",
+  Ham: "ham",
+  "Beef & Bison": "beef-bison",
+  Pork: "pork",
+  Bundles: "bundles",
+}
 
 export const Catalog = (props) => {
-  const productsStore = useProductsStore()
+  const cart = useCart()
+  const [searchValue, setSearchValue] = React.useState("")
+  const [collectionFilter, setCollectionFilter] = React.useState("available-products")
+
+  const onSearchInput = (event) => setSearchValue(event.target.value)
+  const setFilter = (filter) => setCollectionFilter(filter)
+
+  const state = Store.useStoreState((state) => ({
+    productListFilter: state.productListFilter,
+    filteredProducts: state.filteredProducts,
+  }))
+
+  const actions = Store.useStoreActions((actions) => ({
+    setProductListFilter: actions.setProductListFilter,
+  }))
+
+  // React.useEffect(() => {
+  //   actions.setProductListFilter("available-products")
+  // }, [])
+
+  const productsToShow = products.list.filter((product) => {
+    const isInCollection = product.collections.includes(collectionFilter)
+    const title = product.title.toLowerCase()
+    const search = searchValue.toLocaleLowerCase()
+    const matchesSearch = title.includes(search)
+    return isInCollection && matchesSearch
+  })
 
   return (
     <View>
-      <View.Header>
-        <View.Title>Product Catalog</View.Title>
-        <View.Description>
-          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-          laboriosam, nisi ut aliquid ex ea commodi consequatur?
-        </View.Description>
-        <BoxProductTypeFilters />
-      </View.Header>
-      <View.Content>
-        <ViewOptions></ViewOptions>
+      <View.TempTop title='Product Catalog' description='' />
+      <StyledViewContent>
+        <BoxProductTypeFilters
+          filter={collectionFilter}
+          setFilter={setFilter}
+          setSearchValue={onSearchInput}
+          filters={filters}
+          searchValue={searchValue}
+        />
         <BoxOptions>
-          {productsStore.products.map((product) =>
-            product.title.includes(productsStore.filter) ? (
-              <ProductListProduct key={product.id} {...product} />
-            ) : null
-          )}
+          {productsToShow.map((product) => (
+            <ProductListProduct key={product.id} {...product} />
+          ))}
         </BoxOptions>
-      </View.Content>
+      </StyledViewContent>
     </View>
   )
 }
+
+const StyledViewContent = styled(View.Content)`
+  display: flex;
+  flex-direction: column;
+`
 
 const BoxOptions = styled.div`
   margin-top: 48px;

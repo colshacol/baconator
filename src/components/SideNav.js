@@ -5,27 +5,38 @@ import { slide as Menu } from "react-burger-menu"
 import { useSharedStore, useCartStore } from "../stores"
 import { Button } from "./Button"
 import { Link, Route, navigate } from "wouter"
+import { Store } from "../../store"
 
 export const SideNav = (props) => {
-  const sharedStore = useSharedStore()
-
   return (
     <StyledMenu
       right
       width='360px'
       className='SideNav'
-      isOpen={sharedStore.isSideNavOpen}
-      onOpen={() => sharedStore.toggleIsSideNavOpen(true)}
-      onClose={() => sharedStore.toggleIsSideNavOpen(false)}
+      isOpen={props.isOpen}
+      onOpen={() => props.toggle(true)}
+      onClose={() => props.toggle(false)}
     >
-      <div className='innerContainer'>
-        <div className='top' onClick={() => sharedStore.toggleIsSideNavOpen(false)}>
+      <div className='container'>
+        <div className='innerContainer' onClick={() => props.toggle(false)}>
           <Link href='/'>
-            <a className='bottomLink'>Home</a>
+            <p className='linky'>Shop</p>
           </Link>
-          <Link href='/catalog'>
-            <a className='bottomLink'>Catalog</a>
+          <a href='https://pedersonsfarms.com/find'>
+            <p className='linky'>Find</p>
+          </a>
+          <a href='https://pedersonsfarms.com/sell'>
+            <p className='linky'>Sell</p>
+          </a>
+          <Link href='/products'>
+            <p className='linky'>Products</p>
           </Link>
+          <a href='/admin' className='linky'>
+            Recipes
+          </a>
+          <a href='/admin' className='linky'>
+            Sign In
+          </a>
         </div>
       </div>
     </StyledMenu>
@@ -35,21 +46,25 @@ export const SideNav = (props) => {
 const StyledMenu = styled(Menu)`
   background: #fff;
 
-  .bottomLink {
-    font-size: 24px;
-    margin-bottom: 24px;
-  }
-
-  .innerContainer {
+  .container {
     height: 100%;
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 16px;
+    align-items: flex-end;
+    text-align: right;
 
-    .top {
+    .innerContainer {
       display: flex;
       flex-direction: column;
+    }
+
+    .linky {
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 200%;
+      color: var(--brandGreen100);
     }
   }
 

@@ -5,120 +5,85 @@ import { slide as Menu } from "react-burger-menu"
 import { Button } from "./Button"
 import { useScript } from "../utilities/useScript"
 import { Store } from "../../store"
+import { useCart, products, collections } from "../state"
 
-const prices = {
-  0: "$0.00",
-  1: "49.99",
-  2: "$79.99",
-  3: "$109.99",
-  4: "$139.99",
-  5: "$169.99",
-  6: "$199.99",
-}
-
-export const CartMenu = (props) => {
-  const state = Store.useStoreState((state) => ({
-    isSideCartOpen: state.isSideCartOpen,
-  }))
-
-  const actions = Store.useStoreActions((actions) => ({
-    toggleIsSideCartOpen: actions.toggleIsSideCartOpen,
-  }))
-
-  return (
-    <StyledMenu
-      right
-      width='360px'
-      className='CartView'
-      isOpen={state.isSideCartOpen}
-      onOpen={() => actions.toggleIsSideCartOpen()}
-      onClose={() => actions.toggleIsSideCartOpen(false)}
-    >
-      <Cart style={{ paddingLeft: 16 }} />
-    </StyledMenu>
-  )
-}
-
-export const Cart = (props) => {
-  const state = Store.useStoreState((state) => ({
-    isSideCartOpen: state.isSideCartOpen,
-    cartListItems: state.cartListItems,
-    selectedProductCount: state.selectedProductCount,
-    selectedProductVariantIds: state.selectedProductVariantIds,
-    isBoxEmpty: state.isBoxEmpty,
-    cartItems: state.cartItems,
-  }))
-
-  const actions = Store.useStoreActions((actions) => ({
-    toggleIsSideCartOpen: actions.toggleIsSideCartOpen,
-    removeProductFromBox: actions.removeProductFromBox,
-    removeProductsFromBox: actions.removeProductsFromBox,
-    updateCart: actions.updateCart,
-    emptyCart: actions.emptyCart,
-  }))
-
-  React.useEffect(() => {
-    actions.emptyCart()
-  }, [])
-
-  React.useEffect(() => {
-    if (state.cartItems) {
-      console.log("Cart - updating cart.")
-      actions.updateCart()
-    }
-  }, [state.cartItems])
-
-  const status = useScript(window.pedersonsData.assets.rechargeScriptUrl + `&t=${Date.now()}`)
+const useRechargeScript = () => {
+  const status = useScript(window.pedersonsData.assets.rechargeScriptUrl)
 
   React.useEffect(() => {
     status === "ready" && window.reChargeCartJS()
   }, [status === "ready"])
 
+  return status
+}
+
+export const Cart = (props) => {
+  const cart = useCart()
+  useRechargeScript()
+
+  const style = {
+    width: "100%",
+    height: "100px",
+    fontStyle: "italic",
+    display: "flex",
+    alignItems: "center",
+    color: "var(--brandBlack50)",
+  }
+
+  const emptyState = !cart.cartInfo.productCount && (
+    <div style={style}>
+      <p>Empty</p>
+    </div>
+  )
+
+  const loadingState = cart.cartInfo.isLoading && (
+    <div style={style}>
+      <p>Loading</p>
+    </div>
+  )
+
+  const cartItems = Object.entries(cart.cartInfo.cartItems)
+
+  const BoxList = () => {
+    return cartItems.map(([pid, { title, quantity, productId }]) => (
+      <CartItem
+        title={title.slice(0, title.indexOf(" - "))}
+        quantity={quantity}
+        key={title}
+        id={productId}
+        removeProductFromBox={() =>
+          cart.actions.decrementCartProductQuantity(products.getById(productId))
+        }
+        removeProductsFromBox={async () => {
+          const product = products.getById(productId)
+          cart.actions.removeProductFromCart(product)
+        }}
+      />
+    ))
+  }
+
   return (
     <StyledCart className={props.className} style={props.style}>
+      <h3 className='boxTitle'>Your Box</h3>
       <div className='top'>
-        <h3 className='boxTitle'>Your Box ({state.selectedProductCount})</h3>
-        {state.isBoxEmpty && (
-          <div
-            style={{
-              width: "100%",
-              height: "100px",
-              fontStyle: "italic",
-              display: "flex",
-              alignItems: "center",
-              color: "var(--brandBlack50)",
-            }}
-          >
-            No products to show. :(
-          </div>
-        )}
-        {state.cartListItems.map(({ title, quantity, id }) => (
-          <CartItem
-            title={title}
-            quantity={quantity}
-            key={title}
-            id={id}
-            removeProductFromBox={actions.removeProductFromBox}
-            removeProductsFromBox={actions.removeProductsFromBox}
-          />
-        ))}
+        {emptyState}
+        {loadingState}
+        {!emptyState && !loadingState && <BoxList />}
       </div>
       <div className='priceContainer'>
         <ShippingPrice />
-        <CartPrice />
-        <CheckoutButton />
+        <CartPrice price={cart.data.total_price} />
+        <CheckoutButton isBoxEmpty={!cart.cartInfo.productCount} />
       </div>
     </StyledCart>
   )
 }
 
 const CartItem = (props) => {
-  const title = props.title.substring(0, props.title.indexOf(" - ")) || props.title
-
   return (
-    <div className='cartItem' key={title}>
-      <p>
-        {title} (x{props.quantity})
+    <div className='cartItem' key={props.title}>
+      <p className='cartItemTitle'>
+        {props.title} (x{props.quantity})
       </p>
       <span style={{ display: "flex", justifyContent: "space-between" }}>
         {props.quantity > 1 ? (
@@ -144,33 +109,21 @@ const ShippingPrice = (props) => {
 }
 
 const CartPrice = (props) => {
-  const state = Store.useStoreState((state) => ({
-    cartPrice: state.cartPrice,
-  }))
-
   return (
     <div className='priceRow'>
       <h2>Total:</h2>
-      <h2 className='price'>${state.cartPrice}</h2>
+      <h2 className='price'>${props.price / 100}</h2>
     </div>
   )
 }
 
 const CheckoutButton = (props) => {
-  const state = Store.useStoreState((state) => ({
-    isBoxEmpty: state.isBoxEmpty,
-  }))
-
   return (
-    <Button isPrimary name='checkout' isDisabled={state.isBoxEmpty} className='checkout_button'>
+    <Button isPrimary name='checkout' isDisabled={props.isBoxEmpty} className='checkout_button'>
       Checkout
     </Button>
   )
 }
-
-const StyledMenu = styled(Menu)`
-  background: #fff;
-`
 
 const StyledCart = styled.div`
   width: 100%;
@@ -180,9 +133,38 @@ const StyledCart = styled.div`
   justify-content: space-between;
   padding-bottom: 16px;
 
+  .cartItemTitle {
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+
   .top {
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    margin-bottom: 16px;
+    padding-right: 16px;
+  }
+
+  .top::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+  }
+
+  .top::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+  }
+
+  .top::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border: 2px solid #555555;
+  }
+
+  @media (min-width: 760px) {
+    .top {
+      max-height: 450px;
+    }
   }
 
   .cartItem {
@@ -202,7 +184,7 @@ const StyledCart = styled.div`
 
   .boxTitle {
     text-align: right;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
     color: var(--brandBlack100);
   }
 

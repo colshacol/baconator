@@ -3,30 +3,78 @@ import { Link, Route, navigate } from "wouter"
 import styled from "styled-components"
 import { useLocation } from "wouter"
 import { useSharedStore } from "../stores"
+import { Store } from "../../store"
+
+import { useWindowWidth } from "@react-hook/window-size"
+import { SideNav } from "./SideNav"
+import useBoolean from "react-hanger/useBoolean"
+
+const links = {
+  top: [
+    { label: "Recipes", href: "https://pedersonsfarms.com/recipes" },
+    { label: "Sign In", href: "https://buy.pedersonsfarms.com/account/login" },
+  ],
+
+  bottom: [
+    { label: "Shop", href: "/" },
+    { label: "Find", href: "https://pedersonsfarms.com/find" },
+    { label: "Sell", href: "https://pedersonsfarms.com/sell" },
+    { label: "Products", href: "/products" },
+  ],
+}
+
+const useLocationTest = () => {
+  const [location] = useLocation()
+  if (location === "/account") return true
+  if (location === "/account/login") return true
+  if (location === "/account/register") return true
+  if (location === "/challenge") return true
+  if (location.startsWith("/tools")) return false
+  return true
+}
 
 export const NavBar = (props) => {
-  const sharedStore = useSharedStore()
-  const [location, setLocation] = useLocation()
+  const isSideNavOpen = useBoolean()
+  const windowWidth = useWindowWidth()
+  const result = useLocationTest()
+
+  if (!result) return null
 
   return (
     <StyledWrapper>
+      {windowWidth < 760 && <SideNav isOpen={isSideNavOpen.value} toggle={isSideNavOpen.toggle} />}
       <div className='topBar'>
         <div className='topLinks'>
-          <a href='/admin' className='topLink'>
-            Sign In
-          </a>
+          {links.top.map((link) => {
+            const isLocal = link.href.startsWith("/")
+            const Component = isLocal ? Link : "a"
+
+            return (
+              <Component key={link.label} href={link.href} className='topLink'>
+                {link.label}
+              </Component>
+            )
+          })}
         </div>
       </div>
       <div className='bottomBar'>
-        <div className='logoWrapper' onClick={() => setLocation("/")}>
-          <img src={window.pedersonsData.assets.logoImageUrl} alt="Pederson's Logo" />
-        </div>
+        <a href='https://pedersonsfarms.com'>
+          <div className='logoWrapper'>
+            <img src={window.pedersonsData.assets.logoImageUrl} alt="Pederson's Logo" />
+          </div>
+        </a>
         <div className='bottomLinks'>
           <Link href='/'>
-            <a className='bottomLink'>Home</a>
+            <p className='bottomLink'>Shop</p>
           </Link>
-          <Link href='/catalog'>
-            <a className='bottomLink'>Catalog</a>
+          <a href='https://pedersonsfarms.com/find'>
+            <p className='bottomLink'>Find</p>
+          </a>
+          <a href='https://pedersonsfarms.com/sell'>
+            <p className='bottomLink'>Sell</p>
+          </a>
+          <Link href='/products'>
+            <p className='bottomLink'>Products</p>
           </Link>
         </div>
       </div>
@@ -34,7 +82,7 @@ export const NavBar = (props) => {
         <img
           src={window.pedersonsData.assets.menuIconUrl}
           alt='menu'
-          onClick={sharedStore.toggleIsSideNavOpen}
+          onClick={isSideNavOpen.toggle}
         />
       </div>
     </StyledWrapper>
@@ -47,13 +95,14 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100px;
+  min-height: 100px;
   padding: 8px 48px 16px 48px;
   position: relative;
 
   .topBar,
   .bottomBar {
     width: 100%;
-    max-width: 1080px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
@@ -70,9 +119,17 @@ const StyledWrapper = styled.div`
   }
 
   .topLink {
+    margin-left: 16px;
     color: #fff;
     text-decoration: none;
     font-size: 14px;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .topLink:hover,
+  .bottomLink:hover {
+    opacity: 0.7;
   }
 
   .bottomBar {
@@ -89,10 +146,13 @@ const StyledWrapper = styled.div`
   }
 
   .bottomLink {
+    cursor: pointer;
     color: #fff;
     text-decoration: none;
     font-size: 16px;
     margin-left: 48px;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
   }
 
   .topBar,
@@ -136,22 +196,14 @@ const StyledWrapper = styled.div`
   }
 
   @media (min-width: 530px) {
-    height: 120px;
-
-    .topBar,
-    .bottomLinks {
-      display: flex;
-    }
-
-    .menuButtonContainer {
-      display: none;
-    }
+    height: 124px;
+    min-height: 124px;
 
     .logoWrapper {
       width: 180px;
       min-width: 180px;
       position: relative;
-      top: -32px;
+      top: 8px;
 
       img {
         width: 180px;
@@ -161,5 +213,25 @@ const StyledWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
+    .menuButtonContainer {
+      display: none;
+    }
+
+    .topBar,
+    .bottomLinks {
+      display: flex;
+    }
+
+    .logoWrapper {
+      width: 240px;
+      min-width: 240px;
+      position: relative;
+      top: -32px;
+
+      img {
+        width: 240px;
+        height: 120px;
+      }
+    }
   }
 `
