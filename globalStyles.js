@@ -186,6 +186,14 @@ pre code {
   display: none;
 }
 
+.CartView.bm-menu-wrap {
+  top: 0px !important;
+}
+
+.CartView .bm-menu {
+  padding: 32px 0px 0px 24px;
+}
+
 .CartView .bm-menu,
 .SideNav .bm-menu {
   background: var(--brandWhite100) !important;

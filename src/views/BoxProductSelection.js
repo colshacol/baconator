@@ -24,6 +24,7 @@ const filters = {
 }
 
 const log = (...args) => console.log("\n\n[BoxProductSelection]", ...args)
+const subscribableProductIds = pnf.subscribableProducts.map((item) => item.id)
 
 export const BoxProductSelection = React.memo((props) => {
   const cart = useCart()
@@ -35,7 +36,7 @@ export const BoxProductSelection = React.memo((props) => {
   const onSearchInput = (event) => setSearchValue(event.target.value)
   const setFilter = (filter) => setCollectionFilter(filter)
 
-  const productsToShow = products.list.filter((product) => {
+  const productsToShow = products.subscribable.filter((product) => {
     const isInCollection = product.collections.includes(collectionFilter)
     const title = product.title.toLowerCase()
     const search = searchValue.toLocaleLowerCase()
@@ -49,7 +50,13 @@ export const BoxProductSelection = React.memo((props) => {
     }
   }, [isQuickViewOpen.value])
 
-  console.log(isQuickViewOpen, quickViewProduct)
+  console.log({
+    subscribableProductIds,
+    products,
+    productsToShow,
+    isQuickViewOpen,
+    quickViewProduct,
+  })
 
   return (
     <StyledView>
@@ -60,14 +67,6 @@ export const BoxProductSelection = React.memo((props) => {
         title='How it works'
         description='Grab the reigns to customize your box of proteins. The more you buy, the more you save. Cancel, skip, or edit your monthly subscriptions anytime.'
       />
-      {/* <StyledViewHeader data-testid='StyledViewHeader'>
-        <View.Title>How it works</View.Title>
-        <StyledViewDescriptionContainer>
-          <StyledViewDescription>
-            
-          </StyledViewDescription>
-        </StyledViewDescriptionContainer>
-      </StyledViewHeader> */}
 
       <StyledViewContent style={{ marginTop: 48 }}>
         <BoxProductTypeFilters
@@ -104,9 +103,6 @@ export const BoxProductSelection = React.memo((props) => {
             ))}
           </BoxOptions>
         </div>
-        {/* <div className='cartIconFloater' onClick={actions.toggleIsSideCartOpen}>
-          <img src={window.pedersonsData.assets.cartIconUrl1} alt='cart icon' />
-        </div> */}
       </StyledViewContent>
     </StyledView>
   )

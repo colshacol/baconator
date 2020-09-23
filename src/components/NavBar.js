@@ -1,17 +1,13 @@
-import React from "react"
-import { Link, Route, navigate } from "wouter"
-import styled from "styled-components"
-import { useLocation } from "wouter"
-import { useSharedStore } from "../stores"
-import { Store } from "../../store"
-
 import { useWindowWidth } from "@react-hook/window-size"
-import { SideNav } from "./SideNav"
+import React from "react"
 import useBoolean from "react-hanger/useBoolean"
+import styled from "styled-components"
+import { Link, useLocation } from "wouter"
+import { SideNav } from "./SideNav"
 
 const links = {
   top: [
-    { label: "Recipes", href: "https://pedersonsfarms.com/recipes" },
+    // { label: "Recipes", href: "https://pedersonsfarms.com/recipes" },
     { label: "Sign In", href: "https://buy.pedersonsfarms.com/account/login" },
   ],
 
@@ -42,7 +38,9 @@ export const NavBar = (props) => {
 
   return (
     <StyledWrapper>
-      {windowWidth < 760 && <SideNav isOpen={isSideNavOpen.value} toggle={isSideNavOpen.toggle} />}
+      {windowWidth < 760 && (
+        <SideNav links={links} isOpen={isSideNavOpen.value} toggle={isSideNavOpen.toggle} />
+      )}
       <div className='topBar'>
         <div className='topLinks'>
           {links.top.map((link) => {

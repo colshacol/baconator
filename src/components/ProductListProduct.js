@@ -5,14 +5,17 @@ import { useBoxStore, useSharedStore } from "../stores"
 import { Link } from "wouter"
 
 export const ProductListProduct = (props) => {
+  console.log(props.product.title, props.product.media)
+  const media = props.product.media ? props.product.media[0] : {}
+
   return (
     <ProductListProductContainer>
-      <Link href={`/product/${props.id}`}>
-        <ProductListProductTop imageSrc={props.media[0].src}></ProductListProductTop>
+      <Link href={`/product/${props.product.id}`}>
+        <ProductListProductTop imageSrc={media.src}></ProductListProductTop>
       </Link>
       <ProductListProductBottom>
-        <Link href={`/product/${props.id}`}>
-          <ProductListProductTitle>{props.title}</ProductListProductTitle>
+        <Link href={`/product/${props.product.id}`}>
+          <ProductListProductTitle>{props.product.title}</ProductListProductTitle>
         </Link>
       </ProductListProductBottom>
     </ProductListProductContainer>

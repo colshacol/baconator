@@ -1,11 +1,7 @@
 import * as React from "react"
 import styled from "styled-components"
-import getValue from "get-value"
 import { slide as Menu } from "react-burger-menu"
-import { useSharedStore, useCartStore } from "../stores"
-import { Button } from "./Button"
 import { Link, Route, navigate } from "wouter"
-import { Store } from "../../store"
 
 export const SideNav = (props) => {
   return (
@@ -19,24 +15,16 @@ export const SideNav = (props) => {
     >
       <div className='container'>
         <div className='innerContainer' onClick={() => props.toggle(false)}>
-          <Link href='/'>
-            <p className='linky'>Shop</p>
-          </Link>
-          <a href='https://pedersonsfarms.com/find'>
-            <p className='linky'>Find</p>
-          </a>
-          <a href='https://pedersonsfarms.com/sell'>
-            <p className='linky'>Sell</p>
-          </a>
-          <Link href='/products'>
-            <p className='linky'>Products</p>
-          </Link>
-          <a href='/admin' className='linky'>
-            Recipes
-          </a>
-          <a href='/admin' className='linky'>
-            Sign In
-          </a>
+          {[...props.links.bottom, ...props.links.top].map((link) => {
+            const isLocal = link.href.startsWith("/")
+            const Component = isLocal ? Link : "a"
+
+            return (
+              <Component key={link.label} href={link.href} className='linky'>
+                {link.label}
+              </Component>
+            )
+          })}
         </div>
       </div>
     </StyledMenu>

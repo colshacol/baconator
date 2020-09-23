@@ -111,26 +111,33 @@ const getCartItemsCount = (cart) => {
   }, 0)
 }
 
-const getProductVariantIds = (product) => {
-  return product.variants.reduce((final, variant) => {
-    final[variant.title] = variant.id
-    return final
-  }, {})
-}
+// const getProductVariantIds = (product) => {
+//   return product.variants.reduce((final, variant) => {
+//     final[variant.title] = variant.id
+//     return final
+//   }, {})
+// }
 
-const getCartItemByVariantTitleAndId = (cart, variantTitle, id) => {
-  return cart.items.find((item) => {
-    return item.variant_title == variantTitle && item.product_id === id
-  })
-}
+// const getCartItemByVariantTitleAndId = (cart, variantTitle, id) => {
+//   return cart.items.find((item) => {
+//     return item.variant_title == variantTitle && item.product_id === id
+//   })
+// }
 
-const countMatches = (targetList, value) => {
-  return count(targetList, (item) => item == value)
-}
+// const countMatches = (targetList, value) => {
+//   return count(targetList, (item) => item == value)
+// }
 
 // Logic
 //
 //
+
+const fetchProducts = async () => {
+  const [data, error] = await fetch.get(
+    "https://buy.pedersonsfarms.com/admin/api/2020-07/products.json"
+  )
+  return data
+}
 
 const fetchCart = async () => {
   const [data, error] = await fetch.get("/cart.js")
@@ -322,10 +329,13 @@ const createMethods = (list) => {
     return list.find((item) => item.handle == handle)
   }
 
+  const getSubscribable = () => list.filter((item) => item.tags.includes("subscribable"))
+
   return {
     getById,
     getByTitle,
     getByHandle,
+    getSubscribable,
   }
 }
 
@@ -349,6 +359,10 @@ const enhanceProducts = (products) => {
 
 export const products = (() => {
   const list = enhanceProducts(pnf.allProducts)
+  list.methods = createMethods(list)
+  const subscribable = enhanceProducts(pnf.subscribableProducts)
+  subscribable.methods = createMethods(subscribable)
+
   const methods = createMethods(list)
 
   const getProductWithVariantId = (variantId) => {
@@ -360,6 +374,7 @@ export const products = (() => {
 
   return {
     list,
+    subscribable,
     ...methods,
     getProductWithVariantId,
   }

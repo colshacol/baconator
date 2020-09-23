@@ -49,6 +49,8 @@ export const Catalog = (props) => {
     return isInCollection && matchesSearch
   })
 
+  console.log({ productsToShow })
+
   return (
     <View>
       <View.TempTop title='Product Catalog' description='' />
@@ -62,7 +64,9 @@ export const Catalog = (props) => {
         />
         <BoxOptions>
           {productsToShow.map((product) => (
-            <ProductListProduct key={product.id} {...product} />
+            <>
+              <ProductListProduct key={product.id} product={product} />
+            </>
           ))}
         </BoxOptions>
       </StyledViewContent>

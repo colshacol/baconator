@@ -63,7 +63,7 @@ export const Cart = (props) => {
   }
 
   return (
-    <StyledCart className={props.className} style={props.style}>
+    <StyledCart className={props.className + " SideCart"} style={props.style}>
       <h3 className='boxTitle'>Your Box</h3>
       <div className='top'>
         {emptyState}

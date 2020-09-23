@@ -5,6 +5,23 @@
     </head>
     <body>
         <div id="app"></div>
-        <script src="index.js"></script>
+        <div id="mountPoint" />
+        <script>
+            window.pnf = {
+                allProducts: [],
+                allCollections: [],
+                cart: {},
+                customer: {}
+            }
+
+            window.pedersonsData = window.pnf = {
+                allProducts: [],
+                allCollections: [],
+                cart: {},
+                customer: {},
+                assets: {}
+            }
+        </script>
+        <script src="./application.js"></script>
     </body>
 </html>

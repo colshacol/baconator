@@ -6,6 +6,7 @@ import { Store } from "./../../store"
 import { useWindowWidth } from "@react-hook/window-size"
 import { Cart } from "./Cart"
 import useBoolean from "react-hanger/useBoolean"
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants"
 
 export const FloatingCartIcon = (props) => {
   const [location] = useLocation()
@@ -21,7 +22,7 @@ export const FloatingCartIcon = (props) => {
 
   return (
     <>
-      <CartMenu isOpen={isCartOpen.value} toggle={isCartOpen.toggle} />
+      <CartMenu isOpen={isCartOpen.value} toggle={isCartOpen.toggle} style={{ top: 0 }} />
       <StyledFloatingCartIcon
         id='FloatingCartIcon'
         isHomeRoute={isHomeRoute}
