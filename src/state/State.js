@@ -23,8 +23,6 @@ const actions = (self) => {
   const setProducts = (products) => {
     self.products = products.map((product) => {
       product.id = String(product.id)
-      console.log({ product })
-      Product.create(product)
     })
   }
 

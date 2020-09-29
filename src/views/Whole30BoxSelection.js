@@ -9,18 +9,7 @@ import { Encouragement } from "../components/Encouragement"
 import { View } from "../components/View"
 import { useBoxState } from "../useBoxState"
 
-const filters = {
-  All: "subscribable-products",
-  Bacon: "bacon",
-  Sausage: "sausage",
-  "Hot Dogs": "hot-dogs",
-  Ham: "ham",
-  "Beef & Bison": "beef-bison",
-  // Pork: "pork",
-  Bundles: "bundles",
-}
-
-const _BoxProductSelection = (props) => {
+const _Whole30BoxSelection = () => {
   const state = useBoxState()
   const isQuickViewOpen = useBoolean(false)
   const [quickViewProduct, setQuickViewProduct] = React.useState()
@@ -32,20 +21,13 @@ const _BoxProductSelection = (props) => {
 
   const productsToShow = Object.values(state.productIdMap).filter((product) => {
     const isInCollection = product.collections.includes(collectionFilter)
-    const isSubscribable = product.tags.includes("subscribable")
+    const isSubscribable = product.collections.includes("subscribable-products")
+    const isWhole30 = product.collections.includes("whole30-approved")
     const title = product.title.toLowerCase()
     const search = searchValue.toLocaleLowerCase()
     const matchesSearch = title.includes(search)
-    return isInCollection && matchesSearch && isSubscribable
+    return isInCollection && matchesSearch && isWhole30 && isSubscribable
   })
-
-  React.useEffect(() => {
-    if (window.location.href.includes("?")) {
-      const url = new URL(window.location.href)
-      const filter = url.searchParams.get("filter")
-      filter && setCollectionFilter(filter)
-    }
-  }, [])
 
   React.useEffect(() => {
     if (!isQuickViewOpen.value) {
@@ -59,8 +41,8 @@ const _BoxProductSelection = (props) => {
       <Encouragement productCount={state.boxQuantityCount} />
 
       <View.TempTop
-        title='HOW IT WORKS'
-        description='Grab the reigns to customize your monthly subscription box of proteins. The more you buy, the more you save. Cancel, skip, or edit your order anytime.'
+        title='WHOLE30 APPROVED'
+        description='Grab the reigns to customize your box of proteins. The more you buy, the more you save. Cancel, skip, or edit your monthly subscriptions anytime.'
       />
 
       <StyledViewContent style={{ marginTop: 48 }}>
@@ -68,7 +50,6 @@ const _BoxProductSelection = (props) => {
           filter={collectionFilter}
           setFilter={setFilter}
           setSearchValue={onSearchInput}
-          filters={filters}
           searchValue={searchValue}
         />
         <div className='contentRow'>
@@ -84,15 +65,22 @@ const _BoxProductSelection = (props) => {
                 product={product}
                 decrementQuantity={() => {
                   state.removeItem(product.id)
+                  // state2.removeProductFromBox(product.id, 1)
                 }}
                 incrementQuantity={() => {
                   state.addItem(product.id)
+                  // console.log("incrementQuantity TO CART", product)
+                  // state2.addProductToBox(product.id)
                 }}
                 addProductToBox={() => {
                   state.addItem(product.id)
+                  // console.log("ADDING PRODUCT TO CART", product)
+                  // state2.addProductToBox(product.id)
                 }}
                 removeProductFromBox={() => {
                   state.removeItem(product.id)
+                  // console.log("REMOVING PRODUCT FROM CART", product)
+                  // state2.removeProductFromBox(product.id, 99)
                 }}
                 toggleIsQuickViewOpen={() => {
                   isQuickViewOpen.toggle(true)
@@ -107,7 +95,7 @@ const _BoxProductSelection = (props) => {
   )
 }
 
-export const BoxProductSelection = React.memo(_BoxProductSelection)
+export const Whole30BoxSelection = React.memo(_Whole30BoxSelection)
 
 const StyledView = styled(View)`
   padding-bottom: 48px;

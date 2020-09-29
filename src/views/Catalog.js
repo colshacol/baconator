@@ -1,45 +1,16 @@
 import React from "react"
-import { Link, Route } from "wouter"
 import styled from "styled-components"
-import { useProductsStore } from "../stores"
+import { BoxProductTypeFilters } from "../components/BoxProductTypeFilters"
 import { ProductListProduct } from "../components/ProductListProduct"
 import { View } from "../components/View"
-import { Button } from "../components/Button"
-import { BoxProductTypeFilters } from "../components/BoxProductTypeFilters"
-import { Store } from "../../store"
-import { useCart, products } from "../state"
+import { products } from "../state"
 
-const filters = {
-  All: "available-products",
-  Bacon: "bacon",
-  Sausage: "sausage",
-  "Hot Dogs": "hot-dogs",
-  Ham: "ham",
-  "Beef & Bison": "beef-bison",
-  Pork: "pork",
-  Bundles: "bundles",
-}
-
-export const Catalog = (props) => {
-  const cart = useCart()
+export const Catalog = () => {
   const [searchValue, setSearchValue] = React.useState("")
   const [collectionFilter, setCollectionFilter] = React.useState("available-products")
 
   const onSearchInput = (event) => setSearchValue(event.target.value)
   const setFilter = (filter) => setCollectionFilter(filter)
-
-  const state = Store.useStoreState((state) => ({
-    productListFilter: state.productListFilter,
-    filteredProducts: state.filteredProducts,
-  }))
-
-  const actions = Store.useStoreActions((actions) => ({
-    setProductListFilter: actions.setProductListFilter,
-  }))
-
-  // React.useEffect(() => {
-  //   actions.setProductListFilter("available-products")
-  // }, [])
 
   const productsToShow = products.list.filter((product) => {
     const isInCollection = product.collections.includes(collectionFilter)
@@ -49,8 +20,6 @@ export const Catalog = (props) => {
     return isInCollection && matchesSearch
   })
 
-  console.log({ productsToShow })
-
   return (
     <View>
       <View.TempTop title='Product Catalog' description='' />
@@ -59,7 +28,6 @@ export const Catalog = (props) => {
           filter={collectionFilter}
           setFilter={setFilter}
           setSearchValue={onSearchInput}
-          filters={filters}
           searchValue={searchValue}
         />
         <BoxOptions>
@@ -92,29 +60,5 @@ const BoxOptions = styled.div`
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`
-
-const ViewOptions = styled.div`
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-
-  .ViewOptionsButton {
-    width: 100%;
-  }
-
-  @media screen and (min-width: 530px) {
-    .ViewOptionsButton {
-      width: fit-content;
-    }
   }
 `

@@ -5,11 +5,11 @@ import styled from "styled-components"
 import { Button } from "../components/Button"
 import { View } from "../components/View"
 
-export const Home = (props) => {
+export const Home = () => {
   return (
     <View>
       <View.Header data-testid='View.Header'>
-        <View.Title>How It Works</View.Title>
+        <View.Title>HOW IT WORKS</View.Title>
         <View.Description>
           Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
           consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?

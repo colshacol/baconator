@@ -1,10 +1,8 @@
 import { motion } from "framer-motion"
 import * as React from "react"
 import styled from "styled-components"
+import { useBoxState } from "../useBoxState"
 import { Button } from "./Button"
-import { useBoxStore, useSharedStore } from "../stores"
-import { Store } from "../../store"
-import { useCart } from "./../state"
 
 const QuickViewLink = () => {
   return (
@@ -35,50 +33,21 @@ const variants = {
   },
 }
 
-const getProuctStuff = (props) => {
-  if (props.product.variants.length < 2) {
-    return {
-      variant30: null,
-      variant50: null,
-      variant: null,
-      inventory: 99,
-    }
-  }
-
-  const variant30 = props.product.variant30
-  const variant50 = props.product.variant50
-  const variant = props.isBoxEmpty ? variant50 : variant30
-  const inventory = props.isBoxEmpty ? variant50.inventory_quantity : variant30.inventory_quantity
-
-  return {
-    variant30,
-    variant50,
-    variant,
-    inventory,
-  }
-}
-
 export const BoxProductOption = (props) => {
-  const cart = useCart()
+  const state = useBoxState()
+  // const title = props.product.title.slice(0, props.product.title.indexOf("("))
 
   return (
-    <BoxProductOptionContainer
-      variants={variants}
-      custom={props.index}
-      initial='hidden'
-      animate='visible'
-    >
+    <BoxProductOptionContainer variants={variants} custom={props.index} initial='hidden' animate='visible'>
       <BoxProductOptionTop
-        imageSrc={props.product.media[0].src}
+        imageSrc={props.product && props.product.media && props.product.media[0].src}
         onClick={props.toggleIsQuickViewOpen}
       >
         <QuickViewLink />
       </BoxProductOptionTop>
       <BoxProductOptionBottom>
-        <BoxProductOptionTitle>{props.product.title}</BoxProductOptionTitle>
-        <QuantityWeightAndPricing
-          innerHtml={props.product.metaFields.quantity_weight_and_pricing}
-        />
+        <BoxProductOptionTitle>{props.product.titleWithoutPackageQuantity}</BoxProductOptionTitle>
+        <QuantityWeightAndPricing innerHtml={props.product.metaFields.quantity_weight_and_pricing} />
 
         {props.product.isOutOfStock && (
           <Button isDisabled className='BoxProductOptionButton'>
@@ -86,39 +55,38 @@ export const BoxProductOption = (props) => {
           </Button>
         )}
 
-        {props.product.isOutOfStock ? null : props.hasProduct ? (
+        {!!props.product.metaFields.in_stores_only && (
+          <Button
+            className='FindRetailerButton'
+            onClick={(event) => {
+              window.location.assign("https://pedersonsfarms.com/find")
+            }}
+          >
+            FIND A RETAILER
+          </Button>
+        )}
+
+        {!!props.product.isOutOfStock || !!props.product.metaFields.in_stores_only ? null : props.hasProduct ? (
           <div className='quantityChanger'>
             <Button
               className='decrementButton'
               onClick={(event) => {
                 event.preventDefault()
-                cart.actions.decrementCartProductQuantity(props.product)
-                // props.removeProductFromBox()
+                state.removeItem(props.product.id)
               }}
-              children={
-                <img
-                  className='quantityIcon'
-                  src={window.pedersonsData.assets.minusIconUrl}
-                  alt='decrement'
-                />
-              }
-            ></Button>
+            >
+              <img className='quantityIcon' src={window.pedersonsData.assets.minusIconUrl} alt='decrement' />
+            </Button>
             <p className='quantityText'>{props.quantity}</p>
             <Button
               className={`incrementButton`}
               onClick={(event) => {
                 event.preventDefault()
-                cart.actions.incrementCartProductQuantity(props.product)
-                // props.addProductToBox()
+                state.addItem(props.product.id)
               }}
-              children={
-                <img
-                  className='quantityIcon'
-                  src={window.pedersonsData.assets.plusIconUrl}
-                  alt='increment'
-                />
-              }
-            ></Button>
+            >
+              <img className='quantityIcon' src={window.pedersonsData.assets.plusIconUrl} alt='increment' />
+            </Button>
           </div>
         ) : (
           <Button
@@ -126,7 +94,7 @@ export const BoxProductOption = (props) => {
             className='BoxProductOptionButton'
             onClick={(event) => {
               event.preventDefault()
-              cart.actions.addProductToCart(props.product)
+              state.addItem(props.product.id)
             }}
           >
             Add To Box
@@ -174,7 +142,7 @@ const BoxProductOptionContainer = styled(motion.div)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
+    /* margin-top: 16px; */
 
     .quantityIcon {
       max-width: 20px;
@@ -223,10 +191,10 @@ const BoxProductOptionContainer = styled(motion.div)`
 `
 
 const BoxProductOptionTop = styled.div`
-  position: relative;
+  /* position: relative; */
   background: url(${(props) => props.imageSrc});
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
   padding-top: 100%;
@@ -241,7 +209,7 @@ const BoxProductOptionTop = styled.div`
     align-items: center;
     border-radius: 50px;
     cursor: pointer;
-    position: absolute;
+    position: relative;
     bottom: 8px;
     left: 16px;
     background: var(--brandBlack30);

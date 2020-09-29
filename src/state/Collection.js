@@ -55,7 +55,6 @@ const actions = (self) => {
         })
       })
 
-      console.log({ newProducts })
       self.setProducts(newProducts)
     })
   }

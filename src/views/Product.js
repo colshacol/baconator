@@ -3,7 +3,6 @@ import { Link, Route } from "wouter"
 import styled from "styled-components"
 import { useProductsStore } from "../stores"
 import isEmpty from "is-empty"
-import { Ellipsis } from "react-css-spinners"
 import { Store } from "../../store"
 import ImageGallery from "react-image-gallery"
 import "react-responsive-carousel/lib/styles/carousel.min.css" // requires a loader
@@ -11,6 +10,7 @@ import { Carousel } from "react-responsive-carousel"
 import Gallery from "react-photo-gallery"
 import { useCart, products } from "../state"
 import { Button } from "../components/Button"
+import { useBoxState } from "../useBoxState"
 
 const Galleryx = (props) => {
   return (
@@ -66,13 +66,13 @@ const useImages = (product) => {
 }
 
 export const Product = (props) => {
+  const state = useBoxState()
   const cart = useCart()
   const product = products.getById(props.params.productId)
   const images = useImages(product)
-  console.log({ images }, product.media)
 
   if (isEmpty(product)) {
-    return <Ellipsis color='#ffdf00' size={40} />
+    return <p>Loading...</p>
   }
 
   const image = product.media[1] ? product.media[1].src : product.images[0]
@@ -116,41 +116,37 @@ export const Product = (props) => {
                       Out of Stock
                     </Button>
                   )}
-                  {product.isOutOfStock ? null : cart.actions.doesCartHaveProductId(product.id) ? (
+                  {product.isOutOfStock ? null : state.box[product.id] ? (
                     <div className='quantityChanger'>
                       <Button
                         className='decrementButton'
                         onClick={(event) => {
                           event.preventDefault()
-                          cart.actions.decrementCartProductQuantity(product)
+                          state.removeItem(product.id)
                           // props.removeProductFromBox()
                         }}
-                        children={
-                          <img
-                            className='quantityIcon'
-                            src={window.pedersonsData.assets.minusIconUrl}
-                            alt='decrement'
-                          />
-                        }
-                      ></Button>
-                      <p className='quantityText'>
-                        {cart.actions.getCartProductQuantity(product.id)}
-                      </p>
+                      >
+                        <img
+                          className='quantityIcon'
+                          src={window.pedersonsData.assets.minusIconUrl}
+                          alt='decrement'
+                        />
+                      </Button>
+                      <p className='quantityText'>{state.box[product.id].quantity}</p>
                       <Button
                         className={`incrementButton`}
                         onClick={(event) => {
                           event.preventDefault()
-                          cart.actions.incrementCartProductQuantity(product)
+                          state.addItem(product.id)
                           // props.addProductToBox()
                         }}
-                        children={
-                          <img
-                            className='quantityIcon'
-                            src={window.pedersonsData.assets.plusIconUrl}
-                            alt='increment'
-                          />
-                        }
-                      ></Button>
+                      >
+                        <img
+                          className='quantityIcon'
+                          src={window.pedersonsData.assets.plusIconUrl}
+                          alt='increment'
+                        />
+                      </Button>
                     </div>
                   ) : (
                     <Button
@@ -158,7 +154,7 @@ export const Product = (props) => {
                       className='BoxProductOptionButton'
                       onClick={(event) => {
                         event.preventDefault()
-                        cart.actions.addProductToCart(product)
+                        state.addItem(product.id)
                       }}
                     >
                       Add To Box
@@ -373,8 +369,7 @@ const ProductDetails = styled.div`
     span,
     div {
       line-height: 160% !important;
-    }import { useCart } from './../state';
-
+    }
 
     img {
       max-width: 100%;

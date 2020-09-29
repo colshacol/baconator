@@ -1,83 +1,66 @@
 import * as React from "react"
 import styled from "styled-components"
-import getValue from "get-value"
-import { slide as Menu } from "react-burger-menu"
+import { useBoxState } from "../useBoxState"
 import { Button } from "./Button"
-import { useScript } from "../utilities/useScript"
-import { Store } from "../../store"
-import { useCart, products, collections } from "../state"
-
-const useRechargeScript = () => {
-  const status = useScript(window.pedersonsData.assets.rechargeScriptUrl)
-
-  React.useEffect(() => {
-    status === "ready" && window.reChargeCartJS()
-  }, [status === "ready"])
-
-  return status
-}
 
 export const Cart = (props) => {
-  const cart = useCart()
-  useRechargeScript()
-
-  const style = {
-    width: "100%",
-    height: "100px",
-    fontStyle: "italic",
-    display: "flex",
-    alignItems: "center",
-    color: "var(--brandBlack50)",
-  }
-
-  const emptyState = !cart.cartInfo.productCount && (
-    <div style={style}>
-      <p>Empty</p>
-    </div>
-  )
-
-  const loadingState = cart.cartInfo.isLoading && (
-    <div style={style}>
-      <p>Loading</p>
-    </div>
-  )
-
-  const cartItems = Object.entries(cart.cartInfo.cartItems)
-
-  const BoxList = () => {
-    return cartItems.map(([pid, { title, quantity, productId }]) => (
-      <CartItem
-        title={title.slice(0, title.indexOf(" - "))}
-        quantity={quantity}
-        key={title}
-        id={productId}
-        removeProductFromBox={() =>
-          cart.actions.decrementCartProductQuantity(products.getById(productId))
-        }
-        removeProductsFromBox={async () => {
-          const product = products.getById(productId)
-          cart.actions.removeProductFromCart(product)
-        }}
-      />
-    ))
-  }
+  const state = useBoxState()
 
   return (
     <StyledCart className={props.className + " SideCart"} style={props.style}>
       <h3 className='boxTitle'>Your Box</h3>
       <div className='top'>
-        {emptyState}
-        {loadingState}
-        {!emptyState && !loadingState && <BoxList />}
+        {!state.boxProductCount && <EmptyState />}
+        {state.boxProductCount && (
+          <BoxList
+            boxProductList={state.boxProductList}
+            removeItem={state.removeItem}
+            removeProduct={state.removeProduct}
+          />
+        )}
       </div>
       <div className='priceContainer'>
         <ShippingPrice />
-        <CartPrice price={cart.data.total_price} />
-        <CheckoutButton isBoxEmpty={!cart.cartInfo.productCount} />
+        <CartPrice price={state.cartTotalPrice} />
+        <GoToCheckoutButton
+          isBoxEmpty={!state.boxProductCount}
+          onClick={() => {
+            state.isCartOpen.setFalse()
+            state.boxProductCount && state.setIsCheckoutOpen(true)
+          }}
+        />
       </div>
     </StyledCart>
   )
 }
+
+const BoxList = (props) => {
+  return props.boxProductList.map(({ title, quantity, id }) => (
+    <CartItem
+      title={title}
+      quantity={quantity}
+      key={title}
+      id={id}
+      removeItem={() => props.removeItem(id)}
+      removeProduct={async () => props.removeProduct(id)}
+    />
+  ))
+}
+
+const emptyStateStyle = {
+  width: "100%",
+  height: "100px",
+  fontStyle: "italic",
+  display: "flex",
+  alignItems: "center",
+  color: "var(--brandBlack50)",
+}
+
+const EmptyState = () => (
+  <div style={emptyStateStyle}>
+    <p>Empty</p>
+  </div>
+)
 
 const CartItem = (props) => {
   return (
@@ -88,11 +71,11 @@ const CartItem = (props) => {
       <span style={{ display: "flex", justifyContent: "space-between" }}>
         {props.quantity > 1 ? (
           <>
-            <small onClick={() => props.removeProductFromBox(props.id)}>remove one</small>
-            <small onClick={() => props.removeProductsFromBox(props.id)}>remove all</small>
+            <small onClick={() => props.removeItem(props.id)}>remove one</small>
+            <small onClick={() => props.removeProduct(props.id)}>remove all</small>
           </>
         ) : (
-          <small onClick={() => props.removeProductsFromBox(props.id)}>remove</small>
+          <small onClick={() => props.removeItem(props.id)}>remove</small>
         )}
       </span>
     </div>
@@ -117,9 +100,16 @@ const CartPrice = (props) => {
   )
 }
 
-const CheckoutButton = (props) => {
+const GoToCheckoutButton = (props) => {
   return (
-    <Button isPrimary name='checkout' isDisabled={props.isBoxEmpty} className='checkout_button'>
+    <Button
+      isPrimary
+      isDisabled={props.isBoxEmpty}
+      style={{ width: "100%", marginTop: 16 }}
+      onClick={() => {
+        props.onClick()
+      }}
+    >
       Checkout
     </Button>
   )

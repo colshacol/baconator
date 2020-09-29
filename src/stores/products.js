@@ -11,7 +11,7 @@ export const useProductsStore = create((set, get) => {
   }
 
   const getProductById = (id) => {
-    console.log("getProductById")
+    // console.log("getProductById")
     return get().products.find((product) => {
       return product.id === Number(id)
     })

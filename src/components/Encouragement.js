@@ -64,7 +64,6 @@ export const Encouragement = (props) => {
 
   React.useEffect(() => {
     const isMore = lastCount.current < props.productCount
-    console.log(isMore, lastCount.current, props.productCount)
     if (isMore && props.productCount && renders.current !== 0) {
       const shouldInterrupt = variant === "open"
       shouldInterrupt && setVariant("interrupt")
@@ -121,10 +120,7 @@ const EncouragementContent = (props) => {
         }}
       >
         <EncouragementTop productCount={props.productCount} parentVariant={props.parentVariant} />
-        <EncouragementBottom
-          productCount={props.productCount}
-          parentVariant={props.parentVariant}
-        />
+        <EncouragementBottom productCount={props.productCount} parentVariant={props.parentVariant} />
       </div>
     </div>
   )
@@ -152,7 +148,6 @@ const EncouragementTop = (props) => {
   }
 
   React.useEffect(() => {
-    console.log(props.parentVariant)
     if (props.parentVariant === "open") {
       timeouts.current.active = setTimeout(() => setVariant("active"), SETTINGS.topTextEnterDelay)
       timeouts.current.leaving = setTimeout(() => setVariant("leaving"), SETTINGS.topTextExitDelay)
@@ -216,16 +211,9 @@ const EncouragementBottom = (props) => {
   }
 
   React.useEffect(() => {
-    console.log(props.parentVariant)
     if (props.parentVariant === "open") {
-      timeouts.current.active = setTimeout(
-        () => setVariant("active"),
-        SETTINGS.bottomTextEnterDelay
-      )
-      timeouts.current.leaving = setTimeout(
-        () => setVariant("leaving"),
-        SETTINGS.bottomTextExitDelay
-      )
+      timeouts.current.active = setTimeout(() => setVariant("active"), SETTINGS.bottomTextEnterDelay)
+      timeouts.current.leaving = setTimeout(() => setVariant("leaving"), SETTINGS.bottomTextExitDelay)
     }
 
     if (props.parentVariant === "closed") {
@@ -252,18 +240,14 @@ const EncouragementBottom = (props) => {
 
   return (
     <StyledBottom animate={variant} variants={variants} style={style}>
-      {props.productCount === 1 && (
-        <p style={{ color: "white" }}>Continue shopping to save $20.00.</p>
-      )}
+      {props.productCount === 1 && <p style={{ color: "white" }}>Continue shopping to save $20.00.</p>}
       {props.productCount > 1 && (
-        <p style={{ color: "white" }}>
-          Continue shopping to save ${getTotalSavings(props.productCount) + 20}.
-        </p>
+        <p style={{ color: "white" }}>Continue shopping to save ${getTotalSavings(props.productCount) + 20}.</p>
       )}
     </StyledBottom>
   )
 }
 
 const getTotalSavings = (productCount) => {
-  return productCount * 20
+  return (productCount - 1) * 20
 }

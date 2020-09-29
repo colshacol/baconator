@@ -1,54 +1,17 @@
 import * as React from "react"
 import styled from "styled-components"
-import { Store } from "../../store"
-import { useCleanup } from "../utilities/useCleanup"
 
-// const filters = [
-//   "All",
-//   "Bacon",
-//   "Sausage",
-//   "Hot Dogs",
-//   "Ham",
-//   "Beef & Bison",
-//   "Fresh Pork",
-//   "Bundles",
-//   // "Bacon",
-//   // "Beef",
-//   // "Turkey",
-//   // "Ham",
-//   // "Sausage",
-//   // "Chorizo",
-//   // "Bratwurst",
-//   // "Kielbasa",
-//   // "Hot Dogs",
-// ]
-
-const useStore = (props) => {
-  const state = Store.useStoreState((state) => ({
-    productListFilter: state.productListFilter,
-    filterSearchValue: state.filterSearchValue,
-  }))
-
-  const actions = Store.useStoreActions((actions) => ({
-    setProductListFilter: actions.setProductListFilter,
-    setFilterSearchValue: actions.setFilterSearchValue,
-  }))
-
-  // React.useEffect(() => {
-  //   actions.setProductListFilter(props.filters[props.initialFilter])
-
-  //   return () => {
-  //     actions.setProductListFilter(props.filters[props.initialFilter])
-  //     actions.setFilterSearchValue("")
-  //   }
-  // }, [])
-
-  return { state, actions }
+const filters = {
+  All: "available-products",
+  Bacon: "bacon",
+  Sausage: "sausage",
+  "Hot Dogs": "hot-dogs",
+  Ham: "ham",
+  "Beef & Bison": "beef-bison",
+  Bundles: "bundles",
 }
 
 export const BoxProductTypeFilters = (props) => {
-  const { state, actions } = useStore(props)
-
   return (
     <BoxProductTypeFiltersContainer
       onScroll={(event) => {
@@ -57,12 +20,12 @@ export const BoxProductTypeFilters = (props) => {
       }}
     >
       <input
-        className='PNFInput'
+        className='pnf-input'
         placeholder='search product names'
         value={props.searchValue}
         onChange={props.setSearchValue}
       />
-      {Object.entries(props.filters).map(([filter, handle]) => (
+      {Object.entries(filters).map(([filter, handle]) => (
         <span
           key={handle}
           className={`filterOption ${props.filter === handle ? "activeFilter" : ""}`}
@@ -89,7 +52,6 @@ const BoxProductTypeFiltersContainer = styled.div`
   overflow-y: hidden;
   height: fit-content;
   min-height: 40px;
-  border: 1px solid var(--brandGray10);
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
@@ -100,26 +62,6 @@ const BoxProductTypeFiltersContainer = styled.div`
   }
   &::-webkit-scrollbar-thumb {
     background-color: var(--brandDarkGreen30);
-  }
-
-  .PNFInput {
-    height: 32px;
-    border: 1px solid var(--brandBlack70);
-    border-radius: 2px;
-    padding: 0px 8px;
-    font-size: 14px;
-    /*
-    align-items: center; */
-    display: none;
-
-    @media (min-width: 530px) {
-      margin-right: 40px;
-      display: inline-block;
-    }
-
-    @media (min-width: 760px) {
-      margin-right: 48px;
-    }
   }
 
   .filterOptions {

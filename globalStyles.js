@@ -142,6 +142,10 @@ h1, h2, h3, h4, h5, h6, p {
   color: var(--brandGray100);
 }
 
+html, body, #mountPoint, .App {
+  height: 100%;
+}
+
 html {
   display: flex;
   overflow-x: hidden;
@@ -223,4 +227,130 @@ a, :any-link {
   justify-content: center;
   align-items: center;
 }
+.App > div > .bm-overlay {
+  top: 0px;
+
+}
+
+.App > div > .bm-menu-wrap {
+  top: 0px;
+}
+
+.App > div > .bm-overlay {
+  z-index: 5555 !important;
+}
+
+.App > div > .bm-menu-wrap {
+  z-index: 5556 !important;
+}
+
+.App > div > .bm-menu-wrap .bm-menu {
+  background: #fff;
+
+  .warningText {
+    margin-bottom: 24px;
+  }
+}
+
+.App > div > .bm-item-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+  .pnf-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pnf-input-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pnf-input-container .pnf-label {
+  }
+
+  .pnf-input-container .pnf-input, .pnf-input, input[type="text"], input[type="password"], input[type="email"]  {
+    margin-top: 8px;
+  }
+
+  .pnf-horizontal-input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .pnf-input, input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    min-width: 160px;
+    height: 32px;
+    border-radius: 2px;
+    padding: 0px 8px;
+    font-size: 14px;
+    border: 1px solid var(--brandBlack70);
+
+    @media (min-width: 530px) {
+      margin-right: 40px;
+    }
+
+    @media (min-width: 760px) {
+      margin-right: 48px;
+    }
+  }
+
+  .pnf-input::placeholder {
+    opacity: 0.5;
+  }
+
+  #create_customer, div#recover {
+    display: flex;
+    flex-direction: column;
+    padding: 48px;
+
+    input[type="submit"] {
+      margin-top: 24px;
+      height: 32px;
+    }
+  }
+
+  div#recover {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  input[type="submit"] {
+    height: 39px !important;
+    display: flex;
+    align-items: center;
+    padding-bottom: 12px;
+  }
+
+  button, input[type="submit"] {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 10px 16px 10px;
+    font-size: 16px;
+    font-weight: 700;
+    -webkit-letter-spacing: 2px;
+    -moz-letter-spacing: 2px;
+    -ms-letter-spacing: 2px;
+    letter-spacing: 2px;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    background: var(--brandGreen100);
+    color: var(--brandWhite100);
+    border: none;
+    font-weight: 500;
+  }
 `

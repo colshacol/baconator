@@ -8,18 +8,10 @@ import { fetch } from "./fetch"
 const { pnf } = window
 export const queryCache = new QueryCache({})
 
-// Consts
-//
-//
-
 const SUBSCRIPTION_PROPERTIES = {
   shipping_interval_frequency: "1",
   shipping_interval_unit_type: "Month",
 }
-
-// Utilities
-//
-//
 
 export const doesCartHaveProductId = (productId) => {
   const cartItemsWithProductId = getCartItemsWithProductId(productId)
@@ -28,7 +20,6 @@ export const doesCartHaveProductId = (productId) => {
 
 export const getCartItemsWithProductId = (productId) => {
   const cart = getCartCache()
-  const { cartInfo } = cart
   return cart ? cart.items.filter((item) => item.product_id === productId) : []
 }
 
@@ -111,30 +102,9 @@ const getCartItemsCount = (cart) => {
   }, 0)
 }
 
-// const getProductVariantIds = (product) => {
-//   return product.variants.reduce((final, variant) => {
-//     final[variant.title] = variant.id
-//     return final
-//   }, {})
-// }
-
-// const getCartItemByVariantTitleAndId = (cart, variantTitle, id) => {
-//   return cart.items.find((item) => {
-//     return item.variant_title == variantTitle && item.product_id === id
-//   })
-// }
-
-// const countMatches = (targetList, value) => {
-//   return count(targetList, (item) => item == value)
-// }
-
-// Logic
-//
-//
-
 const fetchProducts = async () => {
   const [data, error] = await fetch.get(
-    "https://buy.pedersonsfarms.com/admin/api/2020-07/products.json"
+    "httpsbuy.pedersonsfarms.com/admin/api/2020-07/products.json"
   )
   return data
 }
@@ -158,7 +128,6 @@ export const useCart = () => {
 }
 
 export const addProductToCart = async (product) => {
-  // TODO: Handle errors.
   const cart = getCartCache()
 
   const quantity = 1
@@ -176,11 +145,6 @@ export const addProductToCart = async (product) => {
 export const removeProductFromCart = async (product) => {
   const cart = getCartCache()
   const { cartInfo } = cart
-
-  const variant30 = product.variant30
-  const variant50 = product.variant50
-  const xxx = cart.items.find((item) => item.id === variant30.id)
-  const yyy = cart.items.find((item) => item.id === variant50.id)
 
   if (cartInfo.productIds.length === 1) {
     const clearResponse = await fetch.post("/cart/clear.js")
@@ -232,14 +196,10 @@ const generateCartItemsFromProductIds = (productIds) => {
 export const decrementCartProductQuantity = async (product) => {
   const cart = getCartCache()
   const { cartInfo } = cart
-  const performMutation = () => queryCache.invalidateQueries("cart")
 
-  // If there is one or less products in the cart then it must be
-  // this product we are trying to decrement, so we just need to
-  // empty the cart and invalidate the cache.
   if (cartInfo.productCount <= 1) {
     await fetch.post("/cart/clear.js")
-    return performMutation()
+    return queryCache.invalidateQueries("cart")
   }
 
   const variant30 = product.variant30
@@ -247,19 +207,12 @@ export const decrementCartProductQuantity = async (product) => {
   const item30 = cart.items.find((item) => item.id === variant30.id)
   const item50 = cart.items.find((item) => item.id === variant50.id)
 
-  // If this product's 30 variant is in the cart, decrement the quantity for
-  // the 30 variant and invalidate the cache.
   if (item30) {
     const updates = { [variant30.id]: item30.quantity - 1 }
     const [data, error] = await fetch.post("/cart/update.js", { updates })
-    return performMutation()
+    return queryCache.invalidateQueries("cart")
   }
 
-  // If this product's 50 variant is in the cart, we need to empty the cart,
-  // generate a brand new list of cart items (excluding this product), add
-  // all of the newly generated cart items to the cart in 1 API call, and then
-  // invalidate the cache. (Re-generating the cart items will ensure that a
-  // different product will assume the responsibility of being the required 50 variant.)
   if (item50) {
     const newProductIds = cartInfo.productIds.filter((id) => id !== product.id)
     const items = generateCartItemsFromProductIds(newProductIds)
@@ -281,9 +234,6 @@ export const incrementCartProductQuantity = async (product) => {
     return item.id === id ? final + item.quantity : final
   }, 0)
 
-  // If quantity is 0, this is the first of this variant to be
-  // added to the cart, so we need to use the /cart/add api
-  // and then invalidate the cart query.
   if (!oldQuantity) {
     const items = [{ id, quantity: 1, properties }]
     const [data, error] = await fetch.post("/cart/add.js", { items })
@@ -291,8 +241,6 @@ export const incrementCartProductQuantity = async (product) => {
     return { data, error }
   }
 
-  // If quantity is more than 1, we need to use the /cart/update
-  // api to update the quantity instead of add.
   const updates = { [id]: oldQuantity + 1 }
   const [data, error] = await fetch.post("/cart/update.js", { updates })
   queryCache.invalidateQueries("cart")
@@ -303,18 +251,10 @@ export const QueryCacheProvider = (props) => {
   return <ReactQueryCacheProvider queryCache={queryCache}>{props.children}</ReactQueryCacheProvider>
 }
 
-// Devtools
-//
-//
-
 export const RQDevtools = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   return <ReactQueryDevtools initialIsOpen={false} />
 }
-
-// Other
-//
-//
 
 const createMethods = (list) => {
   const getById = (id) => {

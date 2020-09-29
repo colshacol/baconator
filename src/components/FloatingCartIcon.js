@@ -1,33 +1,27 @@
-import { slide as Menu } from "react-burger-menu"
-import { useLocation } from "wouter"
-import * as React from "react"
-import styled from "styled-components"
-import { Store } from "./../../store"
 import { useWindowWidth } from "@react-hook/window-size"
+import * as React from "react"
+import { slide as Menu } from "react-burger-menu"
+import styled from "styled-components"
+import { useLocation } from "wouter"
+import { useBoxState } from "../useBoxState"
 import { Cart } from "./Cart"
-import useBoolean from "react-hanger/useBoolean"
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants"
 
-export const FloatingCartIcon = (props) => {
+export const FloatingCartIcon = () => {
+  const state = useBoxState()
   const [location] = useLocation()
-  const isCartOpen = useBoolean(false)
   const windowWidth = useWindowWidth()
   const isHomeRoute = location === "/"
   const isLargeScreen = windowWidth > 760
 
+  if (window.location.pathname.startsWith("/tools")) return null
+  if (window.location.pathname.startsWith("/account")) return null
+  if (window.location.pathname.startsWith("/challenge")) return null
   if (isHomeRoute && isLargeScreen) return null
-  console.log("???", isHomeRoute && isLargeScreen)
-  console.log("??????", isCartOpen.value)
-  // Do not display on
 
   return (
     <>
-      <CartMenu isOpen={isCartOpen.value} toggle={isCartOpen.toggle} style={{ top: 0 }} />
-      <StyledFloatingCartIcon
-        id='FloatingCartIcon'
-        isHomeRoute={isHomeRoute}
-        onClick={isCartOpen.toggle}
-      >
+      <CartMenu isOpen={state.isCartOpen.value} toggle={state.isCartOpen.toggle} style={{ top: 0 }} />
+      <StyledFloatingCartIcon id='FloatingCartIcon' isHomeRoute={isHomeRoute} onClick={state.isCartOpen.toggle}>
         <img src={window.pedersonsData.assets.cartIconUrl1} alt='cart icon' />
       </StyledFloatingCartIcon>
     </>
@@ -35,7 +29,6 @@ export const FloatingCartIcon = (props) => {
 }
 
 export const CartMenu = (props) => {
-  console.log("\n\nCART MENU!!!", props)
   return (
     <StyledMenu
       right

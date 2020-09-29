@@ -1,37 +1,9 @@
-import "regenerator-runtime/runtime"
-import * as React from "react"
 import { slide as Menu } from "react-burger-menu"
-import useHotkeys from "react-use-hotkeys"
+import "regenerator-runtime/runtime"
 import styled from "styled-components"
-import { Store } from "../../store"
 
 export const AuditLog = (props) => {
-  const state = Store.useStoreState((state) => state.auditLogs)
-  const [isOpen, setIsOpen] = React.useState(false)
-
-  useHotkeys("F2", (event) => {
-    event.preventDefault()
-    setIsOpen(!isOpen)
-  })
-
-  return (
-    <StyledMenu
-      right
-      width='360px'
-      className='SideNav'
-      isOpen={isOpen}
-      onOpen={() => setIsOpen(true)}
-      onClose={() => setIsOpen(false)}
-    >
-      <div className='innerContainer'>
-        <pre>
-          {state.map((text, index) => (
-            <code key={text + index}>{text}</code>
-          ))}
-        </pre>
-      </div>
-    </StyledMenu>
-  )
+  return null
 }
 
 const StyledMenu = styled(Menu)`

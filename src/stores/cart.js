@@ -14,7 +14,7 @@ const findProductWithId = (allProducts, productId) => {
 }
 
 const findProductVariantId = (product, isFirstProduct) => {
-  console.log("findProductVariantId", { product, isFirstProduct })
+  // console.log("findProductVariantId", { product, isFirstProduct })
   for (const variant of product.variants) {
     if (isFirstProduct && variant.title === VARIANT_TITLE_50) {
       return variant.id
