@@ -1,16 +1,10 @@
 import { motion } from "framer-motion"
 import * as React from "react"
 import styled from "styled-components"
+import { useLocation } from "wouter"
 import { useBoxState } from "../useBoxState"
 import { Button } from "./Button"
-
-const QuickViewLink = () => {
-  return (
-    <div className='quickViewLink'>
-      <img src={window.pedersonsData.assets.searchIconWhiteUrl} alt='search icon' />
-    </div>
-  )
-}
+import { QuickViewLink } from "./ProductList/QuickViewLink"
 
 const QuantityWeightAndPricing = (props) => {
   return (
@@ -28,25 +22,33 @@ const QuantityWeightAndPricing = (props) => {
 const variants = {
   hidden: { opacity: 0 },
   visible: (custom) => {
-    const final = { opacity: 1, transition: { duration: 1, delay: 0.3 * custom } }
+    const final = { opacity: 1, transition: { duration: 1, delay: 0.05 * custom } }
     return final
   },
 }
 
 export const BoxProductOption = (props) => {
+  const [location, setLocation] = useLocation()
   const state = useBoxState()
-  // const title = props.product.title.slice(0, props.product.title.indexOf("("))
+  props.product.isOutOfStock && console.log("OOS", props.product)
+
+  const goToProductView = () => {
+    setLocation(`/product/${props.product.id}`)
+    window.scrollTo(0, 0)
+  }
 
   return (
     <BoxProductOptionContainer variants={variants} custom={props.index} initial='hidden' animate='visible'>
       <BoxProductOptionTop
         imageSrc={props.product && props.product.media && props.product.media[0].src}
-        onClick={props.toggleIsQuickViewOpen}
+        onClick={goToProductView}
       >
         <QuickViewLink />
       </BoxProductOptionTop>
       <BoxProductOptionBottom>
-        <BoxProductOptionTitle>{props.product.titleWithoutPackageQuantity}</BoxProductOptionTitle>
+        <BoxProductOptionTitle onClick={goToProductView}>
+          {props.product.titleWithoutPackageQuantity}
+        </BoxProductOptionTitle>
         <QuantityWeightAndPricing innerHtml={props.product.metaFields.quantity_weight_and_pricing} />
 
         {props.product.isOutOfStock && (
@@ -157,6 +159,7 @@ const BoxProductOptionContainer = styled(motion.div)`
     }
 
     .quantityText {
+      user-select: none;
       font-size: 18px;
       text-align: center;
       width: 100%;
@@ -192,11 +195,13 @@ const BoxProductOptionContainer = styled(motion.div)`
 
 const BoxProductOptionTop = styled.div`
   /* position: relative; */
+  cursor: pointer;
   background: url(${(props) => props.imageSrc});
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
+  height: 0px;
   padding-top: 100%;
 
   @media (min-width: 530px) {
@@ -204,14 +209,14 @@ const BoxProductOptionTop = styled.div`
   }
 
   .quickViewLink {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     border-radius: 50px;
     cursor: pointer;
     position: relative;
-    bottom: 8px;
-    left: 16px;
+    bottom: 48px;
+    left: 8px;
     background: var(--brandBlack30);
     transition: all 0.2s;
     width: 40px;
@@ -241,9 +246,4 @@ const BoxProductOptionTitle = styled.h3`
   color: var(--brandDarkGreen100);
   margin-bottom: 8px;
   /* text-shadow: 0px 2px #000; */
-`
-
-const BoxProductOptionImage = styled.img`
-  margin-bottom: 8px;
-  max-width: 100%;
 `

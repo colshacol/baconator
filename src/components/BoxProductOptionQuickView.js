@@ -1,10 +1,6 @@
 import * as React from "react"
+import { push } from "react-burger-menu"
 import styled from "styled-components"
-import { Button } from "./Button"
-import { Link, Route } from "wouter"
-import { push as Menu } from "react-burger-menu"
-import { useSharedStore } from "../stores"
-import { Store } from "../../store"
 import { Product } from "../views/Product"
 
 export const BoxProductOptionQuickView = (props) => {
@@ -12,12 +8,10 @@ export const BoxProductOptionQuickView = (props) => {
     if (props.isOpen.value) {
       document.querySelector(".QuickView").addEventListener("click", (event) => {
         const innerContainer = document.querySelector(".QuickView .innerContainer")
-        event.currentTarget.contains(innerContainer) && props.toggle(false)
+        event.currentTarget.contains(innerContainer) && props.isOpen.setFalse()
       })
     }
   }, [props.isOpen.value])
-
-  // if (!props.isOpen.value || !props.product) return null
 
   return (
     <StyledMenu
@@ -32,7 +26,7 @@ export const BoxProductOptionQuickView = (props) => {
   )
 }
 
-const StyledMenu = styled(Menu)`
+const StyledMenu = styled(push)`
   top: 0px;
   left: 0px;
 

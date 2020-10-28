@@ -13,12 +13,6 @@ const ViewContainer = styled.div`
   background: var(--brandOffWhite100);
 `
 
-const ViewContainerInner = styled.div`
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-`
-
 View.Header = styled.div`
   --xPadding: 24px;
   --sidePadding: max(calc(((100vw - 1100px) / 2) + 24px), 24px);
@@ -63,12 +57,14 @@ View.TempTop = (props) => {
   return (
     <TempTopContainer>
       <div className='viewHeaderInnerContainer'>
-        <h1 className='viewTitle'>{props.title}</h1>
-        <p className='viewDescription'>{props.description}</p>
+        <h1 className='viewTitle useHighVoltage'>{props.title}</h1>
+        <h4 className='viewDescription'>{props.description}</h4>
       </div>
     </TempTopContainer>
   )
 }
+
+View.TempTop.displayName = "View.TempTop"
 
 const TempTopContainer = styled.div`
   padding: 48px 24px;
@@ -85,7 +81,23 @@ const TempTopContainer = styled.div`
   }
 
   .viewDescription {
+    line-height: 150%;
+    max-width: 80%;
+    font-weight: 500;
+    letter-spacing: 0.25px;
     margin-top: 24px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    button {
+      margin-top: 16px;
+    }
+  }
+
+  .viewTitle {
+    text-transform: uppercase;
   }
 
   .viewTitle,

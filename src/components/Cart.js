@@ -11,7 +11,7 @@ export const Cart = (props) => {
       <h3 className='boxTitle'>Your Box</h3>
       <div className='top'>
         {!state.boxProductCount && <EmptyState />}
-        {state.boxProductCount && (
+        {!!state.boxProductCount && (
           <BoxList
             boxProductList={state.boxProductList}
             removeItem={state.removeItem}
@@ -137,7 +137,6 @@ const StyledCart = styled.div`
   }
 
   .top::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
 
@@ -147,8 +146,8 @@ const StyledCart = styled.div`
   }
 
   .top::-webkit-scrollbar-thumb {
-    background-color: #000000;
-    border: 2px solid #555555;
+    background-color: var(--brandGreen70);
+    border: 1px solid var(--brandDarkGreen10);
   }
 
   @media (min-width: 760px) {
@@ -173,7 +172,6 @@ const StyledCart = styled.div`
   }
 
   .boxTitle {
-    text-align: right;
     margin-bottom: 8px;
     color: var(--brandBlack100);
   }

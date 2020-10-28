@@ -8,7 +8,18 @@ import { SideNav } from "./SideNav"
 const links = {
   top: [
     // { label: "Recipes", href: "https://pedersonsfarms.com/recipes" },
-    { label: "Sign In", href: "https://buy.pedersonsfarms.com/account/login" },
+    !window.pnf.customer.isAuthenticated && {
+      label: "Sign In",
+      href: "https://buy.pedersonsfarms.com/account/login",
+    },
+    window.pnf.customer.isAuthenticated && {
+      label: "My Subscriptions",
+      href: "https://buy.pedersonsfarms.com/tools/recurring/login",
+    },
+    window.pnf.customer.isAuthenticated && {
+      label: "Log Out",
+      href: "https://buy.pedersonsfarms.com/account/logout",
+    },
   ],
 
   bottom: [
@@ -43,7 +54,7 @@ export const NavBar = (props) => {
       )}
       <div className='topBar'>
         <div className='topLinks'>
-          {links.top.map((link) => {
+          {links.top.filter(Boolean).map((link) => {
             const isLocal = link.href.startsWith("/")
             const Component = isLocal ? Link : "a"
 
@@ -77,11 +88,7 @@ export const NavBar = (props) => {
         </div>
       </div>
       <div className='menuButtonContainer'>
-        <img
-          src={window.pedersonsData.assets.menuIconUrl}
-          alt='menu'
-          onClick={isSideNavOpen.toggle}
-        />
+        <img src={window.pedersonsData.assets.menuIconUrl} alt='menu' onClick={isSideNavOpen.toggle} />
       </div>
     </StyledWrapper>
   )
@@ -221,14 +228,14 @@ const StyledWrapper = styled.div`
     }
 
     .logoWrapper {
-      width: 240px;
-      min-width: 240px;
+      width: 200px;
+      min-width: 200px;
       position: relative;
       top: -32px;
 
       img {
-        width: 240px;
-        height: 120px;
+        width: 200px;
+        height: 100px;
       }
     }
   }

@@ -4,23 +4,13 @@ import styled from "styled-components"
 import { BoxProductOption } from "../components/BoxProductOption"
 import { BoxProductOptionQuickView } from "../components/BoxProductOptionQuickView"
 import { BoxProductTypeFilters } from "../components/BoxProductTypeFilters"
+import { Button } from "../components/Button"
 import { Cart } from "../components/Cart"
 import { Encouragement } from "../components/Encouragement"
 import { View } from "../components/View"
 import { useBoxState } from "../useBoxState"
 
-const filters = {
-  All: "subscribable-products",
-  Bacon: "bacon",
-  Sausage: "sausage",
-  "Hot Dogs": "hot-dogs",
-  Ham: "ham",
-  "Beef & Bison": "beef-bison",
-  // Pork: "pork",
-  Bundles: "bundles",
-}
-
-const _BoxProductSelection = (props) => {
+const _BoxProductSelection = () => {
   const state = useBoxState()
   const isQuickViewOpen = useBoolean(false)
   const [quickViewProduct, setQuickViewProduct] = React.useState()
@@ -60,15 +50,23 @@ const _BoxProductSelection = (props) => {
 
       <View.TempTop
         title='HOW IT WORKS'
-        description='Grab the reigns to customize your monthly subscription box of proteins. The more you buy, the more you save. Cancel, skip, or edit your order anytime.'
+        description={
+          <>
+            Grab the reins to customize your monthly subscription box of proteins. The more you buy, the more
+            you save. Cancel, skip, or edit your order anytime.
+            <Button isPrimary onClick={() => window.location.assign("https://pedersonsfarms.com/get-started/")}>
+              Get Started
+            </Button>
+          </>
+        }
       />
 
-      <StyledViewContent style={{ marginTop: 48 }}>
+      <StyledViewContent style={{ marginTop: 46 }}>
         <BoxProductTypeFilters
           filter={collectionFilter}
           setFilter={setFilter}
           setSearchValue={onSearchInput}
-          filters={filters}
+          // filters={filters}
           searchValue={searchValue}
         />
         <div className='contentRow'>
@@ -144,11 +142,9 @@ const StyledViewDescriptionContainer = styled.div`
   padding-bottom: 24px;
 `
 
-const StyledViewDescription = styled(View.Description)``
-
 const StyledCart = styled(Cart)`
   display: none;
-  max-width: 200px !important;
+  max-width: 300px !important;
   margin-right: 48px;
   position: sticky;
   top: 24px;
@@ -156,6 +152,10 @@ const StyledCart = styled(Cart)`
 
   @media (min-width: 760px) {
     display: flex !important;
+    background: var(--brandWhite100);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0px 2px 12px -8px rgba(0, 0, 0, 0.5);
   }
 `
 

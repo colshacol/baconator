@@ -11,7 +11,18 @@ const filters = {
   Bundles: "bundles",
 }
 
+const invertedFilters = Object.entries(filters).reduce((final, [key, value]) => {
+  final[value] = key
+  return final
+}, {})
+
+const getFilterKey = (filter) => {
+  return invertedFilters[filter] || "All"
+}
+
 export const BoxProductTypeFilters = (props) => {
+  const activeKey = getFilterKey(props.filter)
+
   return (
     <BoxProductTypeFiltersContainer
       onScroll={(event) => {
@@ -28,7 +39,7 @@ export const BoxProductTypeFilters = (props) => {
       {Object.entries(filters).map(([filter, handle]) => (
         <span
           key={handle}
-          className={`filterOption ${props.filter === handle ? "activeFilter" : ""}`}
+          className={`filterOption ${activeKey === filter ? "activeFilter" : ""}`}
           onClick={() => props.setFilter(handle)}
         >
           {filter}

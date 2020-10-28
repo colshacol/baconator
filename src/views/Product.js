@@ -1,55 +1,9 @@
-import React from "react"
-import { Link, Route } from "wouter"
-import styled from "styled-components"
-import { useProductsStore } from "../stores"
 import isEmpty from "is-empty"
-import { Store } from "../../store"
-import ImageGallery from "react-image-gallery"
-import "react-responsive-carousel/lib/styles/carousel.min.css" // requires a loader
-import { Carousel } from "react-responsive-carousel"
+import React from "react"
 import Gallery from "react-photo-gallery"
-import { useCart, products } from "../state"
+import styled from "styled-components"
 import { Button } from "../components/Button"
 import { useBoxState } from "../useBoxState"
-
-const Galleryx = (props) => {
-  return (
-    <Carousel>
-      {props.images.map((image) => (
-        <div key={image.thumbnail}>
-          <img src={image.thumbnail} alt='preview image' />
-          <p className='legend'></p>
-        </div>
-      ))}
-    </Carousel>
-  )
-}
-// const images = [
-//   {
-//     original: "https://picsum.photos/id/1018/1000/600/",
-//     thumbnail: "https://picsum.photos/id/1018/250/150/",
-//   },
-//   {
-//     original: "https://picsum.photos/id/1015/1000/600/",
-//     thumbnail: "https://picsum.photos/id/1015/250/150/",
-//   },
-//   {
-//     original: "https://picsum.photos/id/1019/1000/600/",
-//     thumbnail: "https://picsum.photos/id/1019/250/150/",
-//   },
-// ]
-
-const useProduct = (id) => {
-  const state = Store.useStoreState((state) => ({
-    allProducts: state.allProducts,
-  }))
-
-  const product = state.allProducts.find((product) => {
-    return product.id === Number(id)
-  })
-
-  return product
-}
 
 const useImages = (product) => {
   return product.media.slice(2, 5).reduce((final, media) => {
@@ -67,8 +21,7 @@ const useImages = (product) => {
 
 export const Product = (props) => {
   const state = useBoxState()
-  const cart = useCart()
-  const product = products.getById(props.params.productId)
+  const product = state.getProductById(props.params.productId)
   const images = useImages(product)
 
   if (isEmpty(product)) {
@@ -203,7 +156,9 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 auto;
     margin-top: 16px;
+    max-width: 300px;
 
     .quantityIcon {
       filter: invert();
@@ -247,6 +202,7 @@ const StyledWrapper = styled.div`
     width: 100%;
     max-width: 240px;
     margin-top: 16px;
+    box-shadow: 0px 2px 16px -2px rgba(0, 0, 0, 0.25);
   }
 
   .BoxProductOptionButton[disabled] {
@@ -307,7 +263,7 @@ const ProductImage = styled.img`
   }
 `
 
-const ProductTitle = styled.h1`
+const ProductTitle = styled.h3`
   color: #fff;
 
   width: 100%;

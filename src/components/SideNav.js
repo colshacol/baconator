@@ -1,7 +1,7 @@
 import * as React from "react"
-import styled from "styled-components"
 import { slide as Menu } from "react-burger-menu"
-import { Link, Route, navigate } from "wouter"
+import styled from "styled-components"
+import { Link } from "wouter"
 
 export const SideNav = (props) => {
   return (
@@ -15,7 +15,7 @@ export const SideNav = (props) => {
     >
       <div className='container'>
         <div className='innerContainer' onClick={() => props.toggle(false)}>
-          {[...props.links.bottom, ...props.links.top].map((link) => {
+          {[...props.links.bottom, ...props.links.top].filter(Boolean).map((link) => {
             const isLocal = link.href.startsWith("/")
             const Component = isLocal ? Link : "a"
 

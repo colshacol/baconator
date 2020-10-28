@@ -8,5 +8,9 @@
       }
     ]
   ],
-  "plugins": ["babel-plugin-styled-components", ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": false }]]
+  "plugins": [
+    "babel-plugin-add-react-displayname",
+    "babel-plugin-styled-components",
+    ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": false }]
+  ]
 }

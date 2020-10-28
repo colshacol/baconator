@@ -1,7 +1,5 @@
 import * as React from "react"
 import styled from "styled-components"
-import { Button } from "./Button"
-import { useBoxStore, useSharedStore } from "../stores"
 import { Link } from "wouter"
 
 export const ProductListProduct = (props) => {
@@ -15,9 +13,7 @@ export const ProductListProduct = (props) => {
       </Link>
       <ProductListProductBottom>
         <Link href={`/product/${props.product.id}`}>
-          <ProductListProductTitle>
-            {props.product.titleWithoutPackageQuantity}
-          </ProductListProductTitle>
+          <ProductListProductTitle>{props.product.titleWithoutPackageQuantity}</ProductListProductTitle>
         </Link>
       </ProductListProductBottom>
     </ProductListProductContainer>

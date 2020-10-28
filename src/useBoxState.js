@@ -37,13 +37,12 @@ const getCartPrice = (box) => {
 const getCartTotalPrice = (box) => {
   let foundCount = 0
 
-  return Object.values(box).reduce((final, { quantity, variant50 }) => {
+  return Object.values(box).reduce((final, { price_max, quantity }) => {
     Array(quantity)
       .fill("")
       .forEach(() => {
         const discount = foundCount ? 2000 : 0
-        const discountedPrice = variant50.price - discount
-        console.log({ foundCount, discount, discountedPrice, vp: variant50.price })
+        const discountedPrice = price_max - discount
         final += discountedPrice
         foundCount++
       })
@@ -53,12 +52,10 @@ const getCartTotalPrice = (box) => {
 }
 
 const getCartItems = (box) => {
-  const entries = Object.entries(box)
+  const values = Object.values(box)
 
-  return entries.reduce((final, entry) => {
-    // entry = [productId, product]
-    const product = entry[1]
-    const variant = product.variant50
+  return values.reduce((final, product) => {
+    const variant = product.variants[0]
 
     return [
       ...final,
@@ -76,11 +73,17 @@ const sliceStringAtMatch = (target, match) => {
   return target.slice(0, matched.index)
 }
 
-const allProducts = window.pnf.allProducts.map((product) => {
+const noAutoRenew = window.pnf.allProducts.filter((product) => {
+  return !product.title.toLowerCase().includes("renew")
+})
+
+const allProducts = noAutoRenew.map((product) => {
   product.titleWithoutPackageQuantity = sliceStringAtMatch(product.title, /\(\d pack/i)
-  product.variantIds = product.variants.map(({ id }) => id)
+  product.isOutOfStock = product.variants[0].inventory_quantity < 1
   return product
 })
+
+global.allProducts = allProducts
 
 export const useMainBoxState = (() => {
   const productIdMap = createProductIdMap(allProducts)
@@ -122,6 +125,12 @@ export const useMainBoxState = (() => {
       updateBox({})
     }
 
+    const getMatchingDiscountCode = (code) => {
+      return rechargeDiscounts.find((discount) => {
+        return discount.code.toLowerCase() === code.toLowerCase()
+      })
+    }
+
     const boxProductList = Object.values(box)
     const boxProductCount = Object.keys(box).length
     const boxQuantityCount = countItems(box)
@@ -146,10 +155,14 @@ export const useMainBoxState = (() => {
         .json()
         .then((data) => {
           console.log("GOT DISCOUNTS", data)
-          setRechargeDiscounts(data.discounts)
+          setRechargeDiscounts(data.discounts || [])
         })
         .catch((error) => {
           console.error("DIDNT GET DISCOUNTS", error)
+
+          setTimeout(() => {
+            getRechargeDiscounts()
+          }, 1500)
         })
     }
 
@@ -158,9 +171,18 @@ export const useMainBoxState = (() => {
       getRechargeDiscounts()
     }, [])
 
+    window.box = box
+
+    function getProductById(id) {
+      return allProducts.find((product) => {
+        return product.id == id
+      })
+    }
+
     return {
       getRechargeDiscounts,
       rechargeDiscounts,
+      getMatchingDiscountCode,
       isCartOpen,
       box,
       addItem,
@@ -177,6 +199,8 @@ export const useMainBoxState = (() => {
       isCheckoutOpen,
       setIsCheckoutOpen,
       cartPrice,
+      allProducts,
+      getProductById,
     }
   }
 })()

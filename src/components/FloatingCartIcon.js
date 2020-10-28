@@ -51,7 +51,7 @@ const StyledMenu = styled(Menu)`
 const StyledFloatingCartIcon = styled.div`
   position: fixed;
   bottom: 16px;
-  right: 16px;
+  left: 16px;
   width: 64px;
   height: 64px;
   background: var(--brandYellow100);

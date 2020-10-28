@@ -1,7 +1,7 @@
 export const theme = {
   primaryButtonBackgroundColor: "var(--brandGreen100)",
   primaryButtonTextColor: "var(--brandWhite100)",
-  primaryButtonFontWeight: "500",
+  primaryButtonFontWeight: "700",
   primaryButtonBorder: "none",
 
   primaryButtonHoveredBackgroundColor: "var(--brandGreen90)",
